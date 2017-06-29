@@ -1,0 +1,45 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <!-- <h2 class="footer-heading">{{ site.title | escape }}</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div id="footer" class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            {{ site.author }}
+            </li>
+            {% if site.email %}
+            <li><c href="mailto:{{ site.email }}">{{ site.email }}</c></li>
+            {% endif %}
+        </ul>
+     </div>
+
+      <div class="footer-col footer-col-2">
+      	Twitter
+        <ul class="contact-list">
+          {% if site.twitter_username %}
+          <li>
+            {% include icon-twitter.html %} <c href="http://twitter.com/{{ site.twitter_username }}">{{ site.twitter_username }}</c> 
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <ul class="contact-list">
+        	<li>Search</li>
+        	<li>
+				<form action="/search.html" method="get">
+  					<input type="text" id="search-box" name="query">
+  					<!--<input type="submit" value="Go"> -->
+				</form>
+			</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>

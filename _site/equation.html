@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  <title>The Equation Group Breach</title>
+  <meta name="description" content="Report on the breach of The Equation Group by The Shadow Brokers, and a look at the EXTRABACON exploit.">
+
+	<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://thoughtsandstuff.net/equation">
+  <link rel="alternate" type="application/rss+xml" title="Thoughts and Stuff" href="http://thoughtsandstuff.net/feed.xml">
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89653104-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Thoughts and Stuff</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+        	
+        
+        	
+          
+          <a class="page-link" href="/about">About</a>
+          	
+          
+        
+        	
+          
+          <a class="page-link" href="/archives">Archives</a>
+          	
+          
+        
+        	
+          
+          <a class="page-link" href="/#footer">Contact</a>
+          	
+          
+        
+        	
+        
+        	
+        
+        	
+        
+        	
+        
+        	
+        
+        	
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">The Equation Group Breach</h1>
+    <p class="post-meta"><time datetime="2017-02-21T00:00:00-05:00" itemprop="datePublished">Feb 21, 2017</time> • <span> <span class = "reading-time" title = "Estimated read time">
+	
+ 	
+  		11 mins
+  	
+</span>
+   </span> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Alexander Oleinik, Brian Roach, Jennifer Tsui, and Karan Varindani</span></span></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Report on the breach of The Equation Group by The Shadow Brokers, and a look at the <em>EXTRABACON</em> exploit. Prepared by <code class="highlighter-rouge">Alexander Oleinik, Brian Roach, Jennifer Tsui, and Karan Varindani</code> for <code class="highlighter-rouge">Boston University, CS558 Network Security (February 2017)</code>. This work was done without any outside collaboration.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>In August of 2016, a hacking &amp; possible political interest group codenamed The Shadow Brokers breached The Equation Group, likely a subdivision of the NSA’s elite cybersecurity unit, and gained a collection of exploits used to predominantly target network hardware, such as the Cisco ASA series firewalls. The Shadow Brokers attempted to auction off these exploits, and released a small sample of them to prove their authenticity. One such sample was named <em>EXTRABACON</em>, which allows an adversary to disable password authentication on Cisco ASA series firewalls through an SNMP request, and then allows the adversary to enter and ‘own’ the firewall.</p>
+
+<p>We will discuss the parties involved in this breach, the motivations of the Shadow Brokers, the media coverage surrounding the event, and the <em>EXTRABACON</em> exploit (and how to prevent it).</p>
+
+<h3 id="the-players">The Players</h3>
+<p>The two players involved in this event were The Shadow Brokers and The Equation Group. They are both unknown threat actors, but there are suspicions as to their identities. The Equation Group was discovered by Kaspersky Labs in February 2015.<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> They claimed that the group was tied to Stuxnet and Flame, which were both associated with cyberattacks launched by the United States.<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> Some think that the group is associated with the NSA. Nicholas Weaver in particular claimed that “Because of the sheer volume and quality, it is overwhelmingly likely that this data is authentic, and it does not appear to be information taken from compromised targets. Instead, the exploits, binaries with help strings, server configuration scripts, 5 separate versions of one implant framework, and all sort of other features indicate that this is analyst-side code—the kind that probably never leaves the NSA.”<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup> Some think that the Equation Group is a part of the Tailored Access Operations (TAO) division, which is a cyber-warfare intelligence-gathering subunit of the NSA.<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup> <sup id="fnref:5"><a href="#fn:5" class="footnote">5</a></sup> David Sanger of the New York Times said, “According to these experts, the coding resembled a series of ‘products’ developed inside the NSA’s highly classified Tailored Access Operations unit, some of which were described in general terms in documents stolen three years ago by Edward J. Snowden, the former NSA contractor now living in Russia.” While the Snowden documents confirmed that some of the exploits the Equation Group had were indeed once the property of the NSA, many are still reluctant to say that the Equation Group is actually the NSA.</p>
+
+<p>The Shadow Brokers are an anonymous party who were selling exploits gained from supposedly breaching the Equation Group, and they were being sold for 1 million bitcoins (approximately 500 million USD at time of sale). Some believe that the Shadow Brokers are a foreign political adversary, such as Snowden, who believes that they are the Russian Government.<sup id="fnref:6"><a href="#fn:6" class="footnote">6</a></sup> Others believe that it could be an NSA insider, such as the federal cybersecurity contractor Harold T. Martin III, who was found to have smuggled several terabytes of classified information from the NSA.<sup id="fnref:7"><a href="#fn:7" class="footnote">7</a></sup></p>
+
+<p>Additionally, an argument is made that the statements made by the Shadow Brokers were written by a native English speaker attempting to fake non native speech patterns, which would cast doubt on Snowden’s theory.<sup id="fnref:8"><a href="#fn:8" class="footnote">8</a></sup> Ultimately, the identify of both The Equation Group and The Shadow Brokers is not known. In regards to The Shadow Brokers, their true identity likely will not be discovered as they have since ceased operation.</p>
+
+<h3 id="motivation-of-the-shadow-brokers">Motivation of The Shadow Brokers</h3>
+<p>Many individuals thought the timing with which The Shadow Brokers leaked the exploits to be highly coincidental; around the same time, DNC emails were being leaked by a person named Guccifer 2.0.<sup id="fnref:9"><a href="#fn:9" class="footnote">9</a></sup> Edward Snowden has claimed the following about the Equation Group hack on Twitter (with the assumption that the Russian government is behind the Shadow Brokers):</p>
+
+<p>“This leak is likely a warning that someone can prove US responsibility for any attacks that originated from this malware server. That could have significant foreign policy consequences. Particularly if any of those operations targeted US allies, particularly if any of those operations targeted elections. Accordingly, this may be an effort to influence the calculus of decision-makers wondering how sharply to respond to the DNC hacks. TL;DR: This leak looks like a somebody sending a message that an escalation in the attribution game could get messy fast.”<sup id="fnref:10"><a href="#fn:10" class="footnote">10</a></sup></p>
+
+<p>To summarize, Snowden believes that the Russian government was sending a warning to the US; If the US were to publicly blame Russia for the DNC, “it will retaliate by leaking potentially damaging information about US cyber-intelligence operations to the world.”<sup id="fnref:11"><a href="#fn:11" class="footnote">11</a></sup> However, this may have simply been a ‘hack back’; In the past, the Shadow Brokers could have been hacked by The Equation Group, so they figured they would hack them back.</p>
+
+<h2 id="press-coverage">Press Coverage</h2>
+<p>The breach of the Equation Group by The Shadow Brokers caught the attention of the mainstream media because of the likely possibility that the NSA’s exploits had been stolen and partially released to the public. The obvious concern that a federal agency, tasked with upholding national security, had been compromised gave way to a plethora of headlines, from major to smaller news outlets alike. <em>The New York Times</em>, <em>Business Insider</em>, <em>The Wall Street Journal</em>, <em>Bloomberg</em>, and more covered the topic, with headlines like “‘Shadow Brokers’ Leak Raises Alarming Question: Was the NSA Hacked?” from <em>The New York Times</em>, and “‘Shadow Brokers’ claim to have hacked an NSA-linked elite computer security unit” from <em>Business Insider</em>.<sup id="fnref:12"><a href="#fn:12" class="footnote">12</a></sup> <sup id="fnref:13"><a href="#fn:13" class="footnote">13</a></sup> In addition to attention from the mainstream media, the technical media covered how this attack may have transpired, as well as detailing how the leaked exploits operated and the threats they posed to the public. <em>The Hacker News</em> detailed the authenticity of the leak, specifically <em>EXTRABACON</em>, and confirmed that Cisco was aware of the holes in its ASA firewall security and was patching the issue.<sup id="fnref:14"><a href="#fn:14" class="footnote">14</a></sup> Additionally, sources like <em>Ars Techinca</em> covered the event from a technical perspective.</p>
+
+<h2 id="the-extrabacon-exploit">The <em>EXTRABACON</em> Exploit</h2>
+<p>While The Shadow Brokers were asking for 1 million bitcoins to release all the exploits, they shared an archive containing several Equation Group tools for free in as a proof-of-concept. One of these tools was the <em>EXTRABACON</em> exploit.</p>
+
+<h3 id="how-it-works">How it works</h3>
+<p><em>EXTRABACON</em> (EXBA) leverages a buffer overflow in Cisco’s SNMP implementation on the Adaptive Security Appliance (ASA) software. According to Cisco, “An exploit could allow the attacker to execute arbitrary code and obtain full control of the system or to cause a reload of the affected system”.<sup id="fnref:15"><a href="#fn:15" class="footnote">15</a></sup> Firewalls are commonly positioned at the border of a network and handle traffic flowing in and out of the network. Cisco’s ASA performs functions at every layer in the OSI network model. The ASAs are able to process 40Gbps of traffic and can handle 15000 simultaneous VPN connections.<sup id="fnref:16"><a href="#fn:16" class="footnote">16</a></sup> A compromise can entail a catastrophic compromise of privacy and network integrity affecting many connections.</p>
+
+<p>The ASA provides many services to facilitate network administration. EXBA targets two of these - Simple Network Management Protocol (SNMP) and Secure Shell (SSH). SNMP is generally run on UDP port 161 and is widely used for collecting and monitoring hardware statistics. An SNMP client sends a request containing an Object Identifier (OID) and a community string to the server and receives a response containing a value corresponding to the OID. The community string acts as a very basic form of security - in SNMP versions prior to 3, it is transmitted as plaintext and susceptible to man-in-the-middle (MITM) attacks.<sup id="fnref:17"><a href="#fn:17" class="footnote">17</a></sup> SNMP security is widely neglected as many administrators wrongfully assume that no harm can be done to the hardware with access to read-only SNMP.</p>
+
+<p>SSH, on the other hand, is the primary protocol used by network engineers to perform configuration and administration tasks on hardware.<sup id="fnref:18"><a href="#fn:18" class="footnote">18</a></sup> The SSH server on ASAs supports several ciphersuites such as DHE-RSA-AES128-SHA and DES-CBC3-SHA.<sup id="fnref:19"><a href="#fn:19" class="footnote">19</a></sup> Admins generally understand the importance of using strong keys/passwords to prevent unauthorized access via SSH.</p>
+
+<p>EXBA assumes that the attacker has obtained the SNMP community string by MITM, or guessing a common default such “public”. Additionally the attacker must have access to the ASA on an SNMP-enabled interface. EXBA works by sending an SNMP request with OID 1.3.6.1.2.1.1.1.0, to which the firewall responds with its version string. With this information, EXBA crafts and sends a malicious version-specific OID. Upon processing this OID, a buffer overflow occurs on the ASA. The OID is constructed in such a way that when the overflow occurs, the ASA calls sys_mprotect to disable protection on the memory address responsible for enabling/disabling password authentication. The contents of the address are changed to disable authentication before returning to a safe address.</p>
+
+<p>With the attack executed, SSH connections are no longer authenticated and the attacker has access to install persistent malware, tamper with configuration and eavesdrop on the firewall.</p>
+
+<p><img src="/assets/extrabacon-attack.jpeg" alt="The attack on the ASA's SNMP handler occurs within one request" title="EXTRABACON Attack" class="img-responsive" /></p>
+
+<h3 id="the-targets">The targets</h3>
+<p>The Shadow Brokers uploaded encrypted archives of malware to several file-sharing services including mega.co.nz and Yandex disk. They provided decryption keys for one “sample archive” containing exploits including <em>BANANAUSURPER</em>, <em>BLATSTING</em>, and <em>EXTRABACON</em>. All of these exploits target enterprise firewalls. Most internet traffic passes through one of these devices at the business border, or ISP level. Due to the throughput, routing, and packet inspection capabilities of enterprise firewalls, a single compromise has potential to affect tens of thousands of users.<sup id="fnref:20"><a href="#fn:20" class="footnote">20</a></sup> The exploits target a wide range of hardware manufacturers. For example, <em>ELIGIBLEBOMBSHELL</em>, <em>ELIGIBLECANDIDATE</em>, and <em>ELIGIBLECONTESTANT</em> all target TOPSEC firewalls. This manufacturer’s products are not used much outside of China where its hardware has supported high-profile clients such as spacecraft, the 2008 Olympic Games, and Shenzhen University.</p>
+
+<h3 id="preventing-extrabacon-attacks">Preventing <em>EXTRABACON</em> attacks</h3>
+<p>There are a few ways to prevent EXTRABACON attacks:</p>
+
+<p>First, install the latest patch update from CISCO. Previously compromised hardware might still be susceptible if the attacker installed a rootkit while he had access to the system, but fresh installs should be secure.</p>
+
+<p>Administrators should also limit SSH and SNMP interfaces. Preventing external access to the firewall would make sure attackers would have to have a local hardware connection to compromise the system by blocking remote access to certain ports on the network.</p>
+
+<p>Additionally, update to SNMP version 3 or later. This version, released in 2005, brings Triple DES Encrypted Authentication.<sup id="fnref:21"><a href="#fn:21" class="footnote">21</a></sup> Triple DES (3-DES) is defined as a symmetric-key block cipher which applies the Data Encryption Standard (DES) cipher algorithm three times to each data block.<sup id="fnref:22"><a href="#fn:22" class="footnote">22</a></sup></p>
+
+<p>Lastly, using Strong Authentication in general is always helpful and good practice.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="http://usa.kaspersky.com/about-us/press-center/press-releases/2015/kaspersky-lab-discovers-equation-group-crown-creator-cyber-espi">Kaspersky</a> <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="http://usa.kaspersky.com/about-us/press-center/press-releases/2015/kaspersky-lab-discovers-equation-group-crown-creator-cyber-espi">Kaspersky</a> <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p><a href="https://www.lawfareblog.com/very-bad-monday-nsa-0">Lawfare</a> <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p><a href="https://en.wikipedia.org/wiki/Tailored_Access_Operations">Wikipedia</a> <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p><a href="https://arstechnica.com/security/2016/08/hints-suggest-an-insider-helped-the-nsa-equation-group-hacking-tools-leak/">ArsTechnica</a> <a href="#fnref:5" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:6">
+      <p><a href="http://www.businessinsider.com/edward-snowden-shadow-brokers-russia-leaked-nsa-equation-group-files-warning-dnc-hacking-2016-8?r=DE&amp;IR=T">BusinessInsider</a> <a href="#fnref:6" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:7">
+      <p><a href="https://www.nytimes.com/2016/10/20/us/harold-martin-nsa.html">NYTimes</a> <a href="#fnref:7" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:8">
+      <p><a href="https://taia.global/2016/08/shadowbroker-is-a-native-english-speaker-trying-to-appear-non-native/">taia.global <em>(deprecated)</em></a> <a href="#fnref:8" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:9">
+      <p><a href="https://www.bloomberg.com/view/articles/2017-01-13/cyberwar-has-gone-public-and-that-s-dangerous">Bloomberg</a> <a href="#fnref:9" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:10">
+      <p><a href="https://arstechnica.com/tech-policy/2016/08/snowden-speculates-leak-of-nsa-spying-tools-is-tied-to-russian-dnc-hack/">ArsTechnica</a> <a href="#fnref:10" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:11">
+      <p><a href="http://www.businessinsider.com/edward-snowden-shadow-brokers-russia-leaked-nsa-equation-group-files-warning-dnc-hacking-2016-8?r=DE&amp;IR=T">BusinessInsider</a> <a href="#fnref:11" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:12">
+      <p><a href="https://www.nytimes.com/2016/08/17/us/shadow-brokers-leak-raises-alarming-question-was-the-nsa-hacked.html?_r=3">NYTimes</a> <a href="#fnref:12" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:13">
+      <p><a href="http://www.businessinsider.com/shadow-brokers-claims-to-hack-equation-group-group-linked-to-nsa-2016-8">BusinessInsider</a> <a href="#fnref:13" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:14">
+      <p><a href="http://thehackernews.com/2016/08/nsa-hack-exploit.html">HackerNews</a> <a href="#fnref:14" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:15">
+      <p><a href="https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20160817-asa-snmp">Cisco</a> <a href="#fnref:15" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:16">
+      <p><a href="https://www.cisco.com/c/en_ca/products/security/asa-5500-series-next-generation-firewalls/models-comparison.html\#tab-c">Cisco</a> <a href="#fnref:16" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:17">
+      <p><a href="https://www.ietf.org/rfc/rfc1157.txt">Internet Engineering Task Force (IETF)</a> <a href="#fnref:17" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:18">
+      <p><a href="https://tools.ietf.org/html/rfc4253">Internet Engineering Task Force (IETF)</a> <a href="#fnref:18" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:19">
+      <p><a href="https://www.cisco.com/c/en/us/td/docs/security/asa/asa-command-reference/S/cmdref3/s16.html">Cisco</a> <a href="#fnref:19" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:20">
+      <p><a href="http://www.topsec.com.cn/english/about_us.html">Topsec</a> <a href="#fnref:20" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:21">
+      <p><a href="http://www.cisco.com/c/en/us/td/docs/ios/12_4t/12_4t2/snmpv3ae.html">Cisco</a> <a href="#fnref:21" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:22">
+      <p><a href="https://en.m.wikipedia.org/wiki/Triple_DES">Wikipedia</a> <a href="#fnref:22" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <!-- <h2 class="footer-heading">Thoughts and Stuff</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div id="footer" class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            Karan Varindani
+            </li>
+            
+            <li><c href="mailto:karan301@me.com">karan301@me.com</c></li>
+            
+        </ul>
+     </div>
+
+      <div class="footer-col footer-col-2">
+      	Twitter
+        <ul class="contact-list">
+          
+          <li>
+            <a href="https://twitter.com/"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username"></span></a>
+ <c href="http://twitter.com/karan301_">karan301_</c> 
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <ul class="contact-list">
+        	<li>Search</li>
+        	<li>
+				<form action="/search.html" method="get">
+  					<input type="text" id="search-box" name="query">
+  					<!--<input type="submit" value="Go"> -->
+				</form>
+			</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

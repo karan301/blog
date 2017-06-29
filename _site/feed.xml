@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Thoughts and Stuff</title>
+    <description>Thoughts and Stuff is a place for me to get my thoughts about Apple and tech in general out of my head. Occasionally, I might write about travel, education, or football, too. 
+</description>
+    <link>http://thoughtsandstuff.net/</link>
+    <atom:link href="http://thoughtsandstuff.net/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 03 Jun 2017 23:54:19 -0400</pubDate>
+    <lastBuildDate>Sat, 03 Jun 2017 23:54:19 -0400</lastBuildDate>
+    <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Workflow for keeping 8-Ball Scores</title>
+        <description>&lt;p&gt;I’d wager that &lt;a href=&quot;https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;GamePigeon&lt;/a&gt;’s 8-Ball is the most used iMessage app out there. It feels like everyone (myself included) plays it. But how do we go about keeping score?&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; I used to type the score after every game but after forgetting / losing track a couple of times, I decided to build a &lt;a href=&quot;https://itunes.apple.com/us/app/workflow-powerful-automation-made-simple/id915249334?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;Workflow&lt;/a&gt; to semi-automate the process.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;Other than the &lt;a href=&quot;https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;GamePigeon&lt;/a&gt; and &lt;a href=&quot;https://itunes.apple.com/us/app/workflow-powerful-automation-made-simple/id915249334?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;Workflow&lt;/a&gt; apps (both free on the App Store), you’ll need both of the following workflows: &lt;a href=&quot;https://workflow.is/workflows/3b7f492e4b8946e68cbf03ce827818dc&quot;&gt;New Pool Opponent&lt;/a&gt; and &lt;a href=&quot;https://workflow.is/workflows/6733c1a06cae429683fd94d9aedd38e8&quot;&gt;Pool Scores&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first thing you do is run &lt;code class=&quot;highlighter-rouge&quot;&gt;New Pool Opponent&lt;/code&gt;, which is a Normal workflow (it only shows up in the Workflow app, not the widget). It’ll ask for your name the first time you run it. The workflow will then ask for the name of your opponent and ask you if you want to initialize scores. If you say yes, you can set the score to what your current scores are. If not, it’ll set the score to 0-0. Repeat this for each of your opponents. It’ll save your scores as &lt;code class=&quot;highlighter-rouge&quot;&gt;'Pool Scores'&lt;/code&gt; in Workflow’s iCloud Drive directory.&lt;/p&gt;
+
+&lt;p&gt;Next, run &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores&lt;/code&gt; and enter your name &lt;strong&gt;exactly as you did above&lt;/strong&gt;. It’ll grab the &lt;code class=&quot;highlighter-rouge&quot;&gt;'Pool Scores'&lt;/code&gt; file and ask you to select a name from your list of opponents, and then ask if you won, lost, or just want to get the score. If you choose won or lost, it’ll update the score accordingly and then get the score (it both displays the score and copies it to clipboard in case you want to send it to your opponent).&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores&lt;/code&gt; workflow is a Today Widget (and Apple Watch) workflow so after every game, you can just swipe down to bring up Notification Center and update scores from there.&lt;/p&gt;
+
+&lt;p&gt;Read on below for a more detailed documentation of how the workflows work.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;how-does-it-work-documentation&quot;&gt;How does it work? (Documentation)&lt;/h2&gt;
+&lt;p&gt;Each workflow has one Import Question. Enter your name here. Expected input is text &lt;code class=&quot;highlighter-rouge&quot;&gt;myname&lt;/code&gt; with no white-space (e.g. Karan), but anything works (so long as you enter it exactly the same in both workflows).&lt;/p&gt;
+
+&lt;p&gt;Both workflows rely on a dictionary file in Workflow’s iCloud Drive directory. By default, this is read and written as &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores.json&lt;/code&gt;. You can change it by manually changing the name in both workflows (it is referenced twice in &lt;code class=&quot;highlighter-rouge&quot;&gt;New Pool Opponent&lt;/code&gt; and five times in &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;new-pool-opponent&quot;&gt;New Pool Opponent&lt;/h3&gt;
+&lt;p&gt;This is a fairly simple workflow. It either adds or updates key-value pairs in an existing dictionary, or it creates a new dictionary with the given key-value pair. It works as follows.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The workflow asks for your opponent’s name. Expected input is text &lt;code class=&quot;highlighter-rouge&quot;&gt;opponentname&lt;/code&gt; with no white-space (e.g. James), but anything works.&lt;/li&gt;
+  &lt;li&gt;The workflow asks if you want to initialize scores. If yes, expected input is number. Enter your score and your opponent’s score where prompted. If no, scores are assigned as 0-0.&lt;/li&gt;
+  &lt;li&gt;The workflow gets the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores&lt;/code&gt; dictionary file from Workflow’s iCloud Drive directory, and gets the dictionary from the file. If the file doesn’t exist (for example, if you’re running the workflow for the first time) it’ll be created later.&lt;/li&gt;
+  &lt;li&gt;The workflow sets the dictionary value for you and for your opponent. It does this with keys &lt;code class=&quot;highlighter-rouge&quot;&gt;mynameopponentname&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;opponentname&lt;/code&gt;  with values &lt;code class=&quot;highlighter-rouge&quot;&gt;myscore&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;opponentscore&lt;/code&gt; respectively (e.g. {“KaranJames”:100, “James”:0}). If these names already exist in the dictionary, they will be overwritten.&lt;/li&gt;
+  &lt;li&gt;The workflow saves the dictionary to the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores&lt;/code&gt; file in Workflow’s iCloud Drive directory. If the file exists (for example, if you’re adding a new opponent or re-initializing scores) it’ll overwrite the file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;pool-scores&quot;&gt;Pool Scores&lt;/h2&gt;
+&lt;p&gt;This is a slightly more complicated workflow. It grabs an existing dictionary (make sure you run the &lt;code class=&quot;highlighter-rouge&quot;&gt;New Pool Opponent&lt;/code&gt; workflow at least once first to create one), asks you to choose from a list of your opponents, updates the score (if necessary), and copies/displays it. This workflow is best used from the Today Widget (after first run). It works as follows.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The workflow gets the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores&lt;/code&gt; dictionary file from Workflow’s iCloud Drive directory. &lt;strong&gt;This file must already exist&lt;/strong&gt;, execution will end here otherwise.&lt;/li&gt;
+  &lt;li&gt;The workflow gets all keys from the dictionary file. Some of these will be in the form &lt;code class=&quot;highlighter-rouge&quot;&gt;opponentname&lt;/code&gt; while others will be in the form &lt;code class=&quot;highlighter-rouge&quot;&gt;mynameopponentname&lt;/code&gt;. We need to get rid of the latter to present a list of opponent names.&lt;/li&gt;
+  &lt;li&gt;The workflow splits these keys into new lines. It then finds all the keys that begin with &lt;code class=&quot;highlighter-rouge&quot;&gt;myname&lt;/code&gt; and replaces them with a blank. It then goes through and deletes all blank lines.&lt;/li&gt;
+  &lt;li&gt;The workflow presents this updated list of keys (opponent names) and asks you to pick one.&lt;/li&gt;
+  &lt;li&gt;The workflow fetches the dictionary file again, getting just the key-value pairs for you and the opponent you selected this time, and stores the values in &lt;code class=&quot;highlighter-rouge&quot;&gt;My Score&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Opponent Score&lt;/code&gt; variables as appropriate (with the keys again being of the form &lt;code class=&quot;highlighter-rouge&quot;&gt;mynameopponentname&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;opponentname&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;The workflow asks you to choose from a menu: “I won”, “I lost”, or “Get score”. “I won” and “I lost” simply increment either the &lt;code class=&quot;highlighter-rouge&quot;&gt;My Score&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;Opponent Score&lt;/code&gt; variable as appropriate, and then jumps to “Get score”.&lt;/li&gt;
+  &lt;li&gt;The workflow fetches the dictionary file again. It sets (updates) the dictionary value for keys &lt;code class=&quot;highlighter-rouge&quot;&gt;mynameopponentname&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;opponentname&lt;/code&gt; with the updated score variables.&lt;/li&gt;
+  &lt;li&gt;The workflow saves the updated dictionary file, overwriting &lt;code class=&quot;highlighter-rouge&quot;&gt;Pool Scores.json&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;The workflow copies &lt;code class=&quot;highlighter-rouge&quot;&gt;My Score - Opponent Score&lt;/code&gt; to clipboard, so you can share it with your opponent if you want.&lt;/li&gt;
+  &lt;li&gt;The workflow displays the text &lt;code class=&quot;highlighter-rouge&quot;&gt;MyName MyScore-OpponentScore OpponentName&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;The app keeps track of how many games you’ve won, but it doesn’t sync across devices (so iPhone and iPad keep different scores) and it doesn’t let you know your opponent’s score. I’ve also found the number to be inconsistent. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 25 Apr 2017 00:00:00 -0400</pubDate>
+        <link>http://thoughtsandstuff.net/pool-scores</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/pool-scores</guid>
+        
+        
+        <category>apple</category>
+        
+        <category>workflow</category>
+        
+        <category>gaming</category>
+        
+      </item>
+    
+      <item>
+        <title>The Equation Group Breach</title>
+        <description>&lt;p&gt;Report on the breach of The Equation Group by The Shadow Brokers, and a look at the &lt;em&gt;EXTRABACON&lt;/em&gt; exploit. Prepared by &lt;code class=&quot;highlighter-rouge&quot;&gt;Alexander Oleinik, Brian Roach, Jennifer Tsui, and Karan Varindani&lt;/code&gt; for &lt;code class=&quot;highlighter-rouge&quot;&gt;Boston University, CS558 Network Security (February 2017)&lt;/code&gt;. This work was done without any outside collaboration.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In August of 2016, a hacking &amp;amp; possible political interest group codenamed The Shadow Brokers breached The Equation Group, likely a subdivision of the NSA’s elite cybersecurity unit, and gained a collection of exploits used to predominantly target network hardware, such as the Cisco ASA series firewalls. The Shadow Brokers attempted to auction off these exploits, and released a small sample of them to prove their authenticity. One such sample was named &lt;em&gt;EXTRABACON&lt;/em&gt;, which allows an adversary to disable password authentication on Cisco ASA series firewalls through an SNMP request, and then allows the adversary to enter and ‘own’ the firewall.&lt;/p&gt;
+
+&lt;p&gt;We will discuss the parties involved in this breach, the motivations of the Shadow Brokers, the media coverage surrounding the event, and the &lt;em&gt;EXTRABACON&lt;/em&gt; exploit (and how to prevent it).&lt;/p&gt;
+
+&lt;h3 id=&quot;the-players&quot;&gt;The Players&lt;/h3&gt;
+&lt;p&gt;The two players involved in this event were The Shadow Brokers and The Equation Group. They are both unknown threat actors, but there are suspicions as to their identities. The Equation Group was discovered by Kaspersky Labs in February 2015.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; They claimed that the group was tied to Stuxnet and Flame, which were both associated with cyberattacks launched by the United States.&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; Some think that the group is associated with the NSA. Nicholas Weaver in particular claimed that “Because of the sheer volume and quality, it is overwhelmingly likely that this data is authentic, and it does not appear to be information taken from compromised targets. Instead, the exploits, binaries with help strings, server configuration scripts, 5 separate versions of one implant framework, and all sort of other features indicate that this is analyst-side code—the kind that probably never leaves the NSA.”&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; Some think that the Equation Group is a part of the Tailored Access Operations (TAO) division, which is a cyber-warfare intelligence-gathering subunit of the NSA.&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&quot;fnref:5&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; David Sanger of the New York Times said, “According to these experts, the coding resembled a series of ‘products’ developed inside the NSA’s highly classified Tailored Access Operations unit, some of which were described in general terms in documents stolen three years ago by Edward J. Snowden, the former NSA contractor now living in Russia.” While the Snowden documents confirmed that some of the exploits the Equation Group had were indeed once the property of the NSA, many are still reluctant to say that the Equation Group is actually the NSA.&lt;/p&gt;
+
+&lt;p&gt;The Shadow Brokers are an anonymous party who were selling exploits gained from supposedly breaching the Equation Group, and they were being sold for 1 million bitcoins (approximately 500 million USD at time of sale). Some believe that the Shadow Brokers are a foreign political adversary, such as Snowden, who believes that they are the Russian Government.&lt;sup id=&quot;fnref:6&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt; Others believe that it could be an NSA insider, such as the federal cybersecurity contractor Harold T. Martin III, who was found to have smuggled several terabytes of classified information from the NSA.&lt;sup id=&quot;fnref:7&quot;&gt;&lt;a href=&quot;#fn:7&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Additionally, an argument is made that the statements made by the Shadow Brokers were written by a native English speaker attempting to fake non native speech patterns, which would cast doubt on Snowden’s theory.&lt;sup id=&quot;fnref:8&quot;&gt;&lt;a href=&quot;#fn:8&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt; Ultimately, the identify of both The Equation Group and The Shadow Brokers is not known. In regards to The Shadow Brokers, their true identity likely will not be discovered as they have since ceased operation.&lt;/p&gt;
+
+&lt;h3 id=&quot;motivation-of-the-shadow-brokers&quot;&gt;Motivation of The Shadow Brokers&lt;/h3&gt;
+&lt;p&gt;Many individuals thought the timing with which The Shadow Brokers leaked the exploits to be highly coincidental; around the same time, DNC emails were being leaked by a person named Guccifer 2.0.&lt;sup id=&quot;fnref:9&quot;&gt;&lt;a href=&quot;#fn:9&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt; Edward Snowden has claimed the following about the Equation Group hack on Twitter (with the assumption that the Russian government is behind the Shadow Brokers):&lt;/p&gt;
+
+&lt;p&gt;“This leak is likely a warning that someone can prove US responsibility for any attacks that originated from this malware server. That could have significant foreign policy consequences. Particularly if any of those operations targeted US allies, particularly if any of those operations targeted elections. Accordingly, this may be an effort to influence the calculus of decision-makers wondering how sharply to respond to the DNC hacks. TL;DR: This leak looks like a somebody sending a message that an escalation in the attribution game could get messy fast.”&lt;sup id=&quot;fnref:10&quot;&gt;&lt;a href=&quot;#fn:10&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;To summarize, Snowden believes that the Russian government was sending a warning to the US; If the US were to publicly blame Russia for the DNC, “it will retaliate by leaking potentially damaging information about US cyber-intelligence operations to the world.”&lt;sup id=&quot;fnref:11&quot;&gt;&lt;a href=&quot;#fn:11&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt; However, this may have simply been a ‘hack back’; In the past, the Shadow Brokers could have been hacked by The Equation Group, so they figured they would hack them back.&lt;/p&gt;
+
+&lt;h2 id=&quot;press-coverage&quot;&gt;Press Coverage&lt;/h2&gt;
+&lt;p&gt;The breach of the Equation Group by The Shadow Brokers caught the attention of the mainstream media because of the likely possibility that the NSA’s exploits had been stolen and partially released to the public. The obvious concern that a federal agency, tasked with upholding national security, had been compromised gave way to a plethora of headlines, from major to smaller news outlets alike. &lt;em&gt;The New York Times&lt;/em&gt;, &lt;em&gt;Business Insider&lt;/em&gt;, &lt;em&gt;The Wall Street Journal&lt;/em&gt;, &lt;em&gt;Bloomberg&lt;/em&gt;, and more covered the topic, with headlines like “‘Shadow Brokers’ Leak Raises Alarming Question: Was the NSA Hacked?” from &lt;em&gt;The New York Times&lt;/em&gt;, and “‘Shadow Brokers’ claim to have hacked an NSA-linked elite computer security unit” from &lt;em&gt;Business Insider&lt;/em&gt;.&lt;sup id=&quot;fnref:12&quot;&gt;&lt;a href=&quot;#fn:12&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&quot;fnref:13&quot;&gt;&lt;a href=&quot;#fn:13&quot; class=&quot;footnote&quot;&gt;13&lt;/a&gt;&lt;/sup&gt; In addition to attention from the mainstream media, the technical media covered how this attack may have transpired, as well as detailing how the leaked exploits operated and the threats they posed to the public. &lt;em&gt;The Hacker News&lt;/em&gt; detailed the authenticity of the leak, specifically &lt;em&gt;EXTRABACON&lt;/em&gt;, and confirmed that Cisco was aware of the holes in its ASA firewall security and was patching the issue.&lt;sup id=&quot;fnref:14&quot;&gt;&lt;a href=&quot;#fn:14&quot; class=&quot;footnote&quot;&gt;14&lt;/a&gt;&lt;/sup&gt; Additionally, sources like &lt;em&gt;Ars Techinca&lt;/em&gt; covered the event from a technical perspective.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-extrabacon-exploit&quot;&gt;The &lt;em&gt;EXTRABACON&lt;/em&gt; Exploit&lt;/h2&gt;
+&lt;p&gt;While The Shadow Brokers were asking for 1 million bitcoins to release all the exploits, they shared an archive containing several Equation Group tools for free in as a proof-of-concept. One of these tools was the &lt;em&gt;EXTRABACON&lt;/em&gt; exploit.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-it-works&quot;&gt;How it works&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;EXTRABACON&lt;/em&gt; (EXBA) leverages a buffer overflow in Cisco’s SNMP implementation on the Adaptive Security Appliance (ASA) software. According to Cisco, “An exploit could allow the attacker to execute arbitrary code and obtain full control of the system or to cause a reload of the affected system”.&lt;sup id=&quot;fnref:15&quot;&gt;&lt;a href=&quot;#fn:15&quot; class=&quot;footnote&quot;&gt;15&lt;/a&gt;&lt;/sup&gt; Firewalls are commonly positioned at the border of a network and handle traffic flowing in and out of the network. Cisco’s ASA performs functions at every layer in the OSI network model. The ASAs are able to process 40Gbps of traffic and can handle 15000 simultaneous VPN connections.&lt;sup id=&quot;fnref:16&quot;&gt;&lt;a href=&quot;#fn:16&quot; class=&quot;footnote&quot;&gt;16&lt;/a&gt;&lt;/sup&gt; A compromise can entail a catastrophic compromise of privacy and network integrity affecting many connections.&lt;/p&gt;
+
+&lt;p&gt;The ASA provides many services to facilitate network administration. EXBA targets two of these - Simple Network Management Protocol (SNMP) and Secure Shell (SSH). SNMP is generally run on UDP port 161 and is widely used for collecting and monitoring hardware statistics. An SNMP client sends a request containing an Object Identifier (OID) and a community string to the server and receives a response containing a value corresponding to the OID. The community string acts as a very basic form of security - in SNMP versions prior to 3, it is transmitted as plaintext and susceptible to man-in-the-middle (MITM) attacks.&lt;sup id=&quot;fnref:17&quot;&gt;&lt;a href=&quot;#fn:17&quot; class=&quot;footnote&quot;&gt;17&lt;/a&gt;&lt;/sup&gt; SNMP security is widely neglected as many administrators wrongfully assume that no harm can be done to the hardware with access to read-only SNMP.&lt;/p&gt;
+
+&lt;p&gt;SSH, on the other hand, is the primary protocol used by network engineers to perform configuration and administration tasks on hardware.&lt;sup id=&quot;fnref:18&quot;&gt;&lt;a href=&quot;#fn:18&quot; class=&quot;footnote&quot;&gt;18&lt;/a&gt;&lt;/sup&gt; The SSH server on ASAs supports several ciphersuites such as DHE-RSA-AES128-SHA and DES-CBC3-SHA.&lt;sup id=&quot;fnref:19&quot;&gt;&lt;a href=&quot;#fn:19&quot; class=&quot;footnote&quot;&gt;19&lt;/a&gt;&lt;/sup&gt; Admins generally understand the importance of using strong keys/passwords to prevent unauthorized access via SSH.&lt;/p&gt;
+
+&lt;p&gt;EXBA assumes that the attacker has obtained the SNMP community string by MITM, or guessing a common default such “public”. Additionally the attacker must have access to the ASA on an SNMP-enabled interface. EXBA works by sending an SNMP request with OID 1.3.6.1.2.1.1.1.0, to which the firewall responds with its version string. With this information, EXBA crafts and sends a malicious version-specific OID. Upon processing this OID, a buffer overflow occurs on the ASA. The OID is constructed in such a way that when the overflow occurs, the ASA calls sys_mprotect to disable protection on the memory address responsible for enabling/disabling password authentication. The contents of the address are changed to disable authentication before returning to a safe address.&lt;/p&gt;
+
+&lt;p&gt;With the attack executed, SSH connections are no longer authenticated and the attacker has access to install persistent malware, tamper with configuration and eavesdrop on the firewall.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/extrabacon-attack.jpeg&quot; alt=&quot;The attack on the ASA's SNMP handler occurs within one request&quot; title=&quot;EXTRABACON Attack&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-targets&quot;&gt;The targets&lt;/h3&gt;
+&lt;p&gt;The Shadow Brokers uploaded encrypted archives of malware to several file-sharing services including mega.co.nz and Yandex disk. They provided decryption keys for one “sample archive” containing exploits including &lt;em&gt;BANANAUSURPER&lt;/em&gt;, &lt;em&gt;BLATSTING&lt;/em&gt;, and &lt;em&gt;EXTRABACON&lt;/em&gt;. All of these exploits target enterprise firewalls. Most internet traffic passes through one of these devices at the business border, or ISP level. Due to the throughput, routing, and packet inspection capabilities of enterprise firewalls, a single compromise has potential to affect tens of thousands of users.&lt;sup id=&quot;fnref:20&quot;&gt;&lt;a href=&quot;#fn:20&quot; class=&quot;footnote&quot;&gt;20&lt;/a&gt;&lt;/sup&gt; The exploits target a wide range of hardware manufacturers. For example, &lt;em&gt;ELIGIBLEBOMBSHELL&lt;/em&gt;, &lt;em&gt;ELIGIBLECANDIDATE&lt;/em&gt;, and &lt;em&gt;ELIGIBLECONTESTANT&lt;/em&gt; all target TOPSEC firewalls. This manufacturer’s products are not used much outside of China where its hardware has supported high-profile clients such as spacecraft, the 2008 Olympic Games, and Shenzhen University.&lt;/p&gt;
+
+&lt;h3 id=&quot;preventing-extrabacon-attacks&quot;&gt;Preventing &lt;em&gt;EXTRABACON&lt;/em&gt; attacks&lt;/h3&gt;
+&lt;p&gt;There are a few ways to prevent EXTRABACON attacks:&lt;/p&gt;
+
+&lt;p&gt;First, install the latest patch update from CISCO. Previously compromised hardware might still be susceptible if the attacker installed a rootkit while he had access to the system, but fresh installs should be secure.&lt;/p&gt;
+
+&lt;p&gt;Administrators should also limit SSH and SNMP interfaces. Preventing external access to the firewall would make sure attackers would have to have a local hardware connection to compromise the system by blocking remote access to certain ports on the network.&lt;/p&gt;
+
+&lt;p&gt;Additionally, update to SNMP version 3 or later. This version, released in 2005, brings Triple DES Encrypted Authentication.&lt;sup id=&quot;fnref:21&quot;&gt;&lt;a href=&quot;#fn:21&quot; class=&quot;footnote&quot;&gt;21&lt;/a&gt;&lt;/sup&gt; Triple DES (3-DES) is defined as a symmetric-key block cipher which applies the Data Encryption Standard (DES) cipher algorithm three times to each data block.&lt;sup id=&quot;fnref:22&quot;&gt;&lt;a href=&quot;#fn:22&quot; class=&quot;footnote&quot;&gt;22&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, using Strong Authentication in general is always helpful and good practice.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://usa.kaspersky.com/about-us/press-center/press-releases/2015/kaspersky-lab-discovers-equation-group-crown-creator-cyber-espi&quot;&gt;Kaspersky&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://usa.kaspersky.com/about-us/press-center/press-releases/2015/kaspersky-lab-discovers-equation-group-crown-creator-cyber-espi&quot;&gt;Kaspersky&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.lawfareblog.com/very-bad-monday-nsa-0&quot;&gt;Lawfare&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Tailored_Access_Operations&quot;&gt;Wikipedia&lt;/a&gt; &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://arstechnica.com/security/2016/08/hints-suggest-an-insider-helped-the-nsa-equation-group-hacking-tools-leak/&quot;&gt;ArsTechnica&lt;/a&gt; &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:6&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.businessinsider.com/edward-snowden-shadow-brokers-russia-leaked-nsa-equation-group-files-warning-dnc-hacking-2016-8?r=DE&amp;amp;IR=T&quot;&gt;BusinessInsider&lt;/a&gt; &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:7&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.nytimes.com/2016/10/20/us/harold-martin-nsa.html&quot;&gt;NYTimes&lt;/a&gt; &lt;a href=&quot;#fnref:7&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:8&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://taia.global/2016/08/shadowbroker-is-a-native-english-speaker-trying-to-appear-non-native/&quot;&gt;taia.global &lt;em&gt;(deprecated)&lt;/em&gt;&lt;/a&gt; &lt;a href=&quot;#fnref:8&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:9&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.bloomberg.com/view/articles/2017-01-13/cyberwar-has-gone-public-and-that-s-dangerous&quot;&gt;Bloomberg&lt;/a&gt; &lt;a href=&quot;#fnref:9&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:10&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://arstechnica.com/tech-policy/2016/08/snowden-speculates-leak-of-nsa-spying-tools-is-tied-to-russian-dnc-hack/&quot;&gt;ArsTechnica&lt;/a&gt; &lt;a href=&quot;#fnref:10&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:11&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.businessinsider.com/edward-snowden-shadow-brokers-russia-leaked-nsa-equation-group-files-warning-dnc-hacking-2016-8?r=DE&amp;amp;IR=T&quot;&gt;BusinessInsider&lt;/a&gt; &lt;a href=&quot;#fnref:11&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:12&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.nytimes.com/2016/08/17/us/shadow-brokers-leak-raises-alarming-question-was-the-nsa-hacked.html?_r=3&quot;&gt;NYTimes&lt;/a&gt; &lt;a href=&quot;#fnref:12&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:13&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.businessinsider.com/shadow-brokers-claims-to-hack-equation-group-group-linked-to-nsa-2016-8&quot;&gt;BusinessInsider&lt;/a&gt; &lt;a href=&quot;#fnref:13&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:14&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://thehackernews.com/2016/08/nsa-hack-exploit.html&quot;&gt;HackerNews&lt;/a&gt; &lt;a href=&quot;#fnref:14&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:15&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20160817-asa-snmp&quot;&gt;Cisco&lt;/a&gt; &lt;a href=&quot;#fnref:15&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:16&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cisco.com/c/en_ca/products/security/asa-5500-series-next-generation-firewalls/models-comparison.html\#tab-c&quot;&gt;Cisco&lt;/a&gt; &lt;a href=&quot;#fnref:16&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:17&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.ietf.org/rfc/rfc1157.txt&quot;&gt;Internet Engineering Task Force (IETF)&lt;/a&gt; &lt;a href=&quot;#fnref:17&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:18&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://tools.ietf.org/html/rfc4253&quot;&gt;Internet Engineering Task Force (IETF)&lt;/a&gt; &lt;a href=&quot;#fnref:18&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:19&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cisco.com/c/en/us/td/docs/security/asa/asa-command-reference/S/cmdref3/s16.html&quot;&gt;Cisco&lt;/a&gt; &lt;a href=&quot;#fnref:19&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:20&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.topsec.com.cn/english/about_us.html&quot;&gt;Topsec&lt;/a&gt; &lt;a href=&quot;#fnref:20&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:21&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.cisco.com/c/en/us/td/docs/ios/12_4t/12_4t2/snmpv3ae.html&quot;&gt;Cisco&lt;/a&gt; &lt;a href=&quot;#fnref:21&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:22&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://en.m.wikipedia.org/wiki/Triple_DES&quot;&gt;Wikipedia&lt;/a&gt; &lt;a href=&quot;#fnref:22&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 21 Feb 2017 00:00:00 -0500</pubDate>
+        <link>http://thoughtsandstuff.net/equation</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/equation</guid>
+        
+        
+        <category>education</category>
+        
+        <category>security</category>
+        
+      </item>
+    
+      <item>
+        <title>Spending time with Apple's TV app</title>
+        <description>&lt;p&gt;Apple brought its new TV app to iOS and Apple TV devices with iOS 10.2 and tvOS 10.1 respectively almost a month ago, and I’ve been using it extensively since. Josh Centers has a good article on &lt;a href=&quot;http://tidbits.com/article/16949&quot;&gt;how it works&lt;/a&gt; over on TidBITS for those unaware, including information on the complementary Single Sign-On feature. Joe Steel also expressed &lt;a href=&quot;http://joe-steel.com/2016-12-13-First-Impressions-of-TV-the-App.html&quot;&gt;similar sentiments&lt;/a&gt; last month.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-app&quot;&gt;The app&lt;/h2&gt;
+&lt;p&gt;I’d like to touch on the app experience itself before discussing content, which is the crux of this post.&lt;/p&gt;
+
+&lt;p&gt;The TV app is broken down into four tabs: &lt;code class=&quot;highlighter-rouge&quot;&gt;Library&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Now&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Store&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;Search&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Library&lt;/code&gt; tab of the app shows me my purchased Movies and TV Shows, sorted by Most Recent first. It replaces the old Videos app. I don’t understand why this is the first tab on iOS but the second on tvOS. I almost never launch the app with the intention of going here, and I don’t get the inconsistency. I’d much rather the ordering was maintained, with &lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Now&lt;/code&gt; being the first tab on both platforms.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Now&lt;/code&gt; is my biggest draw to the TV app, yet also the part of the app that I feel needs the most work. It has an &lt;em&gt;Up Next&lt;/em&gt; section on top, which acts as a queue of content added from a number of sources (manually or automatically). I understand that Apple is trying to make it as invisible as possible but it feels a step too far right now. Currently, when you search for something in the TV app and choose to play it, it opens up in its parent app (Hulu, ABC, etc.) and the TV app automatically starts keeping track of it in &lt;em&gt;Up Next&lt;/em&gt;. You can remove something from the queue by long pressing it and tapping ‘Remove from Up Next’ on iOS or tvOS. However, there’s no way to mark an individual episode as played or get a list of your currently tracked shows. When I watch a new episode of a show live on cable TV, I have to play the episode again in the app and scrub to the end to get it to mark as watched and remove it from the queue. I’d like to see Apple do more here. Underneath &lt;em&gt;Up Next&lt;/em&gt; is a discovery section that presents content I have access to watch in the TV app. I’ve found this to be pretty useful, but I wish it was aware of shows that I’m already watching to reduce redundancy.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Store&lt;/code&gt; tab shows me which apps have added support  for the TV app, and new releases on iTunes. I wish it differentiated the apps that I’ve already authorized from the list in some way (maybe grey them out or add a check mark). Apps that I’ve authorized from this list will populate the discovery sections of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Now&lt;/code&gt; tab.&lt;/p&gt;
+
+&lt;p&gt;The last tab is &lt;code class=&quot;highlighter-rouge&quot;&gt;Search&lt;/code&gt;, which is very cool. Like Universal Search on the Apple TV, it searches a bunch of supported apps (included Netflix, which is supported in &lt;code class=&quot;highlighter-rouge&quot;&gt;Search&lt;/code&gt; but not &lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Now&lt;/code&gt;) and lets me know what’s available and where. For example, searching for &lt;em&gt;Bob’s Burgers&lt;/em&gt; tells me that it’s available on Hulu, FOX NOW, Netflix, iTunes, and TBS. I can then jump through the list of seasons and see where each episode is available.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-content&quot;&gt;The content&lt;/h2&gt;
+&lt;p&gt;I have access to Hulu, Netflix, and Amazon Prime Video, in addition to paying for cable TV through Comcast Xfinity.&lt;/p&gt;
+
+&lt;p&gt;Currently, most of what I’m able to watch in the TV app is shows available in Hulu. To be specific, that’s &lt;em&gt;Designated Survivor&lt;/em&gt;, &lt;em&gt;Fresh Off the Boat&lt;/em&gt;, &lt;em&gt;Modern Family&lt;/em&gt;, &lt;em&gt;The Goldbergs&lt;/em&gt;, and &lt;em&gt;Bob’s Burgers&lt;/em&gt;&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. I could watch some of these shows (like &lt;em&gt;Bob’s Burgers&lt;/em&gt;) in their network’s app (FOX NOW) using my cable login, but I prefer to watch them ad-free in Hulu. The TV app remembers this preference and doesn’t ask me where I want to watch new episodes every week. I buy and rent movies from the iTunes Store fairly often and it’s great to have those automatically show up in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Now&lt;/code&gt; tab, too. Lastly, I love being able to search for movies and TV shows and adding them to &lt;em&gt;Up Next&lt;/em&gt; to watch later. Even if I can’t watch what I add in the TV app itself, I can still add it to help me keep track of what I want to watch. For example, I currently have the movie &lt;em&gt;Sully&lt;/em&gt; in my Up Next queue. When I’m ready to watch it, I can select it and see where it’s available for me to watch (currently only buy/rent from iTunes).&lt;/p&gt;
+
+&lt;p&gt;The bigger story here though is with the content that I &lt;em&gt;can’t&lt;/em&gt; watch in the TV app. &lt;em&gt;Black Mirror&lt;/em&gt;, &lt;em&gt;Halt and Catch Fire&lt;/em&gt;, &lt;em&gt;Mr Robot&lt;/em&gt;, and many more shows are available to me on Netflix but I can’t keep track of my progress in the Watch Now tab&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. &lt;em&gt;The Grand Tour&lt;/em&gt;, &lt;em&gt;The Man in the High Castle&lt;/em&gt;, and &lt;em&gt;24&lt;/em&gt; are available in Amazon Prime Video but not the TV app. And, unlike with Netflix, these shows don’t even appear in Search results so I can’t even tell if I have access to them (and other Amazon content) without doing a second search in the Amazon Prime Video app. Most inexplicable to me though is HBO. I don’t pay for HBO NOW, HBO’s standalone video service, because I pay for cable and thus have access to HBO GO, which has the same content but lets me watch it by signing in with my cable provider. For some reason, HBO has decided to make HBO NOW compatible with the TV app but not HBO GO. So when I search for movies/shows and see that they’re available on HBO NOW, I have to leave the TV app, switch over to HBO GO, and find them there. I also can’t keep track of shows I’m currently watching (like &lt;em&gt;Westworld&lt;/em&gt; and &lt;em&gt;Game of Thrones&lt;/em&gt;) in the TV app.&lt;/p&gt;
+
+&lt;p&gt;HBO isn’t alone though - other networks like USA haven’t updated their apps to add TV support either. And not only does that frustrate me, but I find it to be cause for concern. Well over a year since the release of iOS 9, most of these apps don’t support fundamental iPad Pro technologies like Split View and Picture in Picture. Hell, I can’t even think of a single network app that supports the larger iPad Pro’s native resolution. What hope is there that they’ll add in support for the TV app — a feature that’s received very little media attention so far — anytime soon?&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;While there’s a fair amount of what I watch available in the TV app right now, I’m still watching a lot of TV elsewhere. There’s also a lot of TV that I &lt;em&gt;want&lt;/em&gt; to start watching, but I haven’t because it’s not supported in the TV app right now.&lt;/p&gt;
+
+&lt;p&gt;I think that sums up how I feel about Apple’s latest TV offering: It removes so much minor irritation and is leaps and bounds better to navigate than any other individual app out there, but it doesn’t have nearly enough support from networks and other content providers right now, and it’ll ultimately fail without them. It’s so convenient that I’m actively holding out on watching things that aren’t supported in it right now, but without Hulu alone, this app would be next to useless to me. If Apple could get Netflix, Amazon Prime Video, and a few big networks (HBO GO and USA in particular for me) on board, it’d become infinitely more useful. And I do think that Apple has to go get these deals because I have little reason to believe that the networks will do it themselves.&lt;/p&gt;
+
+&lt;p&gt;I didn’t talk about Single Sign-On but there are parallels there: It’s supported by very few TV Providers and similarly few network apps. Comcast Xfinity doesn’t support it so I haven’t had a chance to try it out. Given that &lt;a href=&quot;https://itunes.apple.com/us/app/xfinity-tv/id731629156?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;Xfinity’s TV app&lt;/a&gt; is a great iOS citizen&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;, I’m hopeful that this’ll get added soon.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;updates&quot;&gt;Updates&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Jan 17: &lt;a href=&quot;http://appleinsider.com/articles/17/01/18/apple-tv-iphone-ipad-gain-ability-to-play-netflix-movies-directly-in-tv-app&quot;&gt;Netflix adds ability to play content directly in TV app&lt;/a&gt;. Now, when you search for something in the TV app, you can see if it’s available on Netflix and playing it will immediately start playback in the Netflix app. However, Netflix still doesn’t let you track what you’re watching in &lt;code class=&quot;highlighter-rouge&quot;&gt;Up Next&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Jan 26: &lt;a href=&quot;https://www.macrumors.com/2017/01/26/hbo-go-single-sign-on-tv-app/&quot;&gt;HBO GO adds support for Single Sign-On and TV app&lt;/a&gt;. This was a really big one for me. While I &lt;em&gt;still&lt;/em&gt; can’t use Single Sign-On with Comcast Xfinity, having HBO accessible in &lt;code class=&quot;highlighter-rouge&quot;&gt;Search&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Next&lt;/code&gt; has already been great. I’m still baffled it took so long (especially since HBO NOW has had this since day one) but that’s one less bastion&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; left to fall.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Don’t judge me. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;This is doubly frustrating because, as I mentioned earlier, I can search for Netflix shows in the TV app and it’ll open the movie/episode in the Netflix app; it just doesn’t keep track of progress in &lt;code class=&quot;highlighter-rouge&quot;&gt;Watch Now&lt;/code&gt;. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;It supports the iPad Pro’s native resolution, Split View, and Picture in Picture - but not AirPlay. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;Netflix and Amazon Prime Video remain, for those keeping track. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 07 Jan 2017 00:00:00 -0500</pubDate>
+        <link>http://thoughtsandstuff.net/tv-app</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/tv-app</guid>
+        
+        
+        <category>apple</category>
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>Traveling with AirPods</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/airpods.jpeg&quot; alt=&quot;&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Apple’s AirPods were finally released to the public on Monday, and I managed to grab a pair at launch. I’ve been using them quite a bit over the last couple of days and I abslolutely love them. Right off the bat, I’ll say that this is my second-favorite new Apple product since 2013, behind only the Pencil.&lt;/p&gt;
+
+&lt;p&gt;However, if there’s one thing I’ve learned over the years, it’s that nothing puts your tech through its paces quite like long-haul travel. And as luck would have it, I was making one such trip just two days after getting the AirPods. So, how did they fare? (Spoiler: &lt;em&gt;outstandingly&lt;/em&gt; well).&lt;/p&gt;
+
+&lt;h2 id=&quot;the-setting&quot;&gt;The Setting&lt;/h2&gt;
+&lt;p&gt;I was scheduled to fly from Boston to Accra via Toronto and Istanbul, with 2 and 7 hour transits respectively.&lt;/p&gt;
+
+&lt;p&gt;In Boston, my flight was heavily delayed, so I ended up spending 4 hours at the gate before boarding. I wore the AirPods pretty much throughout that time, and for most of the 90 minute flight to Toronto. My transit time in Toronto was cut to naught because of the delay, and then it was time for the main event: a 9 hour transatlantic flight to Istanbul. I then spent 6 hours in the Turkish Airlines lounge at Ataturk Airport, before boarding my final 7 hour flight to Accra.&lt;/p&gt;
+
+&lt;p&gt;Usually when I make this trip&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, my Beats Studio Wireless don’t leave my neck from the time I leave home until I fall asleep on the transatlantic flight, at which point I charge them for my transit in Istanbul and the last flight to Accra. But while I brought the Studios with me on this trip, at no point did I feel compelled to take them out of my bag.&lt;/p&gt;
+
+&lt;h2 id=&quot;pros-and-cons&quot;&gt;Pros and Cons&lt;/h2&gt;
+&lt;p&gt;The AirPods are  &lt;em&gt;much&lt;/em&gt; smaller and lighter than my Beats, and I didn’t expect to appreciate that as much as I did. Being able to take them out and put them in my pocket was &lt;em&gt;so&lt;/em&gt; much more convenient than having to carry the Studios or leave them wrapped around my neck. I also felt like I could listen to use them for longer periods of time than the Studios, which are closed headphones and thus create a bunch of heat.&lt;/p&gt;
+
+&lt;p&gt;On the plane, being able to pull out one of the headphones and have my podcast/movie automatically pause so that I could interact with cabin crew (and resume when I put it back) was a very big plus. During meals, when I was talking to a member of cabin crew pretty often, I took out one headphone and put it back in the case, at which point the AirPods routed the sound from stereo to mono — a beautiful little detail. And don’t even get me started on the range. I was listening to a podcast on my iPad when I decided to visit the restroom, and I was actually able to get up, walk across the cabin, and use the facilities (with the iPad still at my seat) without the AirPods skipping a beat. I thought that was absolutely incredible.&lt;/p&gt;
+
+&lt;p&gt;Another big benefit to me was the easy switching between devices. Almost all the music I’d like to listen to on a flight is cached on my iPhone, but I have a bunch of Movies, TV Shows, and Podcasts downloaded on my iPad. There have been many times in the past where I’ve wanted to listen to music or watch a movie on a flight but didn’t because I just didn’t feel like switching devices. With the AirPods, I was free to switch as I pleased — and so I did. I understand that I can, and probably should, download my music to my iPad and have that be my all-in-one IFE system, but even if I did that I’d still need to switch between them because I obviously can’t lie down and use the 12.9” iPad Pro comfortably on a flight. I also understand that I could just switch between devices with wired headphones, but if that’s your solution, you clearly don’t know the bliss that is traveling with wireless headphones. It’s a complete game changer.&lt;/p&gt;
+
+&lt;p&gt;When I was woken up for breakfast an hour before arriving in Istanbul, the AirPods had just over 50% of battery remaining (after 18 hours of use, and with 15 hours of travel remaining). I had slept for 5 hours on that flight, and I tend to travel with an Anker battery and a bunch of Lightning cables, so I could have charged the AirPods pretty easily, but I wanted to see if they could make it through the trip on a single charge. It turns out, I could. I used the AirPods for a few hours in the lounge, and then for a few more hours on the flight to watch a movie. And by the time I got home, 33 hours after leaving Boston, the case had about 5% remaining and the AirPods were fully charged (i.e. I still had about 5 hours of battery life remaining). That’s without me babying them in any way; at no point did I want to listen to something but didn’t because I was afraid that the battery will run out. That doesn’t happen with the Studios. Not only do I always have to find a few hours to charge it, but I have to carry around a micro-USB cable just for it.&lt;/p&gt;
+
+&lt;p&gt;So what do we have here? Incredibly portable headphones with enough passthrough to use safely in a busy airport, and a very practical play/pause mechanism, with outstanding range and enough battery life to make it through almost two days of travel on a single charge. To me, that’s easily worth the asking price of $159. No question about that.&lt;/p&gt;
+
+&lt;p&gt;But while there’s a lot to love about the AirPods, I’d be remiss if I didn’t mention the obvious downsides. I definitely missed having an in-line remote a lot on this trip for volume control. And while the AirPods have surprisingly good sound, it’s nothing compared to the Studios — especially when listening to music. Lastly, while these were particularly quiet flights (in no small part due to the magnificence of the Boeing 787 Dreamliner), I did miss the Active Noice Cancelation of the Studios at times. It wasn’t a big enough issue to make me get them out of &lt;a href=&quot;https://www.awaytravel.com/luggage/carry-on/black&quot;&gt;my carry-on&lt;/a&gt;&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, but I did wish I had them during takeoff and landing.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The AirPods were a huge hit on this trip. In the future, on short trips, I can’t see any reason for me to bring the Studios with me. However, on longer trips where I’d be packing them anyways for when I get to my destination, I can see myself leaving them in &lt;a href=&quot;https://www.awaytravel.com/luggage/carry-on/black&quot;&gt;my carry-on&lt;/a&gt; to at least have that option. But long gone are the days of me walking through the terminal deaf to the world around me.&lt;/p&gt;
+
+&lt;p&gt;I should also note that I spent most of this trip in airline lounges and a fairly spacious business class open suite. In economy, which is typically a lot louder and a lot more cramped, I might be more inclined to bring the Studios for their active noise cancellation and because I’m far less likely to lose them. My last flight to Accra ended up being in economy class and I woke up to pack the AirPods after dozing off because I was worried that someone might accidentally nudge them out of my ear while I was asleep.&lt;/p&gt;
+
+&lt;p&gt;Either way, the AirPods are undoubtedly my favorite new Apple product of the last couple of years, and I sense that they’re going to go on to completely change the way I listen to music. I’m sold on Apple’s idea of the future of wireless audio playback. Bring on W1 everywhere.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;I make a slight variant of this trip 6 times annually (3 round-trips), in addition to usual summer travel. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;You should check out &lt;a href=&quot;http://awaytravel.com&quot;&gt;Away&lt;/a&gt; if you travel with any sort of frequency. Their suitcases and carry-on bags are the best I’ve ever owned, and come with a no-hassle lifetime warranty. I genuinely love them. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Fri, 23 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://thoughtsandstuff.net/airpods</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/airpods</guid>
+        
+        
+        <category>apple</category>
+        
+        <category>airpods</category>
+        
+      </item>
+    
+      <item>
+        <title>Using Project Fi with iOS</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/project-fi.jpeg&quot; alt=&quot;&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-project-fi&quot;&gt;What is &lt;em&gt;Project Fi&lt;/em&gt;?&lt;/h2&gt;
+&lt;p&gt;If you haven’t heard of Google’s &lt;em&gt;Project Fi&lt;/em&gt; network before, you might want to check out &lt;a href=&quot;https://fi.google.com/about/&quot;&gt;its About page&lt;/a&gt; before reading the rest of this but the gist of it is as follows: It’s a cell carrier owned by Google where you pay $20 per month for unlimited domestic talk and text, unlimited international texts, and the ability to use your phone as a Wi-Fi hotspot. Data costs $10 per GB and is pro-rated (so if you use 2.5 GB, you pay $25), and that pricing applies in over 135 countries(!).&lt;/p&gt;
+
+&lt;p&gt;The biggest caveat as an iPhone user (and generally as someone heavily into Apple’s ecosystem) is that officially, as of the time of writing, &lt;em&gt;Project Fi&lt;/em&gt; only works on three Android phones: the Nexus 6P, Nexus 5X, and Nexus 6. Google says that this is because “these devices are the first smartphones that support our network of networks.” However, if you would like to enroll in &lt;em&gt;Project Fi&lt;/em&gt;  and don’t have a supported phone, Google will sell you a Nexus 5X or a Nexus 6P for up to $150 off of the retail price. You can also request up to eight data-only SIMs for free with your plan. Together, that’s where things get interesting.&lt;/p&gt;
+
+&lt;p&gt;I do a lot of international travel every year. In 2016 alone, I’ve had trips and transits in over 20 different cities across 9 different countries. Unsurprisingly, traditional carriers don’t make it easy to use your phone abroad, with AT&amp;amp;T charging $40 for 200 MB in a limited set of countries (a couple of the ones I visited this year weren’t included) so, as you can imagine, &lt;em&gt;Project Fi&lt;/em&gt; piqued my interest early on.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;I ordered a &lt;a href=&quot;https://www.amazon.com/LG-Nexus-5X-Unlocked-Smartphone/dp/B0178GE4FU&quot;&gt;Nexus 5X&lt;/a&gt; for $199 and a few data-only SIMs, and decided to put them to the test in a little trip that I’m taking right now.  The phone itself is fine to look at but, and I was happy getting it just to (finally) have a decent Android phone to play with, but I really just got it to activate the service.&lt;/p&gt;
+
+&lt;p&gt;I currently have data-only SIMs in my iPhone 6S Plus, 9.7-inch iPad Pro, and 12.9-inch iPad Pro. After inserting the SIM card, I had to go to &lt;code class=&quot;highlighter-rouge&quot;&gt;Settings &amp;gt; Cellular&lt;/code&gt; to turn on Data Roaming (and make sure LTE was enabled), and then go to &lt;code class=&quot;highlighter-rouge&quot;&gt;Cellular Data Options&lt;/code&gt; to change the Cellular Data APN to ‘h2g2’ on each device in order to make &lt;em&gt;Project Fi&lt;/em&gt; work on iOS. That’s all there is to setting it up.&lt;/p&gt;
+
+&lt;h2 id=&quot;tests-and-results&quot;&gt;Tests and Results&lt;/h2&gt;
+&lt;p&gt;I haven’t had a chance to test out &lt;em&gt;Project Fi&lt;/em&gt; in the United States, and I’ll probably update this list with more results as I keep traveling, but here’s what I have so far:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Istanbul: &lt;em&gt;Turkcell&lt;/em&gt; LTE, 2 Mbps in the airport&lt;/li&gt;
+  &lt;li&gt;Rome: &lt;em&gt;TIM&lt;/em&gt; LTE, 18 Mbps in the city&lt;/li&gt;
+  &lt;li&gt;Barcelona: &lt;em&gt;movistar&lt;/em&gt; LTE, 20 Mbps in the airport&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These tests were taken on all three aforementioned iOS devices through Netflix’s &lt;a href=&quot;fast.com&quot;&gt;Fast.com&lt;/a&gt; with consistent results.&lt;/p&gt;
+
+&lt;p&gt;I only mentioned the result from Rome above but I had similar results in Florence, Siena, Cinque Terre, Lucca, and other parts of Italy. (Speeds fluctuated between 3-18 Mbps but I consistently had usable LTE access.)&lt;/p&gt;
+
+&lt;h2 id=&quot;the-bottom-line&quot;&gt;The bottom line&lt;/h2&gt;
+&lt;p&gt;Thanks to Google and_Project Fi_, I now have access to data when traveling &lt;a href=&quot;https://fi.google.com/coverage?u=0&quot;&gt;almost anywhere in the world&lt;/a&gt; for just $10 per GB. That’s  &lt;em&gt;incredible&lt;/em&gt; value — and I suspect that many international travelers would agree, even when factoring in the $20 per month for service and the $199 up-front for the Nexus 5X.&lt;/p&gt;
+
+&lt;p&gt;Additionally, after installing the Google Hangouts app on my iOS devices, I can now make (and receive) international calls and texts at a &lt;a href=&quot;https://fi.google.com/about/rates/&quot;&gt;low, variable per-minute rate&lt;/a&gt; through &lt;em&gt;Project Fi&lt;/em&gt; without having to carry the Nexus 5X with me. I don’t make or receive a lot of calls in general but it’s a nice added bonus, and I’ve already used it a few times on this trip. For example, I was able to call Istanbul from Rome for just 4¢ per minute even though the Nexus 5X was switched off. Rome to Barcelona was 1¢ per minute, Rome to the United States was free over Wi-Fi, and Rome to Accra would have cost me 23¢ per minute. (If I decided to use the Nexus 5X, all calls placed on it would have cost a fixed 20¢ per minute over the Fi Network, or the aforementioned rates over Wi-Fi.)&lt;/p&gt;
+
+&lt;p&gt;I wholeheartedly recommend &lt;em&gt;Project Fi&lt;/em&gt; — and I say that as someone who actively avoids Google for everything but Search. If Google could get it to work natively on iPhone, I would switch carriers in a heartbeat but I wouldn’t get my hopes up over that happening anytime soon.&lt;/p&gt;
+
+&lt;h2 id=&quot;an-aside-on-the-97-inch-ipad-pro&quot;&gt;An aside on the 9.7-inch iPad Pro&lt;/h2&gt;
+&lt;p&gt;When Apple released the 9.7-inch iPad Pro, there was a lot of discussion about the fact that it had a &lt;a href=&quot;http://www.cnet.com/news/apples-true-tone-display-whats-the-deal/&quot;&gt;True Tone display&lt;/a&gt; that its 12.9-inch sibling does not, but not a lot was made of the fact that it had both a SIM slot and an integrated Apple SIM. I found that interesting at the time because it essentially makes this the first dual-SIM iOS device.&lt;/p&gt;
+
+&lt;p&gt;When I bought the iPad, I immediately added it to my AT&amp;amp;T Mobile Share plan using the integrated Apple SIM, remarking at how seamless the setup process was out of the box. After inserting the &lt;em&gt;Project Fi&lt;/em&gt; card in to the previously-empty SIM slot, I’m now remarking similar at how seamless the process of switching between carriers is. All I have to do is go to &lt;code class=&quot;highlighter-rouge&quot;&gt;Settings &amp;gt; Cellular Data&lt;/code&gt; and tap one of the two options under ‘Choose a Data Plan.’ It couldn’t be easier.&lt;/p&gt;
+
+&lt;p&gt;When I got to Istanbul, I only had a &lt;em&gt;Project Fi&lt;/em&gt; SIM card in the 9.7-inch iPad Pro (and in the Nexus 5X) because I didn’t want to bother switching a bunch of SIMs until I knew that the service worked. I mean, nobody likes switching SIM cards. It’s a terrible experience. I’m glad that with the smaller iPad Pro, this isn’t something that I’m going to have to do very often. I hope that this bleeds over to the 12.9-inch iPad Pro and becomes a mainstay feature, and that Apple doesn’t just kill the SIM card slot instead (and keep just the integrated Apple SIM around). Thankfully, the Apple SIM still has a long way to go to work in most countries around the world, so I think that the SIM card slot is safe — for the time being, at least.&lt;/p&gt;
+
+&lt;p&gt;I also wonder how possible it would be to bring this to the iPhone. It’d be great if I could seamlessly switch between two SIM cards but, given that there would be phone numbers associated with the iPhone, it might be a little more complicated. Or maybe it’s not that complicated and I’m just overthinking this. I guess we’ll find out with the new iPhone in September. Until then, I now have this neat little &lt;a href=&quot;https://www.amazon.com/GPG2-Mobile-Safe-Case-travel/dp/B00GQ2HG6C/ref=sr_1_1?ie=UTF8&amp;amp;qid=1471319385&amp;amp;sr=8-1&amp;amp;keywords=Sim+card+holder&quot;&gt;SIM card holder&lt;/a&gt; with me in my backpack!&lt;/p&gt;
+
+&lt;p&gt;(I should add for the sake of completeness that the Apple SIM on iPad allows you to switch between carriers, and I could switch have switched from AT&amp;amp;T to &lt;a href=&quot;https://www.gigsky.com/&quot;&gt;GigSky&lt;/a&gt; — a pay-as-you-go international data carrier — while abroad, but I’d still need to come up with a solution on iPhone. Coupled with the fact that its &lt;a href=&quot;https://cl.ly/h8bP&quot;&gt;rates&lt;/a&gt; are largely unfavorable, &lt;em&gt;Project Fi&lt;/em&gt; still comes out as a much better option.)&lt;/p&gt;
+</description>
+        <pubDate>Thu, 25 Aug 2016 00:00:00 -0400</pubDate>
+        <link>http://thoughtsandstuff.net/project-fi</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/project-fi</guid>
+        
+        
+        <category>google</category>
+        
+        <category>travel</category>
+        
+        <category>project-fi</category>
+        
+        <category>apple</category>
+        
+      </item>
+    
+      <item>
+        <title>Traveling with the iPad Pro</title>
+        <description>&lt;p&gt;I left Boston for Accra on Saturday and, having made a lot of changes to my device lineup recently, I was excited to see how they’d fare on my (typical) long, complicated journey.&lt;/p&gt;
+
+&lt;h2 id=&quot;my-backpack&quot;&gt;My backpack&lt;/h2&gt;
+&lt;p&gt;I try to travel as light as possible, though not usually with much success. However, this trip marked the first time in almost six years that I was traveling transatlantic without a MacBook Pro, so I was off to a &lt;em&gt;flying&lt;/em&gt; start. (I’m so sorry.)&lt;/p&gt;
+
+&lt;p&gt;My bag, an &lt;a href=&quot;https://www.incase.com/shop/bags/incase-icon-slim-pack/&quot;&gt;Incase Icon Slim backpack&lt;/a&gt;, was fitted with the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;MacBook&lt;/li&gt;
+  &lt;li&gt;iPad Pro&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.apple.com/apple-pencil/&quot;&gt;Apple Pencil&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.apple.com/smart-keyboard/&quot;&gt;Smart Keyboard&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;iPad mini&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.apple.com/shop/product/MLDW2AM/A/apple-watch-magnetic-charging-dock&quot;&gt;Watch dock&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Lightning Cables&lt;/li&gt;
+  &lt;li&gt;USB-C Cable&lt;/li&gt;
+  &lt;li&gt;Mini USB Cable&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.anker.com/product/A1271011&quot;&gt;Anker battery&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Travel documents&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I was also carrying around my iPhone 6s Plus, Apple Watch, and &lt;a href=&quot;http://www.beatsbydre.com/headphones/studio-wireless/matte-black/900-00198.html&quot;&gt;Beats Studio Wireless&lt;/a&gt; headphones.&lt;/p&gt;
+
+&lt;p&gt;That list is as small as it’s ever been, and I’ve never traveled with a lighter backpack. I do have some notes though:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Replacing my MacBook Pro with the MacBook was definitely the biggest contributing factor; the drop from 4.49 lbs to 2.03 lbs was very noticeable. I don’t take my Mac on shorter trips anymore but given that I’ll be home for a month I thought it’d be a good idea to just have it around. I don’t see myself using it much (if at all) though.&lt;/li&gt;
+  &lt;li&gt;Going from carrying the iPad Air to both the iPad Pro and iPad mini didn’t feel like much of a step backwards in terms of portability, especially since I had no intention of using the iPad mini during the flights. The Pro slot in where the Air would have in my backpack, and the mini was stowed away in one of the exterior zip compartments. Compared to the weight decrease of the MacBook, the weight increase of both iPads was negligible.&lt;/li&gt;
+  &lt;li&gt;While the &lt;a href=&quot;http://www.anker.com/product/A1271011&quot;&gt;Anker battery&lt;/a&gt; is relatively heavy at 0.79 lbs, this was also the first transatlantic trip I’ve taken without a wall charger for any of my devices. There was very little difference in weight, but I saved a &lt;em&gt;tremendous&lt;/em&gt; amount of space by swapping multiple USB wall plugs and a laptop charger with a single external battery and cables for each device. The Anker can charge two USB devices and my MacBook at the same time and, although I ended up not using it at all this trip, knowing it was around if needed was reassuring.&lt;/li&gt;
+  &lt;li&gt;I bought the &lt;a href=&quot;http://www.apple.com/shop/product/MLDW2AM/A/apple-watch-magnetic-charging-dock&quot;&gt;Apple Watch dock&lt;/a&gt; because it charges via Lightning so I don’t have to carry around the Watch’s weird charging cable. I’d like to see future Beats headphones switch to Lightning so that I can ditch the Mini USB cable, too.&lt;/li&gt;
+  &lt;li&gt;I’ve been carrying the iPad Pro’s &lt;a href=&quot;http://www.apple.com/smart-keyboard/&quot;&gt;Smart Keyboard&lt;/a&gt; case as a crutch of sorts: I don’t use it much — I don’t leave it on the iPad, and I rarely ever use it (I’m typing this on the iPad’s display right now) — but it’s super thin and just slips into my backpack, and I like knowing it’s there in case I decide to crank out a really long article or I’m sitting somewhere I can’t get a good touch-typing angle on the iPad’s display.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-flights&quot;&gt;The flights&lt;/h2&gt;
+&lt;p&gt;I spent my most of the first flight (Boston to Frankfurt) &lt;a href=&quot;https://www.macstories.net/reviews/pigment-brings-adult-coloring-books-to-ipad-pro-with-apple-pencil-support/&quot;&gt;coloring on the iPad Pro&lt;/a&gt; with the Apple Pencil (don’t judge me), texting my friends, drinking wine, and listening to music.&lt;/p&gt;
+
+&lt;p&gt;While in the lounge in Frankfurt, I used the iPad Pro to catch up on Shawn Blanc’s &lt;a href=&quot;https://karan301.com/elements-of-focus-7a155bbccaad&quot;&gt;&lt;em&gt;Elements of Focus&lt;/em&gt;&lt;/a&gt; course, FaceTime with a couple of friends, find out information about my next flight, and let my parents know of my whereabouts. (I also drank beer, of course. When in Rome…)&lt;/p&gt;
+
+&lt;p&gt;The second flight (Frankfurt to Istanbul) was much shorter. I spent it listening to music and writing some stuff, including the majority of this article. I placed the iPad Pro (oriented in landscape) on a pillow on my lap and typed in Ulysses using the on-screen keyboard (while drinking Gin &amp;amp; Tonics, mind you - it’s a wonder how I got anything done).&lt;/p&gt;
+
+&lt;p&gt;I didn’t have that much time to spend in the lounge in Istanbul. I got in, grabbed some lunch, took a shower, texted my parents, and left for the gate.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, I fell very sick on the third flight (Istanbul to Accra). I received treatment from an on-board doctor shortly after takeoff then fell asleep for almost the remainder of the flight. I started listening to music roughly an hour before landing and didn’t use my iPad at all. Ideally, I would’ve spent this flight watching some movies that I had downloaded onto the iPad Pro, but I can’t comment on that experience in-flight right now.&lt;/p&gt;
+
+&lt;h2 id=&quot;battery-life&quot;&gt;Battery Life&lt;/h2&gt;
+&lt;p&gt;The Apple Watch lasted the entire trip (from Saturday morning to Sunday night) and only went to Power Reserve mode roughly 30 minutes before I could get home and charge it.&lt;/p&gt;
+
+&lt;p&gt;The iPad Pro (and Pencil) lasted the entire trip with over half their batteries still remaining. I was very pleased with that, though not really surprised.&lt;/p&gt;
+
+&lt;p&gt;My iPhone had to be charged for at least an hour on each flight. That’s a little disappointing, though again not surprising since it was connected to Bluetooth headphones and playing music almost throughout the trip.&lt;/p&gt;
+
+&lt;p&gt;My Beats Studio Wireless needed to be charged twice; while I slept on the first flight and again on the third.&lt;/p&gt;
+
+&lt;p&gt;Charging any of these devices wasn’t and wouldn’t have been a problem thanks to twin in-seat USB ports and my Anker battery, but I dream of a day that I can make these two-day trips without needing a charger.&lt;/p&gt;
+
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h2&gt;
+&lt;p&gt;In the conclusion of my &lt;a href=&quot;https://karan301.com/ipad-pro-in-the-clasroom-f3c0b9ae08f1&quot;&gt;iPad Pro in the Classroom&lt;/a&gt; article, I noted the following:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The iPad Pro wins anywhere you can sit it down; be it on your lap when reading an article, in bed when watching a movie, or on a desk when doing work, its power really shines through.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This trip solidified that claim for me. Setting it down on my lap, I got more use out of my iPad Pro on its first trip than I ever did in two years with the iPad Air.&lt;/p&gt;
+
+&lt;p&gt;I was worried that the near-13” display might have been too big to use comfortably on flights but there was no problem whatsoever. However, none of the flights were in Economy Class, so that might have been a different experience. I might potentially have a coupe of those coming up next year so we’ll see how they go.&lt;/p&gt;
+
+&lt;p&gt;I noticed on the second flight that I’ve acclimated to the software keyboard in ways I never expected to; I almost treat it like a physical keyboard now, typing with both hands above the display. The &lt;a href=&quot;http://www.apple.com/ios/whats-new/#ipad&quot;&gt;two-finger trackpad mode&lt;/a&gt; is extremely useful for editing and a big advantage over physical keyboards.&lt;/p&gt;
+
+&lt;p&gt;The iPad Pro was at the very least equally capable as an entertainment device, and far and wide more useful as a productivity device. The superior typing experience was paramount to that.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Side note: If you do any writing at all, you should get yourself a copy of Ulysses (&lt;a href=&quot;https://geo.itunes.apple.com/us/app/ulysses-for-ipad/id950335311?mt=8&amp;amp;uo=4&amp;amp;at=11lMfC&quot;&gt;iOS&lt;/a&gt;, &lt;a href=&quot;https://geo.itunes.apple.com/us/app/ulysses/id623795237?mt=12&amp;amp;uo=4&amp;amp;at=11lMfC&quot;&gt;Mac&lt;/a&gt;). It’s by far the best writing experience I’ve ever had on any platform.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I’m excited to take a short trip next year and see how things change. I have a weekend in Miami coming up in a month and I’ll try just taking the iPad Pro, my headphones, iPhone, Apple Watch, and their respective accessories (ditching the MacBook and iPad mini).&lt;/p&gt;
+
+&lt;p&gt;The iPad Pro has passed &lt;a href=&quot;https://karan301.com/why-i-now-have-two-ipads-d874a408f150&quot;&gt;almost&lt;/a&gt; every test I’ve put it through, and I’m increasingly enjoying working on it as I continue to develop better workflows to make the most of it. I’m completely sold on the idea that this is, or at least should be, &lt;a href=&quot;https://brooksreview.net/2015/12/future-computing/&quot;&gt;the future of computing&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Dec 2015 00:00:00 -0500</pubDate>
+        <link>http://thoughtsandstuff.net/ipad-pro-travel</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/ipad-pro-travel</guid>
+        
+        
+        <category>apple</category>
+        
+        <category>ipad</category>
+        
+        <category>travel</category>
+        
+      </item>
+    
+      <item>
+        <title>iPad Pro in the Classroom</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/ipad-pro.jpeg&quot; alt=&quot;&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;a-bit-of-background&quot;&gt;A bit of background&lt;/h2&gt;
+&lt;p&gt;I stopped taking a Mac to campus back in 2011 when the iPad 2 came out. It was &lt;em&gt;much&lt;/em&gt; more portable than the 17” MacBook Pro that I had at the time, and typing on the display was never much of an issue for me. However, I’d been supplementing the iPad with a paper notebook in math and language classes.&lt;/p&gt;
+
+&lt;p&gt;I started college in the Fall of 2013. I picked up an iPad Air for class and a 15” MacBook Pro with Retina Display for working at home. And, since I wanted to go completely digital in college, I bought a generic stylus for the iPad on Amazon and the &lt;a href=&quot;http://www.gingerlabs.com&quot;&gt;Notability app by Ginger Labs&lt;/a&gt;. FiftyThree released the &lt;a href=&quot;http://www.fiftythree.com/pencil&quot;&gt;Pencil&lt;/a&gt; shortly after and I picked that up too.&lt;/p&gt;
+
+&lt;p&gt;I tried handwriting all my notes in Notability at first but that ended up being a terrible idea. In additition to losing the ability to search my notes, the quality of them took a &lt;em&gt;huge&lt;/em&gt; hit. It didn’t take long for me to go back to just typing again, but Notability and the Pencil gave me the added benefit of being able to write the occasional math formula or draw a quick diagram when I needed to. (I should note that I never stopped taking a notebook to my Arabic class. That would have gone horribly.)&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Hereon out, all instances of the Pencil are referring to the &lt;a href=&quot;http://www.apple.com/apple-pencil/&quot;&gt;Apple Pencil&lt;/a&gt;; not the FiftyThree Pencil.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I’ve been using the above system — the iPad on campus and my Mac at home, with Notability running on both — until I decided to tweak it this semester. Some of of my professors have great lecture notes which are made available to us online, and I noticed that a lot of what I type in class ends up being repeated there. I started importing their notes into Notability and annotating them but it wasn’t a great experience. Notability is designed to create notes from scratch and treats imported PDFs as nothing more than background paper. It also saves them in its own proprietary format which makes sharing my notes a pain. I started looking for an app to manage and edit PDFs iOS and came accross &lt;a href=&quot;http://thesweetsetup.com/apps/best-pdf-manager-editor-ipad/&quot;&gt;this roundup&lt;/a&gt; by the fantastic &lt;a href=&quot;http://brooksreview.net&quot;&gt;Ben Brooks&lt;/a&gt;, writing for &lt;em&gt;The Sweet Setup&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;As per his reccomendation, I decided to buy &lt;a href=&quot;https://readdle.com/products/pdfexpert5&quot;&gt;PDF Expert 5 by Readdle&lt;/a&gt; on both Mac and iOS, and moved all my course documents to it. This gave me the ability to highlight &amp;amp; underline text and fill in text boxes, in addition to the freehand writing tools available in Notability. I’m a little disappointed it took me so long to get to this point but I’m very content with my current system.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s talk about the iPad Pro.&lt;/p&gt;
+
+&lt;p&gt;I went to the Apple Store and picked up a Space Grey, 128gb model with Cellular connectivity on the morning of its release. Setting it up was a breeze; I pulled everything from an iCloud backup (which was a lot faster than I expected it to be), and added the device to my AT&amp;amp;T Mobile Share plan using the preinstalled Apple SIM card.&lt;/p&gt;
+
+&lt;p&gt;I had a hard time initially doing anything with the iPad Pro. It took me 5 days from that Wednesday to acclimate to the device, during which I was heavily rotating between it and my iPad Air 2. After the weekend, I decided to take the new iPad  for its first full week of class.&lt;/p&gt;
+
+&lt;p&gt;I’m registered in 4 classes this semester, each with its own content distribution system and rules for submitting assignments: Intro to Astronomy, Intro to Linguistics, 5th-semester Arabic, and Linear Algebra.&lt;/p&gt;
+
+&lt;h2 id=&quot;astronomy&quot;&gt;Astronomy&lt;/h2&gt;
+&lt;p&gt;My Intro to Astronomy class has 3 main components:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;I have to read chapters from the textbook before lecture, and take notes in lecture.&lt;/li&gt;
+  &lt;li&gt;I have to submit a homework assignment on paper at the start of lecture every other week. These assignments usually involve a few short-answer questions with a bit of math in them, and a couple of short essay questions.&lt;/li&gt;
+  &lt;li&gt;I have to attend lab once a week, conduct some experiments, and answer the questions in my lab report. Reports must be printed and submitted at the start of lab every 2 weeks. This is what &lt;a href=&quot;http://www.bu.edu/astronomy/files/2014/01/spectroscopy_2014_Clemens.pdf&quot;&gt;a typical lab assignment&lt;/a&gt; looks like.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I bought the textbook for the class before the semester to clear my conscience, and then proceeded to pirate a PDF of it. On Sunday nights, I like to sit on the couch and read the assigned chapter for the week on my iPad, highlighting things I think might be important. PDF Expert does a great job of collecting everything I highlight, underline, or comment on so that I can refer to it later. I could do this on my MacBook pretty easily but I’ve long preferred the reading experience of an iPad; there’s something about holding the document up in front of me and directly touching the words to annotate them that helps me retain the information better. The iPad Pro felt a little uncomfortable to use on the couch at first but, after adjusting to the increased size and weight, I definitely prefer it to the iPad Air now — the bigger screen size makes for a much more enjoyable reading experience.&lt;/p&gt;
+
+&lt;p&gt;This has been my first semester taking notes in lecture with PDF Expert. My Astronomy professor doesn’t provide us with lecture notes but she does make the presentation slides available on the course website. I converted those to PDF and I’ve been typing quick comments on top them. Lecture is really just an elaboration of what we read at home in the textbook so I don’t need to note down much more than a few homework or exam hints that get given out. Nothing exciting here.&lt;/p&gt;
+
+&lt;p&gt;Doing Astronomy homework usually involves me typing up the written part, leaving blank spaces for the math questions, while referencing the textbook. I either do all of it on my Mac with Split View, or I do the written part on my Mac and reference the textbook on my iPad. I print out the assignment when I’m done, answer the math questions by hand, and put it in my backpack to submit the next day. I have &lt;a href=&quot;https://support.apple.com/en-us/HT201311&quot;&gt;an AirPrint printer&lt;/a&gt; so while it’s been possible to do all of this on my iPad Air since the release of iOS 9, it always felt a little cramped and there’s been no real benefit over doing so on my MacBook. The iPad Pro changed that. Working with both Pages and the textbook side-by-side is as good as doing so on the MacBook, especaially when paired with a keyboard, and now I can do all the math questions with the Apple Pencil in Notes and just copy them as image files into my assignment. That’s enough of an advantage to make the iPad Pro a clear winner here for me. I now do the entire assignment, including printing, on the iPad Pro.&lt;/p&gt;
+
+&lt;p&gt;Lab reports are supposed to be printed out before the start of new lab assignments and filled out over the 2-3 weeks that we work on them, but I’ve been using my iPad Air instead. I download the PDF from &lt;a href=&quot;http://www.bu.edu/astronomy/undergraduate/manuals/&quot;&gt;the repository&lt;/a&gt; the night before we start the lab, import it, and type out the answers to the questions. If there’s a chart that needs to be drawn, I type the data in a table and either create the chart in Numbers later or print the report and draw it by hand. Using the iPad Pro in lab was initially a little frustrating — it’s a much harder device to hold and walk around with while noting down my observations — but it’s still doable, and it’s definitely better than doing so on a Mac. I’ve been setting it down on my desk and typing my answers in Notability, and now I can also sketch diagrams &amp;amp; fill tables more efficiently with the Pencil. So while I’ve lost some of the portability of the iPad Air, the tradeoff has definitely been worth it.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note that I’ve been using both PDF Expert and Notability for different tasks this week. That’s because while both have been updated to take advantage of the iPad Pro’s resolution, only Notability works with the Apple Pencil. Readdle say a PDF Expert update is in coming “&lt;a href=&quot;https://twitter.com/PDFExpert5/status/666635701086265344&quot;&gt;a bit later&lt;/a&gt;.”&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;linguistics&quot;&gt;Linguistics&lt;/h2&gt;
+&lt;p&gt;My Intro to Linguistics class has 2 main components:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;I have to read chapters from the textbook before lecture, and take notes in lecture.&lt;/li&gt;
+  &lt;li&gt;I have to submit a homework assignment on paper at the start of lecture every other week. These assignments often involve tree diagrams and &lt;a href=&quot;http://ipa.typeit.org/full/&quot;&gt;phonetic IPA symbols&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Unfortunately, I haven’t been able to find a PDF of the textbook that we use for this class online. This has long been one of my biggest hurdles in being digital-only in school; even though I’m willing to buy PDF copies of textbooks, that’s usually not an option. I’ve also made this harder for myself by stubbornly insisting on making all my book purchases in iBooks, which has a terrible selection for textbooks. And even if I can find what I’m looking for in the iBookstore, I’d much rather have it alongside all my other course documents in PDF Expert. What I usually end up doing is buying all my textbooks on Amazon at the start of the semester, pirating PDFs of whatever I can find online, and then selling the physical textbooks at the end of the semester. It’s a waste of money but stops me from feeling like I’m stealing from the publishers.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;A quick aside: I’ve noticed that I tend to fall way behind on readings assigned from my physical textbooks. I’m currently several chapters behind schedule in my Linguistics class.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;My Linguistics lecture added another workflow to my iPad setup. Our professor has fantastic handouts that he gives us whenever we start a new topic, but he only makes them available online after we’ve completed the topic. I emailed him to try and see if he could put them up earlier but got no response, so I took to The Sweet Setup again in search of &lt;a href=&quot;http://thesweetsetup.com/apps/best-scanning-app-ios/&quot;&gt;the best document scanning app on iOS&lt;/a&gt;. I bought &lt;a href=&quot;https://itunes.apple.com/app/id834854351?mt=8&amp;amp;at=11l7ja&amp;amp;ct=tss&quot;&gt;Scanbot&lt;/a&gt; as per their reccomendation and have been taking pictures of the handouts as soon as I receive them. Scanbot has great OCR recognition, supports multiple pages, and &lt;a href=&quot;http://blog.scanbot.io/post/132091045941/scanbot-43-for-ios-with-a-new-magic-color&quot;&gt;its new Magic Color Filter&lt;/a&gt; makes the documents look great. I take these pictures on my iPhone (because doing so with an iPad just looks silly) and then export them from Scanbot to PDF Expert in iCloud Drive. The document shows up on my iPad seconds later, text ready to be highlighted and underlined. It’s not ideal, I’d obviously much rather have my professor make the handouts available online before lecture, but I’m happy having this workaround. I annotate notes a lot more often here than in my Astronomy class and I’ve really started to enjoy the precision of doing so with the Pencil.&lt;/p&gt;
+
+&lt;p&gt;I’ve been doing my Linguistics homework on my MacBook for most of the semester, and it’s been such a chore. Between creating tree diagrams online and copying phonetic IPA symbols from the internet, my homework assignments have felt extremely laborious and not at all enjoyable. I haven’t yet had a chance to work on an assignment on the iPad Pro but I imagine doing so with the Pencil is going to be a much nicer experience. Sure, my documents will look a lot less professional, but this class is a non-major requirement. I’d much rather get it done quickly than neatly. (In hindsight, I’m not sure why I haven’t just been doing these on pen and paper until now.)&lt;/p&gt;
+
+&lt;h2 id=&quot;arabic&quot;&gt;Arabic&lt;/h2&gt;
+&lt;p&gt;Language classes have always been a huge stumbling block in my digital-only quest, starting with French in high school and more recently with Arabic in college. Boston University requires that I do 4 semesters of a foreign language which I completed last semester, but I decided to take it again for a 5th semester out of interest.&lt;/p&gt;
+
+&lt;p&gt;The class has several main components:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;I have to complete homework assigned from the textbook before class 3 times a week.&lt;/li&gt;
+  &lt;li&gt;I have to take notes in class.&lt;/li&gt;
+  &lt;li&gt;I have to type and submit two essays via email at set dates in the semester.&lt;/li&gt;
+  &lt;li&gt;I have to watch a short video online and answer 5 multiple choice questions on it every other Sunday.&lt;/li&gt;
+  &lt;li&gt;I have to record and submit two video presentations online.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I’ve flirted with the idea of using an iPad in Arabic every semester but ultimately end up failing. The daily homework has been a large part of why. A lot of what we need to do is assigned from the textbook, but some of it requires watching or listening to content on the textbook website which, much to my bemusement, stores all its content in Flash. I pull out my Mac for these and write my answers on paper. After using the Pencil for a couple of days I decided to try writing in Arabic on it. It’s not perfect, but it’s damn near close. This inspired me to take pictures of the textbook with Scanbot on a per-chapter basis and start doing my homework in Notability. I’ve done a few fill-in-the-blanks assignments and written a bunch of sentences, and so far it’s been pretty good. I still need my Mac for the online content but I don’t need paper at all anymore.&lt;/p&gt;
+
+&lt;p&gt;Most of class is spent going over the homework we did (or, more accurately, were supposed to do) at home. We also go through a few additional assignments from the textbook and do some speaking drills. It’s not too intense so I’ve been able to keep up using the iPad Pro pretty easily. She occasionally gives us a handout to work on and I have to break out my iPhone and Scanbot. These assignments are usually completed within 10-15 minutes with a partner so the time spent scanning and uploading them is much more noticeable than with the lecture notes in Linguistics. Anyways, while I’ve only had 3 Arabic classes with the iPad Pro and Apple Pencil so far, it’s had an extremely impressive start. I’m curious to see how it fares over the rest of the semester.&lt;/p&gt;
+
+&lt;p&gt;I also had the chance to work on an Arabic essay on the iPad Pro last week. I’ve always typed my Arabic essays on my iPhone or iPad because I prefer typing on the software keyboard over an on-screen one, but I’ve also kept my Mac nearby for referencing vocabulary on &lt;a href=&quot;https://quizlet.com/mabdulkerim/folders/al-kitaab-book-two&quot;&gt;Quizlet&lt;/a&gt; and for Google Translate. Split View on the iPad Air allowed me to ditch the Mac and do the first essay entirely on the iPad by having Pages open on the left and Safari with a couple of tabs open on the right, but it felt a little cramped with the keyboard taking up half the screen and there was a noticeable amount of lag when cycling between keyboards. The iPad Pro alleviated all of that for the second essay; there was enough room on the display for everything, and switching keyboards was smooth.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Another quick aside: on the iPad Air, the emoji key turns into a globe when you have 2 language keyboards enabled; but on the iPad Pro, the Caps Lock key becomes a toggle for both languages and the emoji key remains untouched, as shown &lt;a href=&quot;http://f.cl.ly/items/2j3k452n313X2y3h0U3S/Arabic%20Keyboard.jpg&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The video for the multiple choice assignment is hosted on YouTube so I can watch it on any of my devices. I’ve pushed the video to my Apple TV through AirPlay a couple of times but it’s always felt like overkill. I’ve recently taken to watching them in Picture in Picture mode on my iPad (à la &lt;a href=&quot;https://www.macstories.net/ios/ios-9-and-youtube-picture-in-picture-with-youplayer/&quot;&gt;YouPlayer&lt;/a&gt;). This lets me reference the questions without having to switch tabs or look up at the TV. Picture in Picture on the iPad Pro is huge; I miss none of the detail of the video working this way.&lt;/p&gt;
+
+&lt;p&gt;I recorded and submitted both video presentations before getting the iPad Pro so I can’t attest to how well it would work, but given that I recorded, edited, and uploaded the second presentation entirely on my iPhone, I think the iPad would work fine. iMovie is great for adding quick titles and transitions, and for direct upload to YouTube. (In case you were wondering, I recorded the first presentation entirely on my MacBook, and I’ve recorded several presentations on my iPad in the past.)&lt;/p&gt;
+
+&lt;h2 id=&quot;linear-algebra&quot;&gt;Linear Algebra&lt;/h2&gt;
+&lt;p&gt;My Linear Algebra class has 2 main components:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;I have to read chapters from the textbook before lecture, and take notes in lecture.&lt;/li&gt;
+  &lt;li&gt;I have to submit a homework assignment online every week. These assignments involve a lot of vector math.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;As with my Astronomy class, I bought a copy of the textbook for this class before pirating a PDF. I sit on the couch with my iPad every Monday night and read the assigned chapters for the week, highlighting important definitions and examples. I don’t have anything more to add here than what I already said when discussing my Astronomy class.&lt;/p&gt;
+
+&lt;p&gt;My Linear Algebra professor makes fantastic lecture notes available online at the start of the semester. These complement the textbook what’s said in lecture very well. I have the notes in PDF Expert and follow along in lecture, highlighting anything I may need to refer to later and adding the occasional comment. I would love to use the Pencil to write comments instead of typing them here, but I’d rather wait for an update to PDF Expert than increase the number of files I’m shuffling between it and Notability. It’s not that big of a deal.&lt;/p&gt;
+
+&lt;p&gt;I saved writing about my experience doing Linear Algebra homework for last because it is, by far, my favorite anecdote about the iPad Pro. I usually have the assignment sheet open on my Mac in front of me, the textbook open on my iPad to my left, and sheets of A4 paper scattered everywhere else on my desk. I first go through the assignment, making lots of mistakes along the way, then rewrite everything again neatly on the second run. Next, I scan the 10-15 pages to my Mac, merge them into a single PDF document, and upload them to the course server. The entire process takes about 3-4 hours depending on the number of questions assigned and leaves me with a pulsing wrist every time. Last week, I did the entire assignment on the iPad Pro. I had both Notability and PDF Expert open in Split View; the former was a blank canvas where I wrote down my answers and the latter had both the assignment and textbook open in tabs. I was able to erase mistakes as I made them and I didn’t have to scan anything afterwards, both of which saved me a tremendous amount of time. I uploaded the document in Safari using iCloud Drive when I was done.&lt;/p&gt;
+
+&lt;p&gt;Almost immediately after I got the confirmation email, I decided that I wasn’t going to be returning the iPad Pro.&lt;/p&gt;
+
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h2&gt;
+&lt;p&gt;The iPad Pro is an odd device to think about. Compared to the new MacBook with Retina Display, it has both a larger, clearer display, a faster processor, better battery life, and it’s thinner &amp;amp; lighter to boot. Even as an iPad, it isn’t for everyone.&lt;/p&gt;
+
+&lt;p&gt;The iPad Air wins in any situation where you need to hold the iPad and do something; its portability can’t be touched by anything other than the iPad mini, and I’m going to miss being able to get stuff done on the train or while walking between classes.&lt;/p&gt;
+
+&lt;p&gt;The iPad Pro wins anywhere you can sit it down; be it on your lap when reading an article, in bed when watching a movie, or on a desk when doing work, its power really shines through. And when it comes to getting school work done digitally, no device does that better than the iPad Pro.&lt;/p&gt;
+
+&lt;p&gt;In an ideal world I’d be keeping both iPads, but I can’t justify buying a new Mac, iPad, iPhone, and Apple TV in a single semester without selling &lt;em&gt;something&lt;/em&gt;. I’ve been using both my MacBook and iPhone more than usual since I got rid of the iPad Air, and I think I’m okay with that. I’m actually a little glad my MacBook is getting some use. I might decide to pick up a base model iPad mini as a couch computer in the future, but if I had to pick just one iPad, like I do now, I’m happy to have that be the iPad Pro.&lt;/p&gt;
+
+&lt;p&gt;I can’t stress just how much the Apple Pencil increases the utility of the iPad Pro. Its precision turns the device into a true digital textbook and makes it incredibly easy to eliminate a lot of paper workflows in college. I’m typing all my comments in PDF Expert for now but as soon as the app gets updated for the Pencil I’ll start writing those out, simply for the increased memory retention of writing vs typing. (Ben Brooks had an interesting discussion about this recently which you should &lt;a href=&quot;https://brooksreview.net/2015/11/handwritten-notes/&quot;&gt;check out&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;Apple’s &lt;a href=&quot;http://www.apple.com/smart-keyboard/&quot;&gt;Smart Keyboard for iPad Pro&lt;/a&gt; still isn’t out for sale so I picked up a &lt;a href=&quot;http://www.apple.com/magic-accessories/&quot;&gt;Magic Keyboard&lt;/a&gt; and &lt;a href=&quot;https://www.twelvesouth.com/product/compass2&quot;&gt;TwelveSouth Compass&lt;/a&gt; but I’ll be returning those and getting the Smart Keyboard as soon as I can. I don’t need a physical keyboard very often; in the time I’ve had the iPad Pro, I’ve only ever connected the keyboard to it to write about the device itself. I’m comfortable typing anything up to 1,000 words at a time using the on-screen keyboard. I also like writing on the couch which is hard to do with a bluetooth keyboard — I ended up writing several chunks of this article on my MacBook for that reason. I don’t think I’ll be using the Smart Keyboard as a case though; it’s probably just going to sit folded in the accessories section of my backpack, alongside the Pencil, until I need it. I didn’t put a case on my iPad Air, and I won’t be doing so with the iPad Pro either.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 Nov 2015 00:00:00 -0500</pubDate>
+        <link>http://thoughtsandstuff.net/ipad-pro</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/ipad-pro</guid>
+        
+        
+        <category>apple</category>
+        
+        <category>ipad</category>
+        
+        <category>education</category>
+        
+      </item>
+    
+  </channel>
+</rss>
