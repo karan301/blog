@@ -6,9 +6,112 @@
 </description>
     <link>http://thoughtsandstuff.net/</link>
     <atom:link href="http://thoughtsandstuff.net/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 03 Jun 2017 23:54:19 -0400</pubDate>
-    <lastBuildDate>Sat, 03 Jun 2017 23:54:19 -0400</lastBuildDate>
+    <pubDate>Sun, 22 Oct 2017 22:49:57 -0400</pubDate>
+    <lastBuildDate>Sun, 22 Oct 2017 22:49:57 -0400</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Using Lyft on Apple Watch</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/lyft-pickup.jpeg&quot; alt=&quot;&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I mentioned in &lt;a href=&quot;https://thoughtsandstuff.net/cellular-watch&quot;&gt;my last post&lt;/a&gt; that I’d really like to try out Lyft on Apple Watch. At the time, I couldn’t get the app to launch&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, but I reached out to Lyft support and was promised that a fix was coming soon; sure enough, the app was updated just a few days later. I’ve had a few chances to try out Lyft on the Watch this week while my iPhone was dead&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; and thought that I’d report on the collective experience.&lt;/p&gt;
+
+&lt;p&gt;Overall, it works pretty well. Launching the app brings up a screen that shows me roughly how long it’ll take for a Lyft to get to me, and lets me request a ride to my current location. I can change the pickup location to either my Home or Work address (pre-filled in the Lyft app on iPhone), or I can specify a new address by voice. I was worried that I wouldn’t be able to request a ride with Apple Pay — I have no saved credit cards in either Lyft or Uber, and that prevented me from using Uber on Apple Watch the last time I tried — but there was a native interface for that and I was able to request the ride with no problems. Once your payment processes, it contacts nearby drivers and matches you with one. You can now see the ETA, an image of the car, and the license plate number. Scrolling down, you can see the name and a picture of your driver, and you have options to call or text them from the Watch. After the ride, I have the options to tip and rate my driver.&lt;/p&gt;
+
+&lt;p&gt;Under most circumstances, this should work great. The first couple of times that I used the app, it did. I’ve had a number of (relatively minor) issues though that I’d like to touch on.&lt;/p&gt;
+
+&lt;p&gt;I almost never use my current location as a pickup address for Lyft. It’s usually an estimate, and I fine-tune it to make sure the ride goes to the right place. The last time I tried to use Lyft on the Watch, it had the address as 350 Mass Ave., which was across the street from me. I figured I’d change it to 353 Mass Ave., not because I was being lazy but because we would be heading in that direction anyways and I wanted to make navigation easier. Siri recognized the address fine, and I thought everything was going alright, until the driver ‘arrived’ a few minutes later and called me. Lyft had taken him to that address in Boston, while I was in Cambridge. I asked him to cancel the ride, paid the fee, and I called another car. I suppose I’ll just have to stick to using current location while on the Watch, because the screen isn’t large enough for me to suggest a feasible solution&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;When the driver is on the way, the app gives me an ETA but I wish it’d show me where they are. Sometimes the ETA is wildly off, and I’d like to be able to see both where they are and which direction they’re coming from. The Maps app on the Watch handles this well by letting you swipe left during navigation to see a map, and I wish Lyft would adopt this. Don’t make it the primary view, but have the option around.&lt;/p&gt;
+
+&lt;p&gt;Lastly, there’s currently no way to add a drop-off destination on the Watch. I didn’t think that this would be an issue, but I’ve had drivers accept my ride request and cancel shortly after on two (out of three) separate occasions. I imagine that’s why, because that never happens on iPhone. Given that I pretty much only call a Lyft on my Watch when my iPhone is dead and I’m trying to get home, I’d appreciate having the same &lt;a href=&quot;/assets/lyft-address.jpeg&quot;&gt;interface&lt;/a&gt; as pickups for drop-offs, so that I could quickly tap ‘Home’ and save having to have my driver plug it in himself. Having a drop-off address would also allow Lyft to give me an estimate of what my trip would cost at the time of booking.&lt;/p&gt;
+
+&lt;p&gt;As it stands, the app is &lt;em&gt;good enough&lt;/em&gt;. It does everything that I would expect it to, but it doesn’t go above and beyond. I’d love to see any of the above features were added, though I’m not holding my breath on that.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Ditto for Uber, but I gave up on &lt;a href=&quot;https://www.engadget.com/2017/04/25/ubers-terrible-horrible-no-good-very-bad-2017/&quot;&gt;that mess&lt;/a&gt; a while ago. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;Seriously, what is up with the battery life on iOS 11? An iPhone 7 Plus should not be dying this often midday. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;This is also why I’m not asking for features like switching between ride types (Line, Plus, etc.). &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 22 Oct 2017 00:00:00 -0400</pubDate>
+        <link>http://thoughtsandstuff.net/lyft-watch</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/lyft-watch</guid>
+        
+        
+        <category>apple</category>
+        
+        <category>watch</category>
+        
+        <category>lyft</category>
+        
+      </item>
+    
+      <item>
+        <title>Positing a cellular Apple Watch for travel</title>
+        <description>&lt;p&gt;Sometime in early September, I was in a mall in Lisbon and my iPhone was dying. I decided to call an Uber back to the hotel (I don’t speak the language and didn’t feel comfortable without my phone). It was a little far away, and I anxiously watched the battery drain. Luckily, I managed to get in the car right as my phone died.&lt;/p&gt;
+
+&lt;p&gt;The incident stuck with me. Our phones are so important, &lt;em&gt;especially&lt;/em&gt; while away in a foreign country. Over the following few days, I mulled over the idea of an updated Apple Watch with LTE support. I wrote a full blog post and was getting ready to publish it, but one thing led to another and I never ended up doing so.&lt;/p&gt;
+
+&lt;p&gt;In the time since: Apple both announced and released the Series 3 Watch with LTE support, and I’ve been wearing one every day since. About three weeks in, I thought it’d be fun to check-in and see how it compares to what I hoped for.&lt;/p&gt;
+
+&lt;p&gt;First and foremost, there’s one thing I need to get out of the way: &lt;strong&gt;The Apple Watch with LTE doesn’t roam.&lt;/strong&gt; It’s locked to the country where you bought it. There are &lt;a href=&quot;https://www.imore.com/how-roam-your-apple-watch-and-use-lte-data-foreign-country&quot;&gt;hacks&lt;/a&gt; to get it to work, but I use a cellular &lt;a href=&quot;https://thoughtsandstuff.net/project-fi&quot;&gt;Project Fi SIM&lt;/a&gt; when traveling internationally so this would have been a nonstarter. In the case that I described above, the LTE on my Watch would have been no additional help. However, there are plenty of times in Boston when my phone dies while I’m out and about, so this is still worth exploring&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;It’s very rare that I’m out of the house without wearing headphones. In the event that my phone dies, I would like to be able to continue listening to music and podcasts. watchOS 4.0 smartly syncs a subset of playlists to the Watch overnight, and watchOS 4.1 (currently in beta) &lt;a href=&quot;https://9to5mac.com/2017/09/27/watchos-4-1-apple-music-streaming-radio/&quot;&gt;brings full Apple Music support&lt;/a&gt; to the device. Switching AirPods input from iPhone to Watch is seamless, too. Unfortunately, podcasts are a big miss on the Watch (and &lt;a href=&quot;https://marco.org/2017/09/24/what-watch-podcast-apps-need&quot;&gt;it doesn’t look likely&lt;/a&gt; that third-party apps are going to be able to plug that hole anytime soon).&lt;/p&gt;
+
+&lt;p&gt;In my opinion, the Maps app is one of the most underrated features of the Apple Watch. It does a good job of surfacing potential destinations, handles navigation well (with the aid of haptics), and has fantastic public transport overviews. Alas, if my phone dies while I’m out in Boston, I’m confident that I can find my way home without needing Maps; but I’m almost excited to get lost in another state!&lt;/p&gt;
+
+&lt;p&gt;In Boston, what I’m likely to do if my phone dies is check where the bus is. The MBTA runs notoriously behind schedule so I like checking where my transfer is before deciding whether I should get off the bus or stick it out a little more and walk the rest of the way. The &lt;a href=&quot;https://itunes.apple.com/us/app/transit-bus-subway-times/id498151501?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;Transit&lt;/a&gt; app on Apple Watch best surfaces this information, but unfortunately it doesn’t yet have LTE support&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. In the meantime, I’ve been using &lt;a href=&quot;https://itunes.apple.com/us/app/citymapper-transit-navigation/id469463298?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;Citymapper&lt;/a&gt; for this. Their Watch app does a lot more than Transit’s so it takes a couple of extra taps to find what I want, but it gets the job done.&lt;/p&gt;
+
+&lt;p&gt;Alternately, if my phone’s dead, I’m likely to call a Lyft home — especially if it’s later in the day. While I read that &lt;a href=&quot;http://time.com/4956444/apple-watch-3-review/&quot;&gt;Lyft and Uber have been updated with LTE support&lt;/a&gt;, I can’t seem to get either app to launch (with or without a connection to my iPhone). I contacted Lyft support and, after some troubleshooting, they informed me that it’s a known issue. Hopefully it gets resolved soon because this is something I’d really like to try out.&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; (&lt;strong&gt;UPDATE:&lt;/strong&gt; The app got updated, and &lt;a href=&quot;/lyft-watch&quot;&gt;I tried it out&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;Lastly, while I probably won’t need to translate anything on my Watch anytime soon (because it doesn’t roam), I was disappointed to find out that Siri on the Watch can’t handle translations. Siri on iOS 11 &lt;a href=&quot;https://www.macrumors.com/how-to/siri-translation-ios-11/&quot;&gt;gained the ability&lt;/a&gt; to translate to a few select languages, but asking Siri on watchOS 4 the same query tells me to ‘Continue on iPhone.’ Fortunately, &lt;a href=&quot;https://itunes.apple.com/us/app/itranslate-translator/id288113403?mt=8&amp;amp;uo=4&amp;amp;at=10l6nh&quot;&gt;iTranslate&lt;/a&gt; has a fantastic watchOS app that supports many more languages than Siri, &lt;em&gt;and&lt;/em&gt; works over LTE.&lt;/p&gt;
+
+&lt;p&gt;Putting it all together, it’s remarkable to me how much the Watch can do independent of iPhone already. In an emergency, I could contact a friend or family,    find my way home, and continue listening to music. This is, of course, in addition to what the Watch could already do: Store boarding passes and more in Wallet, and pay for things with Apple Pay&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;I look forward to being able to stream Apple Music in the near future. With 3rd-party apps (slowly) being updated to make them independent, it’s a good time to buy an Apple Watch. Hopefully a Podcasts app isn’t far behind, though I fear Apple might push that back until watchOS 5 at the earliest.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;It actually happens surprisingly often. iOS 11 has been a nightmare for my battery life. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;I’ve contacted the developers and it’s something that they’re working on. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;I remember trying to use the Uber app on Apple Watch back when it first came out, and it didn’t work because I only have Apple Pay tied to my account (no Credit Card). The Uber extension in Maps still doesn’t work for me for that reason, but Lyft does, so I’m curious to see if it works on the Watch too. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;I know Apple Pay is almost universally accepted in developed countries outside the United States, but it’s starting to feel that way here in Boston/Cambridge too. Most ATMs, vending machines, liquor and grocery stores, etc. in the area have started accepting it (often without even realizing that they do). &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 12 Oct 2017 00:00:00 -0400</pubDate>
+        <link>http://thoughtsandstuff.net/cellular-watch</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/cellular-watch</guid>
+        
+        
+        <category>apple</category>
+        
+        <category>watch</category>
+        
+        <category>travel</category>
+        
+      </item>
     
       <item>
         <title>Workflow for keeping 8-Ball Scores</title>
