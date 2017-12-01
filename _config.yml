@@ -17,5 +17,6 @@ twitter_username: karan301_
 
 # Build settings
 markdown: kramdown
+encoding: utf-8
 
 permalink: /:title
