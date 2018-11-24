@@ -8,8 +8,8 @@
   
   
 
-  <title>Workflow for keeping 8-Ball Scores</title>
-  <meta name="description" content="My incredibly unnecessary 'solution' to keeping track of iMessage 8-Ball scores with Workflow.">
+  <title>Shortcut for keeping 8-Ball Scores</title>
+  <meta name="description" content="My incredibly unnecessary 'solution' to keeping track of iMessage 8-Ball scores with Shortcuts.">
 
 	<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
@@ -50,6 +50,8 @@
       </a>
 
       <div class="trigger">
+        
+        	
         
         	
         
@@ -96,62 +98,78 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Workflow for keeping 8-Ball Scores</h1>
-    <p class="post-meta"><time datetime="2017-04-25T00:00:00-04:00" itemprop="datePublished">Apr 25, 2017</time> • <span> <span class = "reading-time" title = "Estimated read time">
+    <h1 class="post-title" itemprop="name headline">Shortcut for keeping 8-Ball Scores</h1>
+    <p class="post-meta"><time datetime="2018-11-23T00:00:00-05:00" itemprop="datePublished">Nov 23, 2018</time> • <span> <span class = "reading-time" title = "Estimated read time">
 	
  	
-  		5 mins
+  		7 mins
   	
 </span>
    </span> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Karan Varindani</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>I’d wager that <a href="https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&amp;uo=4&amp;at=10l6nh">GamePigeon</a>’s 8-Ball is the most used iMessage app out there. It feels like everyone (myself included) plays it. But how do we go about keeping score?<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> I used to type the score after every game but after forgetting / losing track a couple of times, I decided to build a <a href="https://itunes.apple.com/us/app/workflow-powerful-automation-made-simple/id915249334?mt=8&amp;uo=4&amp;at=10l6nh">Workflow</a> to semi-automate the process.</p>
+    <p><em>Editor’s note: This post is an updated version of the original post that I wrote for the previous Workflow. It reflects changes made to allow removing opponents, renaming Workflow to Shortcuts, and a few more minor improvements. You can still view the original post <a href="/pool-scores-old">here</a>.</em></p>
+
+<p>I’d wager that <a href="https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&amp;uo=4&amp;at=10l6nh">GamePigeon</a>’s 8-Ball is the most used iMessage app out there. It feels like everyone (myself included) plays it. But how does go about keeping score?<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> I used to type the score after every game but after forgetting / losing track a couple of times, I decided to build a <a href="https://itunes.apple.com/us/app/shortcuts/id915249334?mt=8&amp;uo=4&amp;at=10l6nh">shortcut</a> to semi-automate the process.</p>
 
 <h2 id="getting-started">Getting started</h2>
-<p>Other than the <a href="https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&amp;uo=4&amp;at=10l6nh">GamePigeon</a> and <a href="https://itunes.apple.com/us/app/workflow-powerful-automation-made-simple/id915249334?mt=8&amp;uo=4&amp;at=10l6nh">Workflow</a> apps (both free on the App Store), you’ll need both of the following workflows: <a href="https://workflow.is/workflows/3b7f492e4b8946e68cbf03ce827818dc">New Pool Opponent</a> and <a href="https://workflow.is/workflows/6733c1a06cae429683fd94d9aedd38e8">Pool Scores</a>.</p>
+<p>Other than the <a href="https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&amp;uo=4&amp;at=10l6nh">GamePigeon</a> and <a href="https://itunes.apple.com/us/app/shortcuts/id915249334?mt=8&amp;uo=4&amp;at=10l6nh">Shortcuts</a> apps (both free on the App Store), you’ll need both of the following shortcuts: <a href="https://www.icloud.com/shortcuts/e93ab2d6999f4255a38687e393a7a1de">Manage Pool Opponents</a> and <a href="https://www.icloud.com/shortcuts/9c2fd5ae46394b9686abf041911fb09b">Pool Scores</a>.</p>
 
-<p>The first thing you do is run <code class="highlighter-rouge">New Pool Opponent</code>, which is a Normal workflow (it only shows up in the Workflow app, not the widget). It’ll ask for your name the first time you run it. The workflow will then ask for the name of your opponent and ask you if you want to initialize scores. If you say yes, you can set the score to what your current scores are. If not, it’ll set the score to 0-0. Repeat this for each of your opponents. It’ll save your scores as <code class="highlighter-rouge">'Pool Scores'</code> in Workflow’s iCloud Drive directory.</p>
+<p>The first thing you do is run <code class="highlighter-rouge">Manage Pool Opponents</code>, which is a Normal shortcut (it only shows up in the Shortcuts app, not the widget). It’ll ask for your name the first time you run it, and to set a file name<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>. The shortcut will then ask if you would like to ‘Add an opponent’ or ‘Remove an opponent’. Choose the former, enter the name of your opponent, and choose if you want to initialize scores. If you say yes, you can set the score to what your current scores are. If not, it’ll set the score to 0-0. Repeat this for each of your opponents. It’ll save your scores as <code class="highlighter-rouge">'Pool Scores'</code> in Shortcuts’ iCloud Drive directory.</p>
 
-<p>Next, run <code class="highlighter-rouge">Pool Scores</code> and enter your name <strong>exactly as you did above</strong>. It’ll grab the <code class="highlighter-rouge">'Pool Scores'</code> file and ask you to select a name from your list of opponents, and then ask if you won, lost, or just want to get the score. If you choose won or lost, it’ll update the score accordingly and then get the score (it both displays the score and copies it to clipboard in case you want to send it to your opponent).</p>
+<p>Next, run <code class="highlighter-rouge">Pool Scores</code> and enter your name <strong>exactly as you did above</strong>. It’ll grab the <code class="highlighter-rouge">'Pool Scores'</code> dictionary file and ask you to select a name from your list of opponents, and then ask if you won, lost, or just want to get the score. If you choose won or lost, it’ll update the score accordingly and then get the score (it both displays the score and copies it to clipboard in case you want to send it to your opponent).</p>
 
-<p>The <code class="highlighter-rouge">Pool Scores</code> workflow is a Today Widget (and Apple Watch) workflow so after every game, you can just swipe down to bring up Notification Center and update scores from there.</p>
+<p>The <code class="highlighter-rouge">Pool Scores</code> shortcut is a Today Widget (and Apple Watch) shortcut so after every game, you can just swipe down to bring up Notification Center and update scores from there.</p>
 
-<p>Read on below for a more detailed documentation of how the workflows work.</p>
+<p>Read on below for a more detailed documentation of how the shortcuts work.</p>
 
 <hr />
 
 <h2 id="how-does-it-work-documentation">How does it work? (Documentation)</h2>
-<p>Each workflow has one Import Question. Enter your name here. Expected input is text <code class="highlighter-rouge">myname</code> with no white-space (e.g. Karan), but anything works (so long as you enter it exactly the same in both workflows).</p>
-
-<p>Both workflows rely on a dictionary file in Workflow’s iCloud Drive directory. By default, this is read and written as <code class="highlighter-rouge">Pool Scores.json</code>. You can change it by manually changing the name in both workflows (it is referenced twice in <code class="highlighter-rouge">New Pool Opponent</code> and five times in <code class="highlighter-rouge">Pool Scores</code>).</p>
-
-<h3 id="new-pool-opponent">New Pool Opponent</h3>
-<p>This is a fairly simple workflow. It either adds or updates key-value pairs in an existing dictionary, or it creates a new dictionary with the given key-value pair. It works as follows.</p>
-
+<p>Each shortcut has two Import Questions:</p>
 <ol>
-  <li>The workflow asks for your opponent’s name. Expected input is text <code class="highlighter-rouge">opponentname</code> with no white-space (e.g. James), but anything works.</li>
-  <li>The workflow asks if you want to initialize scores. If yes, expected input is number. Enter your score and your opponent’s score where prompted. If no, scores are assigned as 0-0.</li>
-  <li>The workflow gets the <code class="highlighter-rouge">Pool Scores</code> dictionary file from Workflow’s iCloud Drive directory, and gets the dictionary from the file. If the file doesn’t exist (for example, if you’re running the workflow for the first time) it’ll be created later.</li>
-  <li>The workflow sets the dictionary value for you and for your opponent. It does this with keys <code class="highlighter-rouge">mynameopponentname</code> and <code class="highlighter-rouge">opponentname</code>  with values <code class="highlighter-rouge">myscore</code> and <code class="highlighter-rouge">opponentscore</code> respectively (e.g. {“KaranJames”:100, “James”:0}). If these names already exist in the dictionary, they will be overwritten.</li>
-  <li>The workflow saves the dictionary to the <code class="highlighter-rouge">Pool Scores</code> file in Workflow’s iCloud Drive directory. If the file exists (for example, if you’re adding a new opponent or re-initializing scores) it’ll overwrite the file.</li>
+  <li>Enter your name here. Expected input is text <code class="highlighter-rouge">myname</code> with no white-space (e.g. Karan), but anything works (so long as you enter it exactly the same in both shortcuts).</li>
+  <li>What would you like the file to be saved as in iCloud Drive? Both shortcuts rely on a dictionary file in Shortcut’s iCloud Drive directory. By default, this is read and written as <code class="highlighter-rouge">Pool Scores.json</code> but you can change it to whatever you like here - just make sure that you change it in both shortcuts.</li>
+</ol>
+
+<h3 id="manage-pool-opponents">Manage Pool Opponents</h3>
+<p>This is where you initially create the dictionary, and where you can add or remove opponents. It either adds or updates key-value pairs in an existing dictionary, or it creates a new dictionary with the given key-value pair. It works as follows.</p>
+
+<p><em>Add an opponent:</em></p>
+<ol>
+  <li>The shortcut asks for your opponent’s name. Expected input is text <code class="highlighter-rouge">opponentname</code> with no white-space (e.g. James), but anything works.</li>
+  <li>The shortcut asks if you want to initialize scores. If yes, expected input is number. Enter your score and your opponent’s score where prompted. If no, scores are assigned as 0-0.</li>
+  <li>The shortcut gets the <code class="highlighter-rouge">Pool Scores</code> dictionary file from Shortcuts’ iCloud Drive directory, and gets the dictionary from the file. If the file doesn’t exist (for example, if you’re running the shortcut for the first time) it’ll be created later.</li>
+  <li>The shortcut sets the dictionary value for you and for your opponent. It does this with keys <code class="highlighter-rouge">mynameopponentname</code> and <code class="highlighter-rouge">opponentname</code>  with values <code class="highlighter-rouge">myscore</code> and <code class="highlighter-rouge">opponentscore</code> respectively <em>(e.g. {“KaranJames”:100, “James”:0})</em>. If these names already exist in the dictionary, they will be overwritten.</li>
+  <li>The shortcut saves the dictionary to the <code class="highlighter-rouge">Pool Scores</code> file in Shortcuts’ iCloud Drive directory. If the file exists (for example, if you’re adding a new opponent or re-initializing scores) it’ll overwrite the file.</li>
+</ol>
+
+<p><em>Remove an opponent:</em></p>
+<ol>
+  <li>The shortcut gets the <code class="highlighter-rouge">Pool Scores</code> dictionary file from Shortcuts’ iCloud Drive directory. <strong>This file must already exist</strong>, execution will end here otherwise.</li>
+  <li>The shortcut gets all keys from the dictionary file. Some of these will be in the form <code class="highlighter-rouge">opponentname</code> while others will be in the form <code class="highlighter-rouge">mynameopponentname</code>. We need to get rid of the latter to present a list of opponent names.</li>
+  <li>The shortcut splits these keys into new lines. It then finds all the keys that begin with <code class="highlighter-rouge">myname</code> and replaces them with a blank. It then goes through and deletes all blank lines.</li>
+  <li>The shortcut presents this updated list of keys (opponent names) and asks you to pick one or more.</li>
+  <li>For each selected opponent, the shortcut will set both your scores to 0.</li>
+  <li>The shortcut will then remove your scores from the dictionary, and then clean itself up (for example: any leading or trailing commas in the dictionary will be removed).</li>
+  <li>The shortcut will finally ask you to confirm your changes. If you say yes, it will save the updated dictionary to iCloud Drive. If you cancel, execution will stop here.</li>
 </ol>
 
 <h2 id="pool-scores">Pool Scores</h2>
-<p>This is a slightly more complicated workflow. It grabs an existing dictionary (make sure you run the <code class="highlighter-rouge">New Pool Opponent</code> workflow at least once first to create one), asks you to choose from a list of your opponents, updates the score (if necessary), and copies/displays it. This workflow is best used from the Today Widget (after first run). It works as follows.</p>
+<p>This shortcut grabs an existing dictionary (make sure you run the <code class="highlighter-rouge">Manage Pool Opponents</code> shortcut at least once first to create one), asks you to choose from a list of your opponents, updates the score (if necessary), and copies/displays it. This shortcut is best used from the Today Widget (after first run). It works as follows.</p>
 
 <ol>
-  <li>The workflow gets the <code class="highlighter-rouge">Pool Scores</code> dictionary file from Workflow’s iCloud Drive directory. <strong>This file must already exist</strong>, execution will end here otherwise.</li>
-  <li>The workflow gets all keys from the dictionary file. Some of these will be in the form <code class="highlighter-rouge">opponentname</code> while others will be in the form <code class="highlighter-rouge">mynameopponentname</code>. We need to get rid of the latter to present a list of opponent names.</li>
-  <li>The workflow splits these keys into new lines. It then finds all the keys that begin with <code class="highlighter-rouge">myname</code> and replaces them with a blank. It then goes through and deletes all blank lines.</li>
-  <li>The workflow presents this updated list of keys (opponent names) and asks you to pick one.</li>
-  <li>The workflow fetches the dictionary file again, getting just the key-value pairs for you and the opponent you selected this time, and stores the values in <code class="highlighter-rouge">My Score</code> and <code class="highlighter-rouge">Opponent Score</code> variables as appropriate (with the keys again being of the form <code class="highlighter-rouge">mynameopponentname</code> and <code class="highlighter-rouge">opponentname</code>).</li>
-  <li>The workflow asks you to choose from a menu: “I won”, “I lost”, or “Get score”. “I won” and “I lost” simply increment either the <code class="highlighter-rouge">My Score</code> or <code class="highlighter-rouge">Opponent Score</code> variable as appropriate, and then jumps to “Get score”.</li>
-  <li>The workflow fetches the dictionary file again. It sets (updates) the dictionary value for keys <code class="highlighter-rouge">mynameopponentname</code> and <code class="highlighter-rouge">opponentname</code> with the updated score variables.</li>
-  <li>The workflow saves the updated dictionary file, overwriting <code class="highlighter-rouge">Pool Scores.json</code>.</li>
-  <li>The workflow copies <code class="highlighter-rouge">My Score - Opponent Score</code> to clipboard, so you can share it with your opponent if you want.</li>
-  <li>The workflow displays the text <code class="highlighter-rouge">MyName MyScore-OpponentScore OpponentName</code>.</li>
+  <li>The shortcut gets the <code class="highlighter-rouge">Pool Scores</code> dictionary file from Shortcuts’ iCloud Drive directory. <strong>This file must already exist</strong>, execution will end here otherwise.</li>
+  <li>The shortcut gets all keys from the dictionary file. Some of these will be in the form <code class="highlighter-rouge">opponentname</code> while others will be in the form <code class="highlighter-rouge">mynameopponentname</code>. We need to get rid of the latter to present a list of opponent names.</li>
+  <li>The shortcut splits these keys into new lines. It then finds all the keys that begin with <code class="highlighter-rouge">myname</code> and replaces them with a blank. It then goes through and deletes all blank lines.</li>
+  <li>The shortcut presents this updated list of keys (opponent names) and asks you to pick one.</li>
+  <li>The shortcut fetches the dictionary file again, getting just the key-value pairs for you and the opponent you selected this time, and stores the values in <code class="highlighter-rouge">My Score</code> and <code class="highlighter-rouge">Opponent Score</code> variables as appropriate (with the keys again being of the form <code class="highlighter-rouge">mynameopponentname</code> and <code class="highlighter-rouge">opponentname</code>).</li>
+  <li>The shortcut asks you to choose from a menu: “I won”, “I lost”, or “Get score”. “I won” and “I lost” simply increment either the <code class="highlighter-rouge">My Score</code> or <code class="highlighter-rouge">Opponent Score</code> variable as appropriate, and then jumps to “Get score”.</li>
+  <li>The shortcut fetches the dictionary file again. It sets (updates) the dictionary value for keys <code class="highlighter-rouge">mynameopponentname</code> and <code class="highlighter-rouge">opponentname</code> with the updated score variables.</li>
+  <li>The shortcut saves the updated dictionary file, overwriting <code class="highlighter-rouge">Pool Scores.json</code>.</li>
+  <li>The shortcut copies <code class="highlighter-rouge">My Score - Opponent Score</code> to clipboard, so you can share it with your opponent if you want.</li>
+  <li>The shortcut displays the text <code class="highlighter-rouge">MyName MyScore-OpponentScore OpponentName</code>.</li>
 </ol>
 
 <hr />
@@ -160,6 +178,9 @@
   <ol>
     <li id="fn:1">
       <p>The app keeps track of how many games you’ve won, but it doesn’t sync across devices (so iPhone and iPad keep different scores) and it doesn’t let you know your opponent’s score. I’ve also found the number to be inconsistent. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>I expect most people to leave this as the default. Truthfully, it only exists so that I can more easily test and debug when I add new features without messing with my canonical dictionary. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>

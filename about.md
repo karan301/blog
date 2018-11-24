@@ -17,7 +17,7 @@ Thoughts and Stuff is a static [Jekyll][5] site hosted on a [Linode][6] server[^
 Of course. ([XML][12], [JSON][13])
 
 # How does the site make money?
-It doesn't. I started this website as a way for me to improve my web development and server management skills, and because I quite enjoy writing the things I do here. I do use iTunes Affiliate links though!
+It doesn't. I started this website as a way for me to improve my web development and server management skills, and because I quite enjoy writing the things I do here. ~~I do use iTunes Affiliate links though!~~ ([RIP](https://www.macstories.net/news/apple-announces-apps-and-in-app-purchases-will-be-removed-from-its-affiliate-program-october-1st/))
 
 ---- 
 
