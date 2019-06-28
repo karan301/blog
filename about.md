@@ -8,7 +8,7 @@ permalink: /about
 Thoughts and Stuff is a place for me to get my thoughts about Apple, and tech in general, out of my head. Occasionally, I might write about travel, education, or football[^1], too. 
 
 # Who writes all this stuff?
-This website is written and run by [Karan Varindani][1]. You can find some of my older work at me [301][2] and at [Shining Paradigm][3]. I’m constantly looking for ways to make the site better, so you’ll often find me tweaking the code and other things you probably won’t notice. Feel free to [get in touch][4].
+This website is written and run by [Karan Varindani][1]. You can find some of my older work at [301][2] and at [Shining Paradigm][3]. I’m constantly looking for ways to make the site better, so you’ll often find me tweaking the code and other things you probably (read: hopefully) won’t notice. Feel free to [get in touch][4].
 
 # Tell me more about the site
 Thoughts and Stuff is a static [Jekyll][5] site hosted on a [Linode][6] server[^2]. The theme is a modified version of the default [Minima][8] theme, and somewhat mimics that of [Shining Paradigm][9]. All posts are written in Ulysses ([Mac][10], [iOS][11]). The site's colors and [logo][16][^3] were provided by my friend, [John Branagan][15]. Consider him for your graphic design needs. 
