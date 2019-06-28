@@ -172,17 +172,6 @@ input[type=text]:focus {
     border-color:$sp-color;
 }
 
-/*
-input[type=submit] {
-    padding:5px; 
-    background:$grey-color-light; 
-    border:2px solid $sp-color;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    height: 25px; width: 35px; 
-}
-*/
-
 /**
  * Page content
  */
@@ -277,3 +266,23 @@ input[type=submit] {
     }
 }
 
+@media (prefers-color-scheme: dark) {
+	.site-header {
+    	border-bottom: 1px solid $grey-color-dark;
+    }
+    
+    .site-nav {
+        @include media-query($on-palm) {
+        	background-color: $grey-color-dark;
+        }
+    }
+    
+    .site-footer {
+    	border-top: 1px solid $grey-color-dark;
+    }
+    
+    input[type=text] {
+    	color: $background-color;
+    	background-color: $text-color;
+    }
+}

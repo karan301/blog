@@ -4,10 +4,10 @@
     <title>Thoughts and Stuff</title>
     <description>Thoughts and Stuff is a place for me to get my thoughts about Apple and tech in general out of my head. Occasionally, I might write about travel, education, or football, too. 
 </description>
-    <link>http://thoughtsandstuff.net/</link>
-    <atom:link href="http://thoughtsandstuff.net/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 30 Apr 2019 02:32:53 -0400</pubDate>
-    <lastBuildDate>Tue, 30 Apr 2019 02:32:53 -0400</lastBuildDate>
+    <link>http://0.0.0.0:4000/</link>
+    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 28 Jun 2019 02:03:44 -0400</pubDate>
+    <lastBuildDate>Fri, 28 Jun 2019 02:03:44 -0400</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -89,8 +89,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 23 Nov 2018 00:00:00 -0500</pubDate>
-        <link>http://thoughtsandstuff.net/pool-scores</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/pool-scores</guid>
+        <link>http://0.0.0.0:4000/pool-scores</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/pool-scores</guid>
         
         
         <category>apple</category>
@@ -158,8 +158,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 26 Nov 2017 00:00:00 -0500</pubDate>
-        <link>http://thoughtsandstuff.net/ikea-rallen</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/ikea-rallen</guid>
+        <link>http://0.0.0.0:4000/ikea-rallen</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/ikea-rallen</guid>
         
         
         <category>apple</category>
@@ -197,8 +197,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 14 Nov 2017 00:00:00 -0500</pubDate>
-        <link>http://thoughtsandstuff.net/clips</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/clips</guid>
+        <link>http://0.0.0.0:4000/clips</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/clips</guid>
         
         
         <category>apple</category>
@@ -281,8 +281,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 12 Nov 2017 00:00:00 -0500</pubDate>
-        <link>http://thoughtsandstuff.net/iphone-x</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/iphone-x</guid>
+        <link>http://0.0.0.0:4000/iphone-x</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/iphone-x</guid>
         
         
         <category>apple</category>
@@ -326,8 +326,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 22 Oct 2017 00:00:00 -0400</pubDate>
-        <link>http://thoughtsandstuff.net/lyft-watch</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/lyft-watch</guid>
+        <link>http://0.0.0.0:4000/lyft-watch</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/lyft-watch</guid>
         
         
         <category>apple</category>
@@ -382,8 +382,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Thu, 12 Oct 2017 00:00:00 -0400</pubDate>
-        <link>http://thoughtsandstuff.net/cellular-watch</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/cellular-watch</guid>
+        <link>http://0.0.0.0:4000/cellular-watch</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cellular-watch</guid>
         
         
         <category>apple</category>
@@ -526,8 +526,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 21 Feb 2017 00:00:00 -0500</pubDate>
-        <link>http://thoughtsandstuff.net/equation</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/equation</guid>
+        <link>http://0.0.0.0:4000/equation</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/equation</guid>
         
         
         <category>education</category>
@@ -597,8 +597,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 07 Jan 2017 00:00:00 -0500</pubDate>
-        <link>http://thoughtsandstuff.net/tv-app</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/tv-app</guid>
+        <link>http://0.0.0.0:4000/tv-app</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/tv-app</guid>
         
         
         <category>apple</category>
@@ -656,8 +656,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 23 Dec 2016 00:00:00 -0500</pubDate>
-        <link>http://thoughtsandstuff.net/airpods</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/airpods</guid>
+        <link>http://0.0.0.0:4000/airpods</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/airpods</guid>
         
         
         <category>apple</category>
@@ -714,8 +714,8 @@
 &lt;p&gt;(I should add for the sake of completeness that the Apple SIM on iPad allows you to switch between carriers, and I could switch have switched from AT&amp;amp;T to &lt;a href=&quot;https://www.gigsky.com/&quot;&gt;GigSky&lt;/a&gt; — a pay-as-you-go international data carrier — while abroad, but I’d still need to come up with a solution on iPhone. Coupled with the fact that its &lt;a href=&quot;https://cl.ly/h8bP&quot;&gt;rates&lt;/a&gt; are largely unfavorable, &lt;em&gt;Project Fi&lt;/em&gt; still comes out as a much better option.)&lt;/p&gt;
 </description>
         <pubDate>Thu, 25 Aug 2016 00:00:00 -0400</pubDate>
-        <link>http://thoughtsandstuff.net/project-fi</link>
-        <guid isPermaLink="true">http://thoughtsandstuff.net/project-fi</guid>
+        <link>http://0.0.0.0:4000/project-fi</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/project-fi</guid>
         
         
         <category>google</category>

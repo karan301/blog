@@ -110,6 +110,13 @@ pre {
   .icon > svg path {
     fill: #828282; }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #fdfdfd;
+    background-color: #111; }
+
+  pre, code {
+    background-color: #424242; } }
 /**
  * Site header
  */
@@ -234,16 +241,6 @@ input[type=text] {
 input[type=text]:focus {
   border-color: #7ebfa3; }
 
-/*
-input[type=submit] {
-    padding:5px; 
-    background:$grey-color-light; 
-    border:2px solid $sp-color;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    height: 25px; width: 35px; 
-}
-*/
 /**
  * Page content
  */
@@ -310,6 +307,20 @@ input[type=submit] {
   .search-results > li {
     margin-bottom: 30px; }
 
+@media (prefers-color-scheme: dark) {
+  .site-header {
+    border-bottom: 1px solid #424242; } }
+@media screen and (prefers-color-scheme: dark) and (max-width: 600px) {
+  .site-nav {
+    background-color: #424242; } }
+
+@media (prefers-color-scheme: dark) {
+  .site-footer {
+    border-top: 1px solid #424242; }
+
+  input[type=text] {
+    color: #fdfdfd;
+    background-color: #111; } }
 /**
  * Syntax highlighting styles
  */
