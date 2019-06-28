@@ -191,3 +191,16 @@ pre {
         }
     }
 }
+
+@media (prefers-color-scheme: dark) {
+	body {
+		color: $background-color;
+    	background-color: $text-color;
+    }
+  
+  	pre,code {
+    	border: 0.5px solid $sp-color-light;
+    	background-color: $text-color;
+	}
+
+}
