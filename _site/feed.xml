@@ -4,11 +4,133 @@
     <title>Thoughts and Stuff</title>
     <description>Thoughts and Stuff is a place for me to get my thoughts about Apple and tech in general out of my head. Occasionally, I might write about travel, education, or football, too. 
 </description>
-    <link>http://0.0.0.0:4000/</link>
-    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 28 Jun 2019 02:03:44 -0400</pubDate>
-    <lastBuildDate>Fri, 28 Jun 2019 02:03:44 -0400</lastBuildDate>
+    <link>http://thoughtsandstuff.net/</link>
+    <atom:link href="http://thoughtsandstuff.net/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 20 Jul 2020 20:30:49 -0400</pubDate>
+    <lastBuildDate>Mon, 20 Jul 2020 20:30:49 -0400</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Tesla Shortcuts</title>
+        <description>&lt;p&gt;A few months ago I wanted to see if it would be possible to control my Model 3 with Siri. After a lot of research/procrastination&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, I’ve finally come up with a set of shortcuts&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; (based on the &lt;a href=&quot;https://tesla-api.timdorr.com/&quot;&gt;unofficial Tesla API&lt;/a&gt;) that I’m happy enough with to share. You can download all the shortcuts &lt;a href=&quot;/tesla-shortcuts-tldr&quot;&gt;here&lt;/a&gt;, but pease read on for a guide on how they work and why you might be interested in using them.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/tesla-spoiler.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;about-the-shortcuts&quot;&gt;About the shortcuts&lt;/h2&gt;
+&lt;p&gt;I’ve put together twelve shortcuts in total: three administrative, and nine actions. Let me briefly explain what each of them does.&lt;/p&gt;
+
+&lt;p&gt;The first shortcut that you have to run is &lt;code class=&quot;highlighter-rouge&quot;&gt;Setup Tesla&lt;/code&gt;. As the name implies, this is the setup script. It’ll ask you for your Tesla email address, grab your Tesla password from your Clipboard, then ask what your preferred climate temperature is (in °F). It’ll&lt;br /&gt;
+then save your login and temperature preference in iCloud Drive (in a file named ‘Tesla Preferences’ in your Shortcuts folder). Your password will be encrypted before it’s saved. Don’t worry if you forget to copy it before running the shortcut - you’ll be reminded to go do that and return to the Shortcuts app.&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Once your preferences are set up, you probably won’t need this shortcut anymore -  but there are a few reasons to keep it around. Running it again will let you:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Update your preferred climate temperature.&lt;/li&gt;
+  &lt;li&gt;Update your login information.&lt;/li&gt;
+  &lt;li&gt;Delete your preferences file from iCloud Drive.&lt;/li&gt;
+  &lt;li&gt;Check out the documentation (this website).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The second administrative shortcut is &lt;code class=&quot;highlighter-rouge&quot;&gt;Authenticate Tesla&lt;/code&gt;. This is the backbone of all nine action shortcuts, but &lt;strong&gt;you never need to run it individually&lt;/strong&gt;. It grabs your email and encrypted password from your preferences file and uses those to connect with your car. Once authenticated, it’ll wake up the car (and make sure that it’s awake) then pass on an access token that the action shortcuts need to work.&lt;/p&gt;
+
+&lt;p&gt;The last administrative piece is &lt;code class=&quot;highlighter-rouge&quot;&gt;Control Tesla&lt;/code&gt;. This is the launchpad for all the shortcuts that I’m sharing here. All it does (for the most part)&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; is present a menu that lets you pick between the supported actions and runs one of them. It works conversationally in Siri, through the Shortcuts widget, or, of course, through the Shortcuts app.&lt;/p&gt;
+
+&lt;p&gt;As a result of it simply being a controller for the other action shortcuts, &lt;code class=&quot;highlighter-rouge&quot;&gt;Control Tesla&lt;/code&gt; is pretty much useless on its own. This was intentional; I could have combined all the shortcuts into a Frankenstein master shortcut, but this approach allows the other shortcuts to function on their own (e.g. You can say “Hey Siri, Turn Climate Off” without having to go through the &lt;code class=&quot;highlighter-rouge&quot;&gt;Control Tesla&lt;/code&gt; menu first).&lt;/p&gt;
+
+&lt;p&gt;Now let’s talk about those action shortcuts.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Set Climate&lt;/code&gt; sets your car’s climate to the preferred climate from your preferences file.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Set New Climate&lt;/code&gt; lets you enter a temperature&lt;sup id=&quot;fnref:5&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; and sets your car’s climate to it.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Turn Climate Off&lt;/code&gt; turns off your car’s climate.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Get Climate&lt;/code&gt; tells you what your car’s current climate status is and lets you toggle it (e.g. it’ll let you know that your climate is on and set to 72, and ask if you would like to turn it off).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Get Car Battery&lt;/code&gt; checks your car’s current battery percentage and available range. If your car is currently charging, it’ll also let you know how long is left until it’s fully charged.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Enable Sentry Mode&lt;/code&gt; turns on sentry mode.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Disable Sentry Mode&lt;/code&gt; turns off sentry mode.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Check Sentry Mode&lt;/code&gt; lets you know whether sentry mode is on or off, and lets you toggle its current state.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Open The Frunk&lt;/code&gt; actuates the front trunk.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can say any of those commands to Siri to perform the action on its own, or say “Control Tesla” if you don’t remember the exact name. Only &lt;code class=&quot;highlighter-rouge&quot;&gt;Control Tesla	&lt;/code&gt; will show up in the Shortcuts widget by default but you can easily put any or all of these actions there too.&lt;sup id=&quot;fnref:6&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;why-should-i-use-this&quot;&gt;Why should I use this?&lt;/h2&gt;
+&lt;p&gt;If you happen to open and read through the shortcuts, I hope you’ll see just how much work went into making them. I took a lot of care in making sure that each shortcut is laid out logically, well-documented, checks for potential errors wherever appropriate, provides lots of options, and more. Yet you might be wondering why I bothered to do so. After all, &lt;a href=&quot;https://apps.apple.com/us/app/tesla/id582007913&quot;&gt;Tesla&lt;/a&gt; has a pretty good app that accomplishes everything that my shortcuts do.&lt;/p&gt;
+
+&lt;p&gt;The first reason that I built these is speed. Let’s use the example of turning on your car’s climate: As it stands you need to launch the Tesla app, wait for it to connect to your car, go to the climate section, then tap the arrows until you get to the temperature you want. Instead, I just tap on the  &lt;code class=&quot;highlighter-rouge&quot;&gt;Control Tesla&lt;/code&gt;  widget, tap ‘Control Climate,’ and then I can either tap on my preferred temperature or enter a custom temperature value. I can then put my phone away or wait for the confirmation message.&lt;/p&gt;
+
+&lt;p&gt;The biggest distinction is in where the wait occurs. Using the Tesla app, I have to launch the app then wait for it to load &lt;em&gt;before&lt;/em&gt; I can do what I want. Using my shortcut, I can do what I want then just wait to confirm that it went well. Let’s use Mail as an analogy. Using the Tesla app feels like I’m launching Mail, waiting a few seconds for it to load, then typing my email and tapping send. Using these shortcuts feel like I’m launching mail and instantly typing my email, then tapping send and just waiting for it to confirm that the email was sent.&lt;/p&gt;
+
+&lt;p&gt;It’s been a much more pleasant experience in practice. I can confidently say that, since I’ve gotten these shortcuts to work reliably, &lt;strong&gt;I haven’t been using the Tesla app &lt;em&gt;at all&lt;/em&gt;&lt;/strong&gt;. It isn’t just &lt;a href=&quot;https://en.wikipedia.org/wiki/Eating_your_own_dog_food&quot;&gt;dogfooding&lt;/a&gt; — I simply haven’t been in a situation where it would be quicker to use the app instead.&lt;/p&gt;
+
+&lt;p&gt;Speaking of reliability, one of the reasons it took me so long to release these shortcuts is because, historically, they had worked super inconsistently. I used to have lots of failures where my car simply refused to wake up in the morning. However, this time around I was able to include a check to make sure that the car did actually wake up. If not, this shortcut will run itself again several times until the car eventually wakes up and connects. With that in place, all these actions have been &lt;em&gt;substantially&lt;/em&gt; more reliable for me. I’ve also added additional checks for better error handling in unusual situations (such as when your login information has changed or when your car is being serviced).&lt;/p&gt;
+
+&lt;p&gt;Speed aside, I’ve really been enjoying the added flexibility that these shortcuts have brought. This manifests itself in several important ways.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;I can control my car from my iPad.&lt;/strong&gt; There’s no Tesla app for iPad, and I work on an iPad Pro for most of the day. I now no longer have to stop what I’m doing and pick up my phone to check its battery level or turn on the climate. It now just takes a couple of taps and I can get back to what I was doing.&lt;sup id=&quot;fnref:7&quot;&gt;&lt;a href=&quot;#fn:7&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;I can control my car using Siri.&lt;/strong&gt; With iOS 13.1, Siri can have a conversation with you when running a shortcut. This means that you can go through the menus of &lt;code class=&quot;highlighter-rouge&quot;&gt;Control Tesla&lt;/code&gt; (saying things like “Check battery level” or even “the second one”) to control your car hands-free. This has been particularly useful for me while getting ready for work in the morning.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;I can control my car using Shortcuts Automation&lt;/strong&gt;. This is another &lt;em&gt;really&lt;/em&gt; cool feature of Shortcuts in iOS 13.1. You can have certain shortcuts run automatically using certain triggers. A few examples:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;I keep a spare &lt;a href=&quot;https://shop.tesla.com/product/model-3-key-card&quot;&gt;key card&lt;/a&gt; for my Model 3 on my desk at work. Now, whenever I tap my iPhone on this key card, Shortcuts connects to my car and sets the climate to my preferred temperature &lt;em&gt;without me doing anything&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Siri can predict when I’m going to leave work to go home and, 15 minutes before, can send me a notification asking if I want to run the shortcut to cool my car down.&lt;/li&gt;
+  &lt;li&gt;I’m currently looking into putting a clear NFC tag on my hood so that when I tap my iPhone against it, Shortcuts can immediately actuate the front trunk. 
+Those are just three examples but there are lots of triggers that you can use for &lt;a href=&quot;https://support.apple.com/guide/shortcuts/intro-to-personal-automation-apd690170742/ios&quot;&gt;Shortcuts Automation in iOS 13.1&lt;/a&gt;. This is the best example of the flexibility that these shortcuts have afforded me.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;additional-information&quot;&gt;Additional information&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;These shortcuts require iOS 13 to work. Furthermore, iOS 13.1 Is required for Conversational Siri and Shortcuts Automation to work. They will not work at all on iOS 12, even if the user downloads the Shortcuts app from the App Store, because the underlying file system behind shortcuts has been changed between those two versions.&lt;/li&gt;
+  &lt;li&gt;To add these shortcuts to your library, you have to &lt;a href=&quot;https://support.apple.com/guide/shortcuts/enable-shared-shortcuts-apdfeb05586f/ios&quot;&gt;enable running untrusted shortcuts&lt;/a&gt;. This is a security feature new to iOS 13; you won’t be allowed to run (or add) shortcuts shared outside the Shortcuts Gallery until you’ve enabled certain security settings.&lt;sup id=&quot;fnref:8&quot;&gt;&lt;a href=&quot;#fn:8&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+  &lt;li&gt;Continuing with the theme of security, the first time you run each shortcut, it will require authentication for some actions (the ‘Get Contents of URL’ actions that are used for the Tesla API calls will be most noticeably). These are all required to run the shortcut correctly.&lt;/li&gt;
+  &lt;li&gt;Although your password is base64 encoded and is never stored in plaintext, it is still stored in a file accessible in iCloud Drive. If an attacker knew what they were doing (and what they were looking at), it would not take much to decrypt the key and get the original password.&lt;/li&gt;
+  &lt;li&gt;Lastly, at this time, these shortcuts only support accounts that have one Tesla vehicle. Get in touch if this is a hard limitation for you and I’ll see what I can do.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;If I’m being honest, it was two days of intense research with many months of complete procrastination between them. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;Check out &lt;a href=&quot;https://support.apple.com/guide/shortcuts/welcome/ios&quot;&gt;Apple’s Shortcuts User Guide&lt;/a&gt; if you’re not sure what those are. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;You can also enter your password in yourself but you’ll rightfully be shamed for doing so. You should really be using a password manager, like iCloud Keychain. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;There literally one added nicety: It looks up your preferred temperature from your preferences file, so that the menu is dynamic. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot;&gt;
+      &lt;p&gt;You can enter this number directly from the Shortcuts widget which is pretty neat. &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:6&quot;&gt;
+      &lt;p&gt;From the Shortcuts app, tap the (…) button beside the shortcut name to bring it up in the editor. From the editor, tap the (…) on top and enable “Show in Widget”. &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:7&quot;&gt;
+      &lt;p&gt;Pro-tip: If you’re working on an iPad with a keyboard attached, you can use Cmd+Space to enter Spotlight search, type in the name of one of the shortcuts (e.g. ‘Set Climate’), and then tap on it to run it. &lt;a href=&quot;#fnref:7&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:8&quot;&gt;
+      &lt;p&gt;You have to have run a shortcut (either user-created or from the Gallery) once before, and then head to &lt;code class=&quot;highlighter-rouge&quot;&gt;Settings &amp;gt; Shortcuts&lt;/code&gt; to enable an “Allow Untrusted Shortcuts” toggle. Remember: These security measures exist for a reason. Please inspect and carefully vet all shortcuts downloaded outside the Gallery before running them on devices with personal information. &lt;a href=&quot;#fnref:8&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 26 Sep 2019 00:00:00 -0400</pubDate>
+        <link>http://thoughtsandstuff.net/tesla-shortcuts</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/tesla-shortcuts</guid>
+        
+        
+        <category>tesla</category>
+        
+        <category>shortcuts</category>
+        
+      </item>
     
       <item>
         <title>Shortcut for keeping 8-Ball Scores</title>
@@ -89,8 +211,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 23 Nov 2018 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/pool-scores</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/pool-scores</guid>
+        <link>http://thoughtsandstuff.net/pool-scores</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/pool-scores</guid>
         
         
         <category>apple</category>
@@ -158,8 +280,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 26 Nov 2017 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/ikea-rallen</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/ikea-rallen</guid>
+        <link>http://thoughtsandstuff.net/ikea-rallen</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/ikea-rallen</guid>
         
         
         <category>apple</category>
@@ -197,8 +319,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 14 Nov 2017 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/clips</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/clips</guid>
+        <link>http://thoughtsandstuff.net/clips</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/clips</guid>
         
         
         <category>apple</category>
@@ -281,8 +403,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 12 Nov 2017 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/iphone-x</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/iphone-x</guid>
+        <link>http://thoughtsandstuff.net/iphone-x</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/iphone-x</guid>
         
         
         <category>apple</category>
@@ -326,8 +448,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 22 Oct 2017 00:00:00 -0400</pubDate>
-        <link>http://0.0.0.0:4000/lyft-watch</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/lyft-watch</guid>
+        <link>http://thoughtsandstuff.net/lyft-watch</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/lyft-watch</guid>
         
         
         <category>apple</category>
@@ -382,8 +504,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Thu, 12 Oct 2017 00:00:00 -0400</pubDate>
-        <link>http://0.0.0.0:4000/cellular-watch</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/cellular-watch</guid>
+        <link>http://thoughtsandstuff.net/cellular-watch</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/cellular-watch</guid>
         
         
         <category>apple</category>
@@ -526,8 +648,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 21 Feb 2017 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/equation</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/equation</guid>
+        <link>http://thoughtsandstuff.net/equation</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/equation</guid>
         
         
         <category>education</category>
@@ -597,8 +719,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 07 Jan 2017 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/tv-app</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/tv-app</guid>
+        <link>http://thoughtsandstuff.net/tv-app</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/tv-app</guid>
         
         
         <category>apple</category>
@@ -656,75 +778,13 @@
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 23 Dec 2016 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/airpods</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/airpods</guid>
+        <link>http://thoughtsandstuff.net/airpods</link>
+        <guid isPermaLink="true">http://thoughtsandstuff.net/airpods</guid>
         
         
         <category>apple</category>
         
         <category>airpods</category>
-        
-      </item>
-    
-      <item>
-        <title>Using Project Fi with iOS</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/assets/project-fi.jpeg&quot; alt=&quot;&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;what-is-project-fi&quot;&gt;What is &lt;em&gt;Project Fi&lt;/em&gt;?&lt;/h2&gt;
-&lt;p&gt;If you haven’t heard of Google’s &lt;em&gt;Project Fi&lt;/em&gt; network before, you might want to check out &lt;a href=&quot;https://fi.google.com/about/&quot;&gt;its About page&lt;/a&gt; before reading the rest of this but the gist of it is as follows: It’s a cell carrier owned by Google where you pay $20 per month for unlimited domestic talk and text, unlimited international texts, and the ability to use your phone as a Wi-Fi hotspot. Data costs $10 per GB and is pro-rated (so if you use 2.5 GB, you pay $25), and that pricing applies in over 135 countries(!).&lt;/p&gt;
-
-&lt;p&gt;The biggest caveat as an iPhone user (and generally as someone heavily into Apple’s ecosystem) is that officially, as of the time of writing, &lt;em&gt;Project Fi&lt;/em&gt; only works on three Android phones: the Nexus 6P, Nexus 5X, and Nexus 6. Google says that this is because “these devices are the first smartphones that support our network of networks.” However, if you would like to enroll in &lt;em&gt;Project Fi&lt;/em&gt;  and don’t have a supported phone, Google will sell you a Nexus 5X or a Nexus 6P for up to $150 off of the retail price. You can also request up to eight data-only SIMs for free with your plan. Together, that’s where things get interesting.&lt;/p&gt;
-
-&lt;p&gt;I do a lot of international travel every year. In 2016 alone, I’ve had trips and transits in over 20 different cities across 9 different countries. Unsurprisingly, traditional carriers don’t make it easy to use your phone abroad, with AT&amp;amp;T charging $40 for 200 MB in a limited set of countries (a couple of the ones I visited this year weren’t included) so, as you can imagine, &lt;em&gt;Project Fi&lt;/em&gt; piqued my interest early on.&lt;/p&gt;
-
-&lt;h2 id=&quot;getting-started&quot;&gt;Getting started&lt;/h2&gt;
-&lt;p&gt;I ordered a &lt;a href=&quot;https://www.amazon.com/LG-Nexus-5X-Unlocked-Smartphone/dp/B0178GE4FU&quot;&gt;Nexus 5X&lt;/a&gt; for $199 and a few data-only SIMs, and decided to put them to the test in a little trip that I’m taking right now.  The phone itself is fine to look at but, and I was happy getting it just to (finally) have a decent Android phone to play with, but I really just got it to activate the service.&lt;/p&gt;
-
-&lt;p&gt;I currently have data-only SIMs in my iPhone 6S Plus, 9.7-inch iPad Pro, and 12.9-inch iPad Pro. After inserting the SIM card, I had to go to &lt;code class=&quot;highlighter-rouge&quot;&gt;Settings &amp;gt; Cellular&lt;/code&gt; to turn on Data Roaming (and make sure LTE was enabled), and then go to &lt;code class=&quot;highlighter-rouge&quot;&gt;Cellular Data Options&lt;/code&gt; to change the Cellular Data APN to ‘h2g2’ on each device in order to make &lt;em&gt;Project Fi&lt;/em&gt; work on iOS. That’s all there is to setting it up.&lt;/p&gt;
-
-&lt;h2 id=&quot;tests-and-results&quot;&gt;Tests and Results&lt;/h2&gt;
-&lt;p&gt;I haven’t had a chance to test out &lt;em&gt;Project Fi&lt;/em&gt; in the United States, and I’ll probably update this list with more results as I keep traveling, but here’s what I have so far:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Istanbul: &lt;em&gt;Turkcell&lt;/em&gt; LTE, 2 Mbps in the airport&lt;/li&gt;
-  &lt;li&gt;Rome: &lt;em&gt;TIM&lt;/em&gt; LTE, 18 Mbps in the city&lt;/li&gt;
-  &lt;li&gt;Barcelona: &lt;em&gt;movistar&lt;/em&gt; LTE, 20 Mbps in the airport&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These tests were taken on all three aforementioned iOS devices through Netflix’s &lt;a href=&quot;fast.com&quot;&gt;Fast.com&lt;/a&gt; with consistent results.&lt;/p&gt;
-
-&lt;p&gt;I only mentioned the result from Rome above but I had similar results in Florence, Siena, Cinque Terre, Lucca, and other parts of Italy. (Speeds fluctuated between 3-18 Mbps but I consistently had usable LTE access.)&lt;/p&gt;
-
-&lt;h2 id=&quot;the-bottom-line&quot;&gt;The bottom line&lt;/h2&gt;
-&lt;p&gt;Thanks to Google and_Project Fi_, I now have access to data when traveling &lt;a href=&quot;https://fi.google.com/coverage?u=0&quot;&gt;almost anywhere in the world&lt;/a&gt; for just $10 per GB. That’s  &lt;em&gt;incredible&lt;/em&gt; value — and I suspect that many international travelers would agree, even when factoring in the $20 per month for service and the $199 up-front for the Nexus 5X.&lt;/p&gt;
-
-&lt;p&gt;Additionally, after installing the Google Hangouts app on my iOS devices, I can now make (and receive) international calls and texts at a &lt;a href=&quot;https://fi.google.com/about/rates/&quot;&gt;low, variable per-minute rate&lt;/a&gt; through &lt;em&gt;Project Fi&lt;/em&gt; without having to carry the Nexus 5X with me. I don’t make or receive a lot of calls in general but it’s a nice added bonus, and I’ve already used it a few times on this trip. For example, I was able to call Istanbul from Rome for just 4¢ per minute even though the Nexus 5X was switched off. Rome to Barcelona was 1¢ per minute, Rome to the United States was free over Wi-Fi, and Rome to Accra would have cost me 23¢ per minute. (If I decided to use the Nexus 5X, all calls placed on it would have cost a fixed 20¢ per minute over the Fi Network, or the aforementioned rates over Wi-Fi.)&lt;/p&gt;
-
-&lt;p&gt;I wholeheartedly recommend &lt;em&gt;Project Fi&lt;/em&gt; — and I say that as someone who actively avoids Google for everything but Search. If Google could get it to work natively on iPhone, I would switch carriers in a heartbeat but I wouldn’t get my hopes up over that happening anytime soon.&lt;/p&gt;
-
-&lt;h2 id=&quot;an-aside-on-the-97-inch-ipad-pro&quot;&gt;An aside on the 9.7-inch iPad Pro&lt;/h2&gt;
-&lt;p&gt;When Apple released the 9.7-inch iPad Pro, there was a lot of discussion about the fact that it had a &lt;a href=&quot;http://www.cnet.com/news/apples-true-tone-display-whats-the-deal/&quot;&gt;True Tone display&lt;/a&gt; that its 12.9-inch sibling does not, but not a lot was made of the fact that it had both a SIM slot and an integrated Apple SIM. I found that interesting at the time because it essentially makes this the first dual-SIM iOS device.&lt;/p&gt;
-
-&lt;p&gt;When I bought the iPad, I immediately added it to my AT&amp;amp;T Mobile Share plan using the integrated Apple SIM, remarking at how seamless the setup process was out of the box. After inserting the &lt;em&gt;Project Fi&lt;/em&gt; card in to the previously-empty SIM slot, I’m now remarking similar at how seamless the process of switching between carriers is. All I have to do is go to &lt;code class=&quot;highlighter-rouge&quot;&gt;Settings &amp;gt; Cellular Data&lt;/code&gt; and tap one of the two options under ‘Choose a Data Plan.’ It couldn’t be easier.&lt;/p&gt;
-
-&lt;p&gt;When I got to Istanbul, I only had a &lt;em&gt;Project Fi&lt;/em&gt; SIM card in the 9.7-inch iPad Pro (and in the Nexus 5X) because I didn’t want to bother switching a bunch of SIMs until I knew that the service worked. I mean, nobody likes switching SIM cards. It’s a terrible experience. I’m glad that with the smaller iPad Pro, this isn’t something that I’m going to have to do very often. I hope that this bleeds over to the 12.9-inch iPad Pro and becomes a mainstay feature, and that Apple doesn’t just kill the SIM card slot instead (and keep just the integrated Apple SIM around). Thankfully, the Apple SIM still has a long way to go to work in most countries around the world, so I think that the SIM card slot is safe — for the time being, at least.&lt;/p&gt;
-
-&lt;p&gt;I also wonder how possible it would be to bring this to the iPhone. It’d be great if I could seamlessly switch between two SIM cards but, given that there would be phone numbers associated with the iPhone, it might be a little more complicated. Or maybe it’s not that complicated and I’m just overthinking this. I guess we’ll find out with the new iPhone in September. Until then, I now have this neat little &lt;a href=&quot;https://www.amazon.com/GPG2-Mobile-Safe-Case-travel/dp/B00GQ2HG6C/ref=sr_1_1?ie=UTF8&amp;amp;qid=1471319385&amp;amp;sr=8-1&amp;amp;keywords=Sim+card+holder&quot;&gt;SIM card holder&lt;/a&gt; with me in my backpack!&lt;/p&gt;
-
-&lt;p&gt;(I should add for the sake of completeness that the Apple SIM on iPad allows you to switch between carriers, and I could switch have switched from AT&amp;amp;T to &lt;a href=&quot;https://www.gigsky.com/&quot;&gt;GigSky&lt;/a&gt; — a pay-as-you-go international data carrier — while abroad, but I’d still need to come up with a solution on iPhone. Coupled with the fact that its &lt;a href=&quot;https://cl.ly/h8bP&quot;&gt;rates&lt;/a&gt; are largely unfavorable, &lt;em&gt;Project Fi&lt;/em&gt; still comes out as a much better option.)&lt;/p&gt;
-</description>
-        <pubDate>Thu, 25 Aug 2016 00:00:00 -0400</pubDate>
-        <link>http://0.0.0.0:4000/project-fi</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/project-fi</guid>
-        
-        
-        <category>google</category>
-        
-        <category>travel</category>
-        
-        <category>project-fi</category>
-        
-        <category>apple</category>
         
       </item>
     

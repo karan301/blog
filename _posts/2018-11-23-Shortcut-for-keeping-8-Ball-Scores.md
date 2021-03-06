@@ -7,12 +7,14 @@ categories: apple shortcuts gaming
 excerpt: My incredibly unnecessary 'solution' to keeping track of iMessage 8-Ball scores with Shortcuts.
 permalink: /pool-scores
 ---
-_Editor's note: This post is an updated version of the original post that I wrote for the previous Workflow. It reflects changes made to allow removing opponents, renaming Workflow to Shortcuts, and a few more minor improvements. You can still view the original post [here](/pool-scores-old)._
+_Update 1: This post is an updated version of the original post that I wrote for the previous Workflow. It reflects changes made to allow removing opponents, renaming Workflow to Shortcuts, and a few more minor improvements. You can still view the original post [here](/pool-scores-old)._
+
+_Update 2: I was recently informed that the shortcuts stopped working with iOS 13. I was able to quickly resolve the issue with a couple of changes to 'Add an opponent' but didn't have time to fix the bugs in 'Remove an opponent'. That option has been removed for now, I'll fix it eventually._
 
 I'd wager that [GamePigeon](https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&uo=4&at=10l6nh)'s 8-Ball is the most used iMessage app out there. It feels like everyone (myself included) plays it. But how does go about keeping score?[^1] I used to type the score after every game but after forgetting / losing track a couple of times, I decided to build a [shortcut](https://itunes.apple.com/us/app/shortcuts/id915249334?mt=8&uo=4&at=10l6nh) to semi-automate the process.
 
 ## Getting started
-Other than the [GamePigeon](https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&uo=4&at=10l6nh) and [Shortcuts](https://itunes.apple.com/us/app/shortcuts/id915249334?mt=8&uo=4&at=10l6nh) apps (both free on the App Store), you'll need both of the following shortcuts: [Manage Pool Opponents](https://www.icloud.com/shortcuts/e93ab2d6999f4255a38687e393a7a1de) and [Pool Scores](https://www.icloud.com/shortcuts/9c2fd5ae46394b9686abf041911fb09b).
+Other than the [GamePigeon](https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&uo=4&at=10l6nh) and [Shortcuts](https://itunes.apple.com/us/app/shortcuts/id915249334?mt=8&uo=4&at=10l6nh) apps (both free on the App Store), you'll need both of the following shortcuts: [Manage Pool Opponents](https://www.icloud.com/shortcuts/b5325e3e579d4a35b9aeb6482af3c4a2) and [Pool Scores](https://www.icloud.com/shortcuts/9c2fd5ae46394b9686abf041911fb09b).
 
 The first thing you do is run `Manage Pool Opponents`, which is a Normal shortcut (it only shows up in the Shortcuts app, not the widget). It'll ask for your name the first time you run it, and to set a file name[^2]. The shortcut will then ask if you would like to 'Add an opponent' or 'Remove an opponent'. Choose the former, enter the name of your opponent, and choose if you want to initialize scores. If you say yes, you can set the score to what your current scores are. If not, it'll set the score to 0-0. Repeat this for each of your opponents. It'll save your scores as `'Pool Scores'` in Shortcuts' iCloud Drive directory.
 
