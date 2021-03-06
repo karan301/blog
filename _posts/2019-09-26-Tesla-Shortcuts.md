@@ -5,6 +5,7 @@ date: 2019-09-26
 author: Karan Varindani
 categories: tesla shortcuts
 excerpt: A suite of shortcuts that can be used to control a Tesla vehicle through Siri (and more).
+published: false
 permalink: /tesla-shortcuts
 ---
 
