@@ -9,13 +9,13 @@
   
 
   <title>Tesla Shortcuts Downloads</title>
-  <meta name="description" content="Download links to all the shortcuts.">
+  <meta name="description" content="Links to get started with the shortcuts.">
 
 	<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://thoughtsandstuff.net/tesla-shortcuts-tldr">
-  <link rel="alternate" type="application/rss+xml" title="Thoughts and Stuff" href="http://thoughtsandstuff.net/feed.xml">
+  <link rel="canonical" href="http://0.0.0.0:4000/tesla-shortcuts-tldr">
+  <link rel="alternate" type="application/rss+xml" title="Thoughts and Stuff" href="http://0.0.0.0:4000/feed.xml">
 
 <!-- Google Analytics -->
 <script>
@@ -101,31 +101,49 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Tesla Shortcuts Downloads</h1>
-    <p class="post-meta"><time datetime="2019-09-26T00:00:00-04:00" itemprop="datePublished">Sep 26, 2019</time> • <span> <span class = "reading-time" title = "Estimated read time">
+    <p class="post-meta"><time datetime="2021-04-15T00:00:00-04:00" itemprop="datePublished">Apr 15, 2021</time> • <span> <span class = "reading-time" title = "Estimated read time">
 	
  	
-  		1 min
+  		2 mins
   	
 </span>
    </span> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Karan Varindani</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>To get started, make sure that you’re running on an iPhone, iPad, or iPod touch running iOS 13.1 or newer, and that you have ‘Allow Untrusted Shortcuts’ enabled in Settings. Read <a href="/tesla-shortcuts">the main post</a> for more information.</p>
+    <p><em>To get started, make sure that you’re running on an iPhone, iPad, or iPod touch running iOS 14 or newer, and that you have ‘Allow Untrusted Shortcuts’ enabled in Settings. Read <a href="/tesla-shortcuts">the main post</a> for more information.</em></p>
 
+<h3 id="step-1-authenticate">Step 1: Authenticate</h3>
+<p>Download the <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613">Auth app for Tesla</a> from the App Store. Sign in with your Tesla credentials and make sure that you have a valid access token.</p>
+
+<h3 id="step-2-setup">Step 2: Setup</h3>
+<p>Download the <a href="https://www.icloud.com/shortcuts/1212abd071fb405b9844009885d6cd9d">Tesla Setup</a> shortcut and add it to Shortcuts. Run it once, enter a preferred temperature, and make sure you receive a confirmation message.</p>
+
+<h3 id="steps-3-actions">Steps 3: Actions</h3>
+<p>Download and add the following shortcuts to Shortcuts.</p>
 <ul>
-  <li><a href="https://www.icloud.com/shortcuts/7f18c2b9ac4a4b3ba0b7bbafab1c7317">Setup Tesla</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/bf27b343689145b9b0d1ebd974a1c9c4">Authenticate Tesla</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/127aa950fa4c471b9a5e6b0aeb3d67cd">Control Tesla</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/4618ca22e61d4ec1868d5b2aceb32538">Set Climate</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/a7dfdbb572be49459461ffe4c9bece5f">Set New Climate</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/16f5a1d013b84b39b18ebe28ca33468a">Turn Climate Off</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/42eb3fceffdb49c1ae6b3d1d78b0bc8d">Get Climate</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/03ab027305e240c287d4d401965aa21e">Check Sentry Mode</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/5d54a5452c244d1f9fdcf48687e645dc">Enable Sentry Mode</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/cca5dbd027514f22ac6337fa40327b15">Disable Sentry Mode</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/14c4e14825554f08902f73cae8e3b5c8">Get Car Battery</a></li>
-  <li><a href="https://www.icloud.com/shortcuts/5228250aa3224f93a1aae32f59faf67e">Open the Frunk</a></li>
+  <li><a href="https://www.icloud.com/shortcuts/6320086e9adb4901beb532ca3006a598">Tesla Auth</a></li>
+  <li><a href="https://www.icloud.com/shortcuts/0396e3fb28f14da8a964af4e609b212b">Get Battery Level</a></li>
+  <li><a href="https://www.icloud.com/shortcuts/1d9dc451f39d47ba8adca76f0c3a2d1b">Control Sentry Mode</a></li>
+  <li><a href="https://www.icloud.com/shortcuts/c8551fdc9c5b41dfa2803eac36623432">Control Climate</a></li>
+  <li><a href="https://www.icloud.com/shortcuts/d099fef59a1943d1bc02322cb77c9dcd">Open Frunk</a></li>
+  <li><a href="https://www.icloud.com/shortcuts/105cc176b1d54b5e9cc686d6b34194aa">Tesla Control</a></li>
+</ul>
+
+<h3 id="step-4-control">Step 4: Control</h3>
+<p>I’ve found that the best way to use these shortcuts is to add the <code class="highlighter-rouge">Tesla Control</code> shortcut to a widget, to your Home Screen, and/or to run it from Siri. It links to all the other shortcuts so you can consider it a launcher of sorts. It’s cleaner than trying to find the specific shortcut you want to run (you can think of these as modules).</p>
+
+<hr />
+
+<h2 id="an-aside-on-token-management">An aside on token management:</h2>
+<p>During <em>Step 2</em>, <code class="highlighter-rouge">Tesla Setup</code> talks to the Auth app for Tesla to get an access token. It then stores this token in a Tesla Preferences file in iCloud Drive. This allows you to only need the Auth app on one device for initial setup - it’s not accessed by any of the shortcuts. (Your iPad or other iOS devices will reference the token from the file in iCloud Drive, which should sync over pretty quickly, so they don’t need the Auth app installed.) This shortcut assumes that you keep the Auth app installed on your iPhone, and only your iPhone. As long as you run any of the shortcuts once within 7 days of the token expiring from your iPhone, you’ll never need to manually refresh your access token. However, if it expires, you can re-run <code class="highlighter-rouge">Tesla Setup</code> from any device that has the Auth app installed to manually refresh the token.</p>
+
+<h2 id="other-notes">Other notes:</h2>
+<ul>
+  <li>Please don’t rename any of the shortcuts. They all have dependencies with each other, and this will cause issues.</li>
+  <li>If you find any issues, please <a href="mailto:karan301@me.com">let me know</a> and I’ll be sure to correct them for other people as well.</li>
+  <li>These shortcuts have only been validated as of iOS 14.5. There may or may not be issues with older versions of iOS (I have not tested iOS 13 at all).</li>
+  <li>After running <code class="highlighter-rouge">Tesla Setup</code> the first time, it creates a preferences file in iCloud Drive. Subsequent runs of this shortcut will check for the presence of the preferences file. If it exists, you’ll be presented with a few other options (e.g. update your preferred temperature, refresh your token).</li>
 </ul>
 
   </div>

@@ -10,7 +10,7 @@ title: Thoughts and Stuff
 author: Karan Varindani
 email: karan301@me.com
 description: > # this means to ignore newlines until "baseurl:"
-  Thoughts and Stuff is a place for me to get my thoughts about Apple and tech in general out of my head. Occasionally, I might write about travel, education, or football, too. 
+  Thoughts and Stuff is a place for me to get my thoughts about Apple and tech in general out of my head. Occasionally, I might write about travel, education, or football. 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://thoughtsandstuff.net" # the base hostname & protocol for your site
 twitter_username: karan301_

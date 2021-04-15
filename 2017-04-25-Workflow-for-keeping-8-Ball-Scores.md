@@ -6,6 +6,7 @@ author: Karan Varindani
 categories: apple workflow gaming
 excerpt: My incredibly unnecessary 'solution' to keeping track of iMessage 8-Ball scores with Workflow.
 permalink: /pool-scores-old
+
 ---
 I'd wager that [GamePigeon](https://itunes.apple.com/us/app/gamepigeon/id1124197642?mt=8&uo=4&at=10l6nh)'s 8-Ball is the most used iMessage app out there. It feels like everyone (myself included) plays it. But how do we go about keeping score?[^1] I used to type the score after every game but after forgetting / losing track a couple of times, I decided to build a [Workflow](https://itunes.apple.com/us/app/workflow-powerful-automation-made-simple/id915249334?mt=8&uo=4&at=10l6nh) to semi-automate the process.
 

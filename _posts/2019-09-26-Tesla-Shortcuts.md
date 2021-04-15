@@ -5,47 +5,48 @@ date: 2019-09-26
 author: Karan Varindani
 categories: tesla shortcuts
 excerpt: A suite of shortcuts that can be used to control a Tesla vehicle through Siri (and more).
-published: false
+published: true
 permalink: /tesla-shortcuts
 ---
 
 	
 
-A few months ago I wanted to see if it would be possible to control my Model 3 with Siri. After a lot of research/procrastination[^1], I've finally come up with a set of shortcuts[^2] (based on the [unofficial Tesla API](https://tesla-api.timdorr.com/)) that I'm happy enough with to share. You can download all the shortcuts [here](/tesla-shortcuts-tldr), but pease read on for a guide on how they work and why you might be interested in using them.
+A few months ago I wanted to see if it would be possible to control my Model 3 with Siri. After a lot of research/procrastination[^1], I've finally come up with a set of shortcuts[^2] (based on the [unofficial Tesla API](https://tesla-api.timdorr.com/)) that I'm happy enough with to share. You can download all the shortcuts [here](/tesla-shortcuts-tldr), or read on for a more detailed guide on how they work and why you might be interested in using them.
 
 ![](/assets/tesla-spoiler.jpeg)
 
 ## About the shortcuts
-I've put together twelve shortcuts in total: three administrative, and nine actions. Let me briefly explain what each of them does.
+*(**Note:** The names of the shortcuts referenced below are slightly different than the names on the download page. There's a long, uninteresting reason behind this. I'll resolve this eventually and update when I do.)*
 
-The first shortcut that you have to run is `Setup Tesla`. As the name implies, this is the setup script. It'll ask you for your Tesla email address, grab your Tesla password from your Clipboard, then ask what your preferred climate temperature is (in °F). It'll  
-then save your login and temperature preference in iCloud Drive (in a file named ‘Tesla Preferences’ in your Shortcuts folder). Your password will be encrypted before it's saved. Don't worry if you forget to copy it before running the shortcut - you’ll be reminded to go do that and return to the Shortcuts app.[^3]
+I've put together seven shortcuts in total: three administrative, and four actions. Let me briefly explain what each of them does.
+
+To get started, you first have to download the [Auth app for Tesla](https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613) from the App Store. Sign in with your Tesla credentials and make sure that you have a valid access token. I used to handle this natively in Shortcuts, but Tesla recently updated its [authentication process](https://tesla-api.timdorr.com/api-basics/authentication) for the Tesla API and it now requires a separate app for this. Fortunately, the app donates some actions to Shortcuts, and the developer is receptive to feedback. The app is [open source](https://github.com/teslabuds/authappfortesla) if you'd like to check out what it's doing.
+
+The first shortcut that you have to run is `Setup Tesla`. As the name implies, this is the setup script. It'll ask you what your preferred climate temperature is (in °F). It'll  
+then ping the Auth app and save your access token, token expiration, and temperature preference in iCloud Drive (in a file named ‘Tesla Preferences’ in your Shortcuts folder).
 
 Once your preferences are set up, you probably won't need this shortcut anymore -  but there are a few reasons to keep it around. Running it again will let you:
 1. Update your preferred climate temperature.
-2. Update your login information.
-3. Delete your preferences file from iCloud Drive.
-4. Check out the documentation (this website).
+2. Delete your preferences file from iCloud Drive.
+3. Manually refresh your access token
+4. Report an issue (email me).
 
-The second administrative shortcut is `Authenticate Tesla`. This is the backbone of all nine action shortcuts, but **you never need to run it individually**. It grabs your email and encrypted password from your preferences file and uses those to connect with your car. Once authenticated, it'll wake up the car (and make sure that it's awake) then pass on an access token that the action shortcuts need to work.
+The second administrative shortcut is `Authenticate Tesla`. This is the backbone of all four action shortcuts, but **you never need to run it individually**. It grabs your access token from your preferences file, confirms that it's not expired, and uses it to connect with your car. Once authenticated, it'll wake up the car (and make sure that it's awake) then pass on the validated access token that the action shortcuts need to work.
 
-The last administrative piece is `Control Tesla`. This is the launchpad for all the shortcuts that I’m sharing here. All it does (for the most part)[^4] is present a menu that lets you pick between the supported actions and runs one of them. It works conversationally in Siri, through the Shortcuts widget, or, of course, through the Shortcuts app.
+The last administrative piece is `Control Tesla`. This is the launchpad for all the shortcuts that I’m sharing here. All it does (for the most part)[^3] is present a menu that lets you pick between the supported actions and runs one of them. It works conversationally in Siri, through the Shortcuts widget, or, of course, through the Shortcuts app.
 
-As a result of it simply being a controller for the other action shortcuts, `Control Tesla` is pretty much useless on its own. This was intentional; I could have combined all the shortcuts into a Frankenstein master shortcut, but this approach allows the other shortcuts to function on their own (e.g. You can say “Hey Siri, Turn Climate Off” without having to go through the `Control Tesla` menu first).
+As a result of it simply being a controller for the other action shortcuts, `Control Tesla` is pretty much useless on its own. This was intentional; I could have combined all the shortcuts into a Frankenstein master shortcut, but this approach allows the other shortcuts to function on their own (e.g. You can say “Hey Siri, Open the Frunk” without having to go through the `Control Tesla` menu first).
 
 Now let's talk about those action shortcuts.
 
-* `Set Climate` sets your car’s climate to the preferred climate from your preferences file.
-* `Set New Climate` lets you enter a temperature[^5] and sets your car’s climate to it.
-* `Turn Climate Off` turns off your car’s climate.
-* `Get Climate` tells you what your car’s current climate status is and lets you toggle it (e.g. it'll let you know that your climate is on and set to 72, and ask if you would like to turn it off). 
 * `Get Car Battery` checks your car’s current battery percentage and available range. If your car is currently charging, it'll also let you know how long is left until it's fully charged.
-* `Enable Sentry Mode` turns on sentry mode.
-* `Disable Sentry Mode` turns off sentry mode.
-* `Check Sentry Mode` lets you know whether sentry mode is on or off, and lets you toggle its current state.
+* `Control Sentry Mode` lets you check if sentry mode is on or off. It also lets you turn it on or off.
+* `Control Climate` lets you check what your car’s current climate status is. It also lets you turn your climate on or off.
 * `Open The Frunk` actuates the front trunk.
 
-You can say any of those commands to Siri to perform the action on its own, or say “Control Tesla” if you don't remember the exact name. Only `Control Tesla	` will show up in the Shortcuts widget by default but you can easily put any or all of these actions there too.[^6]
+You can say any of those commands to Siri to perform the action on its own, or say “Control Tesla” if you don't remember the exact name.
+
+`Control Sentry Mode` and `Control Climate` are both fully interactive. If you run them on their own, they'll present a menu and let you choose how you'd like to run them. However, you can duplicate either of them, and change a text action close to the top (named 'Default State') to give it a permanent action. (For example: You can duplicate `Control Climate`, name it `Turn climate off`, and change the 'Default State' variable from "0" to "off". This will let you say "Hey Siri, turn climate off" and it will perform that action without any user interaction.) This is accomplished by using Input Variables. Based on the input provided, the shortcuts will go down a different path. For example, to control Sentry Mode, `Control Tesla` will always run the `Control Sentry Mode` action - but will either pass in "check", "on", or "off" based on what you choose in the menu. This is explained in greater detail in the comments inside the radar.
 
 ---- 
 
@@ -62,7 +63,7 @@ Speaking of reliability, one of the reasons it took me so long to release these 
 
 Speed aside, I’ve really been enjoying the added flexibility that these shortcuts have brought. This manifests itself in several important ways.
 
-**I can control my car from my iPad.** There’s no Tesla app for iPad, and I work on an iPad Pro for most of the day. I now no longer have to stop what I’m doing and pick up my phone to check its battery level or turn on the climate. It now just takes a couple of taps and I can get back to what I was doing.[^7]
+**I can control my car from my iPad.** There’s no Tesla app for iPad, and I work on an iPad Pro for most of the day. I now no longer have to stop what I’m doing and pick up my phone to check its battery level or turn on the climate. It now just takes a couple of taps and I can get back to what I was doing.[^4]
 
 **I can control my car using Siri.** With iOS 13.1, Siri can have a conversation with you when running a shortcut. This means that you can go through the menus of `Control Tesla` (saying things like “Check battery level” or even “the second one”) to control your car hands-free. This has been particularly useful for me while getting ready for work in the morning.
 
@@ -75,10 +76,9 @@ Those are just three examples but there are lots of triggers that you can use fo
 ----
 
 ## Additional information
-* These shortcuts require iOS 13 to work. Furthermore, iOS 13.1 Is required for Conversational Siri and Shortcuts Automation to work. They will not work at all on iOS 12, even if the user downloads the Shortcuts app from the App Store, because the underlying file system behind shortcuts has been changed between those two versions.
-* To add these shortcuts to your library, you have to [enable running untrusted shortcuts](https://support.apple.com/guide/shortcuts/enable-shared-shortcuts-apdfeb05586f/ios). This is a security feature new to iOS 13; you won't be allowed to run (or add) shortcuts shared outside the Shortcuts Gallery until you’ve enabled certain security settings.[^8]
+* These shortcuts require a minimum of iOS 13 to work. Furthermore, iOS 13.1 Is required for Conversational Siri and Shortcuts Automation to work. They will not work at all on iOS 12, even if the user downloads the Shortcuts app from the App Store, because the underlying file system behind shortcuts has been changed between those two versions. Additionally, I've only really tested them on iOS 14.5 - so you may need to update if you run in to any issues.
+* To add these shortcuts to your library, you have to [enable running untrusted shortcuts](https://support.apple.com/guide/shortcuts/enable-shared-shortcuts-apdfeb05586f/ios). This is a security feature new to iOS 13; you won't be allowed to run (or add) shortcuts shared outside the Shortcuts Gallery until you’ve enabled certain security settings.[^5]
 * Continuing with the theme of security, the first time you run each shortcut, it will require authentication for some actions (the ‘Get Contents of URL’ actions that are used for the Tesla API calls will be most noticeably). These are all required to run the shortcut correctly.
-* Although your password is base64 encoded and is never stored in plaintext, it is still stored in a file accessible in iCloud Drive. If an attacker knew what they were doing (and what they were looking at), it would not take much to decrypt the key and get the original password.
 * Lastly, at this time, these shortcuts only support accounts that have one Tesla vehicle. Get in touch if this is a hard limitation for you and I’ll see what I can do.
 
 ----
@@ -87,14 +87,8 @@ Those are just three examples but there are lots of triggers that you can use fo
 
 [^2]:	Check out [Apple’s Shortcuts User Guide](https://support.apple.com/guide/shortcuts/welcome/ios) if you’re not sure what those are.
 
-[^3]:	You can also enter your password in yourself but you’ll rightfully be shamed for doing so. You should really be using a password manager, like iCloud Keychain.
+[^3]:	There's literally one added nicety: It looks up your preferred temperature from your preferences file, so that the menu is dynamic.
 
-[^4]:	There literally one added nicety: It looks up your preferred temperature from your preferences file, so that the menu is dynamic.
+[^4]:	Pro-tip: If you’re working on an iPad with a keyboard attached, you can use ⌘space (Cmd-space) to enter Spotlight search, type in the name of one of the shortcuts (e.g. "Get Car Battery"), and then hit return run it.
 
-[^5]:	You can enter this number directly from the Shortcuts widget which is pretty neat.
-
-[^6]:	From the Shortcuts app, tap the (...) button beside the shortcut name to bring it up in the editor. From the editor, tap the (...) on top and enable “Show in Widget”.
-
-[^7]:	Pro-tip: If you’re working on an iPad with a keyboard attached, you can use Cmd+Space to enter Spotlight search, type in the name of one of the shortcuts (e.g. ‘Set Climate’), and then tap on it to run it.
-
-[^8]:	You have to have run a shortcut (either user-created or from the Gallery) once before, and then head to `Settings > Shortcuts` to enable an “Allow Untrusted Shortcuts” toggle. Remember: These security measures exist for a reason. Please inspect and carefully vet all shortcuts downloaded outside the Gallery before running them on devices with personal information.
+[^5]:	You have to have run a shortcut (either user-created or from the Gallery) once before, and then head to `Settings > Shortcuts` to enable an “Allow Untrusted Shortcuts” toggle. Remember: These security measures exist for a reason. Please inspect and carefully vet all shortcuts downloaded outside the Gallery before running them on devices with personal information.
