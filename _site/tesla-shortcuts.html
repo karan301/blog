@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  <title>Tesla Shortcuts</title>
+  <meta name="description" content="A suite of shortcuts that can be used to control a Tesla vehicle through Siri (and more).">
+
+	<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://0.0.0.0:4000/tesla-shortcuts">
+  <link rel="alternate" type="application/rss+xml" title="Thoughts and Stuff" href="http://0.0.0.0:4000/feed.xml">
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89653104-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Thoughts and Stuff</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+        	
+        
+        	
+        
+        	
+        
+        	
+          
+          <a class="page-link" href="/about">About</a>
+          	
+          
+        
+        	
+          
+          <a class="page-link" href="/archives">Archives</a>
+          	
+          
+        
+        	
+          
+          <a class="page-link" href="/#footer">Contact</a>
+          	
+          
+        
+        	
+        
+        	
+        
+        	
+        
+        	
+        
+        	
+        
+        	
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Tesla Shortcuts</h1>
+    <p class="post-meta"><time datetime="2019-09-26T00:00:00-04:00" itemprop="datePublished">Sep 26, 2019</time> • <span> <span class = "reading-time" title = "Estimated read time">
+	
+ 	
+  		11 mins
+  	
+</span>
+   </span> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Karan Varindani</span></span></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>A few months ago I wanted to see if it would be possible to control my Model 3 with Siri. After a lot of research/procrastination<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>, I’ve finally come up with a set of shortcuts<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> (based on the <a href="https://tesla-api.timdorr.com/">unofficial Tesla API</a>) that I’m happy enough with to share. You can download all the shortcuts <a href="/tesla-shortcuts-tldr">here</a>, or read on for a more detailed guide on how they work and why you might be interested in using them.</p>
+
+<p><img src="/assets/tesla-spoiler.jpeg" alt="" /></p>
+
+<h2 id="about-the-shortcuts">About the shortcuts</h2>
+<p><em>(<strong>Note:</strong> The names of the shortcuts referenced below are slightly different than the names on the download page. There’s a long, uninteresting reason behind this. I’ll resolve this eventually and update when I do.)</em></p>
+
+<p>I’ve put together seven shortcuts in total: three administrative, and four actions. Let me briefly explain what each of them does.</p>
+
+<p>To get started, you first have to download the <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613">Auth app for Tesla</a> from the App Store. Sign in with your Tesla credentials and make sure that you have a valid access token. I used to handle this natively in Shortcuts, but Tesla recently updated its <a href="https://tesla-api.timdorr.com/api-basics/authentication">authentication process</a> for the Tesla API and it now requires a separate app for this. Fortunately, the app donates some actions to Shortcuts, and the developer is receptive to feedback. The app is <a href="https://github.com/teslabuds/authappfortesla">open source</a> if you’d like to check out what it’s doing.</p>
+
+<p>The first shortcut that you have to run is <code class="highlighter-rouge">Setup Tesla</code>. As the name implies, this is the setup script. It’ll ask you what your preferred climate temperature is (in °F). It’ll<br />
+then ping the Auth app and save your access token, token expiration, and temperature preference in iCloud Drive (in a file named ‘Tesla Preferences’ in your Shortcuts folder).</p>
+
+<p>Once your preferences are set up, you probably won’t need this shortcut anymore -  but there are a few reasons to keep it around. Running it again will let you:</p>
+<ol>
+  <li>Update your preferred climate temperature.</li>
+  <li>Delete your preferences file from iCloud Drive.</li>
+  <li>Manually refresh your access token</li>
+  <li>Report an issue (email me).</li>
+</ol>
+
+<p>The second administrative shortcut is <code class="highlighter-rouge">Authenticate Tesla</code>. This is the backbone of all four action shortcuts, but <strong>you never need to run it individually</strong>. It grabs your access token from your preferences file, confirms that it’s not expired, and uses it to connect with your car. Once authenticated, it’ll wake up the car (and make sure that it’s awake) then pass on the validated access token that the action shortcuts need to work.</p>
+
+<p>The last administrative piece is <code class="highlighter-rouge">Control Tesla</code>. This is the launchpad for all the shortcuts that I’m sharing here. All it does (for the most part)<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup> is present a menu that lets you pick between the supported actions and runs one of them. It works conversationally in Siri, through the Shortcuts widget, or, of course, through the Shortcuts app.</p>
+
+<p>As a result of it simply being a controller for the other action shortcuts, <code class="highlighter-rouge">Control Tesla</code> is pretty much useless on its own. This was intentional; I could have combined all the shortcuts into a Frankenstein master shortcut, but this approach allows the other shortcuts to function on their own (e.g. You can say “Hey Siri, Open the Frunk” without having to go through the <code class="highlighter-rouge">Control Tesla</code> menu first).</p>
+
+<p>Now let’s talk about those action shortcuts.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Get Car Battery</code> checks your car’s current battery percentage and available range. If your car is currently charging, it’ll also let you know how long is left until it’s fully charged.</li>
+  <li><code class="highlighter-rouge">Control Sentry Mode</code> lets you check if sentry mode is on or off. It also lets you turn it on or off.</li>
+  <li><code class="highlighter-rouge">Control Climate</code> lets you check what your car’s current climate status is. It also lets you turn your climate on or off.</li>
+  <li><code class="highlighter-rouge">Open The Frunk</code> actuates the front trunk.</li>
+</ul>
+
+<p>You can say any of those commands to Siri to perform the action on its own, or say “Control Tesla” if you don’t remember the exact name.</p>
+
+<p><code class="highlighter-rouge">Control Sentry Mode</code> and <code class="highlighter-rouge">Control Climate</code> are both fully interactive. If you run them on their own, they’ll present a menu and let you choose how you’d like to run them. However, you can duplicate either of them, and change a text action close to the top (named ‘Default State’) to give it a permanent action. (For example: You can duplicate <code class="highlighter-rouge">Control Climate</code>, name it <code class="highlighter-rouge">Turn climate off</code>, and change the ‘Default State’ variable from “0” to “off”. This will let you say “Hey Siri, turn climate off” and it will perform that action without any user interaction.) This is accomplished by using Input Variables. Based on the input provided, the shortcuts will go down a different path. For example, to control Sentry Mode, <code class="highlighter-rouge">Control Tesla</code> will always run the <code class="highlighter-rouge">Control Sentry Mode</code> action - but will either pass in “check”, “on”, or “off” based on what you choose in the menu. This is explained in greater detail in the comments inside the radar.</p>
+
+<hr />
+
+<h2 id="why-should-i-use-this">Why should I use this?</h2>
+<p>If you happen to open and read through the shortcuts, I hope you’ll see just how much work went into making them. I took a lot of care in making sure that each shortcut is laid out logically, well-documented, checks for potential errors wherever appropriate, provides lots of options, and more. Yet you might be wondering why I bothered to do so. After all, <a href="https://apps.apple.com/us/app/tesla/id582007913">Tesla</a> has a pretty good app that accomplishes everything that my shortcuts do.</p>
+
+<p>The first reason that I built these is speed. Let’s use the example of turning on your car’s climate: As it stands you need to launch the Tesla app, wait for it to connect to your car, go to the climate section, then tap the arrows until you get to the temperature you want. Instead, I just tap on the  <code class="highlighter-rouge">Control Tesla</code>  widget, tap ‘Control Climate,’ and then I can either tap on my preferred temperature or enter a custom temperature value. I can then put my phone away or wait for the confirmation message.</p>
+
+<p>The biggest distinction is in where the wait occurs. Using the Tesla app, I have to launch the app then wait for it to load <em>before</em> I can do what I want. Using my shortcut, I can do what I want then just wait to confirm that it went well. Let’s use Mail as an analogy. Using the Tesla app feels like I’m launching Mail, waiting a few seconds for it to load, then typing my email and tapping send. Using these shortcuts feel like I’m launching mail and instantly typing my email, then tapping send and just waiting for it to confirm that the email was sent.</p>
+
+<p>It’s been a much more pleasant experience in practice. I can confidently say that, since I’ve gotten these shortcuts to work reliably, <strong>I haven’t been using the Tesla app <em>at all</em></strong>. It isn’t just <a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food">dogfooding</a> — I simply haven’t been in a situation where it would be quicker to use the app instead.</p>
+
+<p>Speaking of reliability, one of the reasons it took me so long to release these shortcuts is because, historically, they had worked super inconsistently. I used to have lots of failures where my car simply refused to wake up in the morning. However, this time around I was able to include a check to make sure that the car did actually wake up. If not, this shortcut will run itself again several times until the car eventually wakes up and connects. With that in place, all these actions have been <em>substantially</em> more reliable for me. I’ve also added additional checks for better error handling in unusual situations (such as when your login information has changed or when your car is being serviced).</p>
+
+<p>Speed aside, I’ve really been enjoying the added flexibility that these shortcuts have brought. This manifests itself in several important ways.</p>
+
+<p><strong>I can control my car from my iPad.</strong> There’s no Tesla app for iPad, and I work on an iPad Pro for most of the day. I now no longer have to stop what I’m doing and pick up my phone to check its battery level or turn on the climate. It now just takes a couple of taps and I can get back to what I was doing.<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup></p>
+
+<p><strong>I can control my car using Siri.</strong> With iOS 13.1, Siri can have a conversation with you when running a shortcut. This means that you can go through the menus of <code class="highlighter-rouge">Control Tesla</code> (saying things like “Check battery level” or even “the second one”) to control your car hands-free. This has been particularly useful for me while getting ready for work in the morning.</p>
+
+<p><strong>I can control my car using Shortcuts Automation</strong>. This is another <em>really</em> cool feature of Shortcuts in iOS 13.1. You can have certain shortcuts run automatically using certain triggers. A few examples:</p>
+<ul>
+  <li>I keep a spare <a href="https://shop.tesla.com/product/model-3-key-card">key card</a> for my Model 3 on my desk at work. Now, whenever I tap my iPhone on this key card, Shortcuts connects to my car and sets the climate to my preferred temperature <em>without me doing anything</em>.</li>
+  <li>Siri can predict when I’m going to leave work to go home and, 15 minutes before, can send me a notification asking if I want to run the shortcut to cool my car down.</li>
+  <li>I’m currently looking into putting a clear NFC tag on my hood so that when I tap my iPhone against it, Shortcuts can immediately actuate the front trunk. 
+Those are just three examples but there are lots of triggers that you can use for <a href="https://support.apple.com/guide/shortcuts/intro-to-personal-automation-apd690170742/ios">Shortcuts Automation in iOS 13.1</a>. This is the best example of the flexibility that these shortcuts have afforded me.</li>
+</ul>
+
+<hr />
+
+<h2 id="additional-information">Additional information</h2>
+<ul>
+  <li>These shortcuts require a minimum of iOS 13 to work. Furthermore, iOS 13.1 Is required for Conversational Siri and Shortcuts Automation to work. They will not work at all on iOS 12, even if the user downloads the Shortcuts app from the App Store, because the underlying file system behind shortcuts has been changed between those two versions. Additionally, I’ve only really tested them on iOS 14.5 - so you may need to update if you run in to any issues.</li>
+  <li>To add these shortcuts to your library, you have to <a href="https://support.apple.com/guide/shortcuts/enable-shared-shortcuts-apdfeb05586f/ios">enable running untrusted shortcuts</a>. This is a security feature new to iOS 13; you won’t be allowed to run (or add) shortcuts shared outside the Shortcuts Gallery until you’ve enabled certain security settings.<sup id="fnref:5"><a href="#fn:5" class="footnote">5</a></sup></li>
+  <li>Continuing with the theme of security, the first time you run each shortcut, it will require authentication for some actions (the ‘Get Contents of URL’ actions that are used for the Tesla API calls will be most noticeably). These are all required to run the shortcut correctly.</li>
+  <li>Lastly, at this time, these shortcuts only support accounts that have one Tesla vehicle. Get in touch if this is a hard limitation for you and I’ll see what I can do.</li>
+</ul>
+
+<hr />
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>If I’m being honest, it was two days of intense research with many months of complete procrastination between them. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Check out <a href="https://support.apple.com/guide/shortcuts/welcome/ios">Apple’s Shortcuts User Guide</a> if you’re not sure what those are. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>There’s literally one added nicety: It looks up your preferred temperature from your preferences file, so that the menu is dynamic. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Pro-tip: If you’re working on an iPad with a keyboard attached, you can use ⌘space (Cmd-space) to enter Spotlight search, type in the name of one of the shortcuts (e.g. “Get Car Battery”), and then hit return run it. <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p>You have to have run a shortcut (either user-created or from the Gallery) once before, and then head to <code class="highlighter-rouge">Settings &gt; Shortcuts</code> to enable an “Allow Untrusted Shortcuts” toggle. Remember: These security measures exist for a reason. Please inspect and carefully vet all shortcuts downloaded outside the Gallery before running them on devices with personal information. <a href="#fnref:5" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <!-- <h2 class="footer-heading">Thoughts and Stuff</h2> -->
+
+    <div class="footer-col-wrapper">
+      <div id="footer" class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            Karan Varindani
+            </li>
+            
+            <li><c href="mailto:karan301@me.com">karan301@me.com</c></li>
+            
+        </ul>
+     </div>
+
+      <div class="footer-col footer-col-2">
+      	Twitter
+        <ul class="contact-list">
+          
+          <li>
+            <a href="https://twitter.com/"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username"></span></a>
+ <c href="http://twitter.com/karan301_">karan301_</c> 
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <ul class="contact-list">
+        	<li>Search</li>
+        	<li>
+				<form action="/search.html" method="get">
+  					<input type="text" id="search-box" name="query">
+  					<!--<input type="submit" value="Go"> -->
+				</form>
+			</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
